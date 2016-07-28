@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Character : MonoBehaviour {
+public class Waypoint : MonoBehaviour {
+
+    public Vector3 pos;
+
+    void Awake()
+    {
+        
+    }
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        pos = this.transform.position;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-}
-
-public enum CharacterActions
-{
-    Move,
-    Storytime,
-    IdleChat,
 }
