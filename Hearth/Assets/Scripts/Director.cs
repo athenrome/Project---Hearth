@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Director : MonoBehaviour {
 
     public Camera cam;
 
-    public Vector3 mousePosition;
+    public Waypoint characterEntry;
+    public Waypoint forestExit;
+
+    public List<Character> CharacterPool;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -13,16 +17,9 @@ public class Director : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        mousePosition = GetMousePosition();
-        
+	void Update () {      
 	
 	}
 
-    Vector3 GetMousePosition()
-    {
-        Vector3 pos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        return pos;
-    }
 }

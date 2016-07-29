@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class FireController : MonoBehaviour {
 
@@ -31,14 +31,5 @@ public class FireController : MonoBehaviour {
 
     }
 
-    void AddFuel()
-    {
-
-    }
-
-    void ConsumeFuel()
-    {
-
-    }
 }
 
