@@ -65,8 +65,8 @@
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\CharacterController.cs" />
     <Compile Include="Assets\Scripts\Director.cs" />
-    <Compile Include="Assets\Scripts\Fire.cs" />
     <Compile Include="Assets\Scripts\FirePit.cs" />
+    <Compile Include="Assets\Scripts\Flame.cs" />
     <Compile Include="Assets\Scripts\Waypoint.cs" />
     <Compile Include="Assets\Scripts\Wood.cs" />
   </ItemGroup>

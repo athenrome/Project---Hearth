@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class FirePit : MonoBehaviour {
 
-    public Fire centralFlame;
+    public Flame centralFlame;
     public List<Wood> woodInFire;
     
 
@@ -17,8 +17,15 @@ public class FirePit : MonoBehaviour {
 	
 	}  
 
-    void UpdateFlame()
+    public void AddWood(Wood toAdd)
     {
-
+        woodInFire.Add(toAdd);
+        centralFlame.intensity += 5;
     }
+
+    public void RemoveWood(Wood toRemove)
+    {
+        woodInFire.Remove(toRemove);
+    }
+
 }

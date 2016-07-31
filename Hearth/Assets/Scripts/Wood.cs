@@ -10,7 +10,7 @@ public class Wood : MonoBehaviour {
 
     public int woodID;
 
-    Director director;
+
 
     public bool burning;
 
@@ -26,7 +26,7 @@ public class Wood : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        director = FindObjectOfType<Director>();
+        
     }
 
     // Update is called once per frame
@@ -46,21 +46,27 @@ public class Wood : MonoBehaviour {
     }
 
     //START FIREPIT
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        print("in pit");
-
         if(col.gameObject.GetComponent<FirePit>() == true)//if the colliding object is the fire pit
         {
+            FirePit pit = col.gameObject.GetComponent<FirePit>();
 
+            Debug.Log("Entered pit");
+
+            pit.AddWood(this);
         }
     }
 
-    void OnCollisionExit(Collision col)
+    void OnTriggerExit(Collider col)
     {
-        print("left pit");
+        Debug.Log("Exited pit");
     }
     //END FIREPIT
+
+
+
+
 
     //START WOOD DRAGGING
     void OnMouseDown()
@@ -69,11 +75,14 @@ public class Wood : MonoBehaviour {
         posX = Input.mousePosition.x - camPos.x;
         posY = Input.mousePosition.y - camPos.y;
 
+        Debug.Log("Selected Log");
+
     }
 
     void OnMouseDrag()
     {
-        Vector3 curPos = new Vector3(Input.mousePosition.x - posX, Input.mousePosition.y - posY, camPos.z);
+        Vector3 curPos = new Vector3(Input.mousePosition.x - posX, 1, camPos.z);
+        //Vector3 curPos = new Vector3(Input.mousePosition.x - posX, Input.mousePosition.y - posY, camPos.z);
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(curPos);
         transform.position = worldPos;
