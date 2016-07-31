@@ -8,8 +8,6 @@ public class Wood : MonoBehaviour {
     float posX;
     float posY;
 
-
-
     public int woodID;
 
     Director director;
@@ -46,6 +44,23 @@ public class Wood : MonoBehaviour {
             burning = false;
         }
     }
+
+    //START FIREPIT
+    void OnCollisionEnter(Collision col)
+    {
+        print("in pit");
+
+        if(col.gameObject.GetComponent<FirePit>() == true)//if the colliding object is the fire pit
+        {
+
+        }
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+        print("left pit");
+    }
+    //END FIREPIT
 
     //START WOOD DRAGGING
     void OnMouseDown()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class FireController : MonoBehaviour {
+public class Fire : MonoBehaviour {
 
     public float minLightLevel;
     public float maxLightLevel;

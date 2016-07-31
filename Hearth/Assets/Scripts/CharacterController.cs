@@ -28,7 +28,7 @@ public class CharacterController : MonoBehaviour {
             startTime = Time.time;
             journeyLength = Vector3.Distance(startPoint.transform.position, target.transform.position);
 
-            Debug.Log("Starting Movment");
+            //Debug.Log("Starting Movment");
             currAction = CharacterActions.Move;
         }
         
@@ -44,7 +44,7 @@ public class CharacterController : MonoBehaviour {
         if (currAction == CharacterActions.Move)
         {
             MoveToTarget();
-            Debug.Log("Moving");
+            //Debug.Log("Moving");
 
             float distCovered = (Time.time - startTime) * moveSpeed;
             float fracJourney = distCovered / journeyLength;
