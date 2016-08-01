@@ -73,19 +73,26 @@ public class Wood : MonoBehaviour {
     {
         camPos = Camera.main.WorldToScreenPoint(transform.position);
         posX = Input.mousePosition.x - camPos.x;
-        posY = Input.mousePosition.y - camPos.y;
+        posY = Input.mousePosition.y - camPos.y;//1 - camPos.y;
+
+
 
         Debug.Log("Selected Log");
 
     }
 
+
+
     void OnMouseDrag()
     {
-        Vector3 curPos = new Vector3(Input.mousePosition.x - posX, 1, camPos.z);
-        //Vector3 curPos = new Vector3(Input.mousePosition.x - posX, Input.mousePosition.y - posY, camPos.z);
+        //Vector3 currPos = new Vector3(Input.mousePosition.x - posX, 5, camPos.z);
+        Vector3 currPos = new Vector3(Input.mousePosition.x - posX, Input.mousePosition.y - posY, camPos.z);
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(curPos);
-        transform.position = worldPos;
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(currPos);
+
+
+        transform.position = new Vector3(worldPos.x, worldPos.y, 0);
+
     }
     //END WOOD DRAGGING
 }
