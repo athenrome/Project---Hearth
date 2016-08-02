@@ -21,6 +21,8 @@ public class FirePit : MonoBehaviour {
     {
         woodInFire.Add(toAdd);
         centralFlame.intensity += 5;
+
+        centralFlame.transform.position = new Vector3(centralFlame.transform.position.x, centralFlame.transform.position.y + 1, centralFlame.transform.position.z);
     }
 
     public void RemoveWood(Wood toRemove)

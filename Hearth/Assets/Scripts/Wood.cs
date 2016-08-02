@@ -55,6 +55,10 @@ public class Wood : MonoBehaviour {
             Debug.Log("Entered pit");
 
             pit.AddWood(this);
+
+            GameObject.Destroy(this.gameObject);
+
+            
         }
     }
 
