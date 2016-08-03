@@ -5,7 +5,8 @@ public class FirePit : MonoBehaviour {
 
     public Flame centralFlame;
     public List<Wood> woodInFire;
-    
+
+    public int fireSize;
 
 	// Use this for initialization
 	void Start () {
@@ -14,20 +15,28 @@ public class FirePit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}  
+        
+	}
 
     public void AddWood(Wood toAdd)
     {
         woodInFire.Add(toAdd);
         centralFlame.intensity += 5;
 
-        centralFlame.transform.position = new Vector3(centralFlame.transform.position.x, centralFlame.transform.position.y + 1, centralFlame.transform.position.z);
+        fireSize++;
     }
 
     public void RemoveWood(Wood toRemove)
     {
         woodInFire.Remove(toRemove);
+        fireSize--;       
+    }
+
+    void UpdateFire()
+    {
+        float targetIntensity = woodInFire.Count * 5;
+
+        centralFlame.intensity = targetIntensity;
     }
 
 }

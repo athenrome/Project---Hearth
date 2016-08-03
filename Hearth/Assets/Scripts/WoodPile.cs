@@ -22,8 +22,12 @@ public class WoodPile : MonoBehaviour {
 
     public void OnMouseDown()
     {
-
-        GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation);
-        Debug.Log("Spawn Log");
+        if(woodCount >= 1 )
+        {
+            GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation);
+            woodCount--;
+            Debug.Log("Spawn Log");
+        }
+        
     }
 }
