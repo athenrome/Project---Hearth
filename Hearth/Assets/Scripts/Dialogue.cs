@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 public class Dialogue : MonoBehaviour {
 
-    public List<DialogueLine> dialogueSet;
+    public string text;
+    public DialogueTag tag;
+
     public bool available; //if this piece of dialogue can be used
     public float deadTime; //the time since this dialogue was last used
 
@@ -16,18 +18,6 @@ public class Dialogue : MonoBehaviour {
 	void Update () {
 	
 	}
-}
-
-public class DialogueLine
-{
-    public string text;
-    public DialogueTag tag;
-
-    public DialogueLine(string _text, DialogueTag _tag)
-    {
-        text = _text;
-        tag = _tag;
-    }
 }
 
 public enum DialogueTag
