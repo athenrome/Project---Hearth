@@ -3,15 +3,21 @@ using System.Collections;
 
 public class CharacterController : MonoBehaviour {
 
-    public CharacterActions currAction;
+    public DialogueWindow diagWin; // where character dialogue is presented
+
+
+
+    public Character character;
+
+    CharacterActions currAction;
     CharacterActions lastAction;
 
-    public Waypoint target;
-    public Waypoint startPoint;
+    Waypoint target;
+    Waypoint startPoint;
 
     public float moveSpeed = 1f;
-    private float startTime;
-    private float journeyLength;
+    float startTime;
+    float journeyLength;
 
 
     // Use this for initialization
@@ -43,8 +49,6 @@ public class CharacterController : MonoBehaviour {
 
         if (currAction == CharacterActions.Move)
         {
-            MoveToTarget();
-            //Debug.Log("Moving");
 
             float distCovered = (Time.time - startTime) * moveSpeed;
             float fracJourney = distCovered / journeyLength;
@@ -54,7 +58,7 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    void MoveToTarget()
+    public void Speak()
     {
         
     }
@@ -63,7 +67,7 @@ public class CharacterController : MonoBehaviour {
 public enum CharacterActions
 {
     Idle,
-
+    Speak,
     StartMove,
     Move,
 }

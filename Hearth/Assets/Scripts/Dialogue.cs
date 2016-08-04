@@ -8,16 +8,21 @@ public class Dialogue : MonoBehaviour {
 
     public bool available; //if this piece of dialogue can be used
     public float deadTime; //the time since this dialogue was last used
+}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+public class DialogueStory
+{
+    public List<Dialogue> storyText;
+    public StoryType type;
+
+    public bool available; //if this piece of dialogue can be used
+    public float deadTime; //the time since this dialogue was last used
+}
+
+public enum StoryType
+{
+    Hopeful,
+    Ghost,
 }
 
 public enum DialogueTag
