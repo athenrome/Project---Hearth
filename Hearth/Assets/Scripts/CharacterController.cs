@@ -22,7 +22,7 @@ public class CharacterController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        currAction = CharacterActions.StartMove;
+        currAction = CharacterActions.Idle;
 	
 	}
 	
@@ -39,7 +39,7 @@ public class CharacterController : MonoBehaviour {
         }
         
         
-        if(this.transform.position == target.pos)//have i reached the target
+        if(currAction != CharacterActions.Idle && this.transform.position == target.pos)//have i reached the target
         {
             //Debug.Log("Idling");
             currAction = CharacterActions.Idle;
