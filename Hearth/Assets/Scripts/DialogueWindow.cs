@@ -18,7 +18,7 @@ public class DialogueWindow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        	
+        diagText.text = "";//clear the text
 	}
 
 	// Update is called once per frame
