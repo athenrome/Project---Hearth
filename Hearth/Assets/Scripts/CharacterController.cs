@@ -66,7 +66,7 @@ public class CharacterController : MonoBehaviour {
     {
         Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
 
-        print(targetDialogue.text);
+
 
         diagWin.WriteDialogue(targetDialogue);
     }
