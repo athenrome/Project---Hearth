@@ -13,6 +13,10 @@ public class WoodPile : MonoBehaviour {
 
     public Transform woodSpawn;
 
+    List<GameObject> pileLogs = new List<GameObject>();
+
+
+    bool pileChanged = false;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +31,28 @@ public class WoodPile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+       
+        
+
+        if(pileChanged == true)
+        {
+            if (pileLogs.Count > 0)//clear all spawned logs
+            {
+                foreach (GameObject obj in pileLogs)
+                {
+                    GameObject.Destroy(obj);
+                }
+            }
+
+            for (int i = 0; i < woodCount; i++)//spawn new logs
+            {
+                GameObject woodObj = GameObject.Instantiate(woodModel, woodPileSpawns[i].position, woodPileSpawns[i].rotation) as GameObject;
+                pileLogs.Add(woodObj);
+            }
+
+            pileChanged = false;
+        }
 	
 	}
 
@@ -36,6 +62,7 @@ public class WoodPile : MonoBehaviour {
         {
             GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation);
             woodCount--;
+            pileChanged = true;
             Debug.Log("Spawn Log");
         }
     }
@@ -45,7 +72,8 @@ public class WoodPile : MonoBehaviour {
         if(woodCount < maxWood)
         {
             woodCount++;
-            GameObject.Instantiate(woodModel, woodPileSpawns[woodCount - 1].position, woodPileSpawns[woodCount - 1].rotation);
+            pileChanged = true;
+            
         }
     }
 
