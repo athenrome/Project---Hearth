@@ -23,6 +23,10 @@ public class CharacterController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         currAction = CharacterActions.Idle;
+
+        character = new Character();
+
+        Speak(DialogueType.NeedWoodPrompt);
 	
 	}
 	
@@ -58,9 +62,13 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    public void Speak()
+    public void Speak(DialogueType toSpeak)
     {
-        
+        Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
+
+        print(targetDialogue.text);
+
+        diagWin.WriteDialogue(targetDialogue);
     }
 }
 

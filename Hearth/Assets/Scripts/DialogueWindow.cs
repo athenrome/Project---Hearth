@@ -9,36 +9,46 @@ public class DialogueWindow : MonoBehaviour {
 
     string toWrite;
 
-    public float letterInterval = 50; //time it takes between letter writes
+    public float letterInterval = 5; //time it takes between letter writes
     float currInterval;
 
     int currLetter;
 
-    bool written;
+    bool canWrite;
 
 	// Use this for initialization
 	void Start () {
-        targetDialogue = new Dialogue("Ryan is an awesome fellow", DialogueTag.DarknessPrompt);
-	
+        	
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
-        if(currLetter < targetDialogue.length)
+        if(canWrite == true)
         {
-            if (currInterval > 0)
+            if (currLetter < targetDialogue.length)
             {
-                currInterval -= Time.deltaTime;
-            }
-            else
-            {
-                currInterval = letterInterval;
-                WriteLetter();
+                if (currInterval > 0)
+                {
+                    currInterval -= Time.deltaTime;
+                }
+                else
+                {
+                    currInterval = letterInterval;
+                    WriteLetter();
+                }
             }
         }
+
+        
 	}
 
+    public void WriteDialogue(Dialogue _dialogue)
+    {
+        targetDialogue = _dialogue;
+        currLetter = 0;
+        canWrite = true;
+    }
 
     void WriteLetter()
     {
@@ -49,5 +59,10 @@ public class DialogueWindow : MonoBehaviour {
         diagText.text = toWrite;
 
         currLetter++;
+
+        if(currLetter >= targetDialogue.length)
+        {
+            canWrite = false;
+        }
     }
 }

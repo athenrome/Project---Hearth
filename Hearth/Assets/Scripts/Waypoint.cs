@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Waypoint : MonoBehaviour {
 
+
+
     public Vector3 pos;
 
-    void Awake()
-    {
-        
-    }
+    public bool occupied;
+
+    public PointType type;
 
 	// Use this for initialization
 	void Start () {
@@ -20,4 +21,11 @@ public class Waypoint : MonoBehaviour {
 	void Update () {
 	
 	}
+}
+
+public enum PointType
+{
+    FirepitSlot,
+    EntryPoint,
+    ForestPoint,
 }
