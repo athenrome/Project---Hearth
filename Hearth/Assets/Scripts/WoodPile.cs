@@ -27,6 +27,8 @@ public class WoodPile : MonoBehaviour {
         AddWood();
         AddWood();
 
+        pileChanged = true;
+
     }
 	
 	// Update is called once per frame

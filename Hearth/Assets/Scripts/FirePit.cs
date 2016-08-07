@@ -15,6 +15,7 @@ public class FirePit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        fireSize = Mathf.RoundToInt(centralFlame.intensity);
         
 	}
 

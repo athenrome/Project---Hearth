@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour {
 
     CharacterActions currAction;
     CharacterActions lastAction;
+    float timeSinceLastAction;
 
     Waypoint target;
     Waypoint startPoint;
@@ -35,6 +36,8 @@ public class CharacterController : MonoBehaviour {
 
         if(currAction == CharacterActions.StartMove)
         {
+            startPoint.occupied = false;
+
             startTime = Time.time;
             journeyLength = Vector3.Distance(startPoint.transform.position, target.transform.position);
 
@@ -46,6 +49,7 @@ public class CharacterController : MonoBehaviour {
         if(currAction != CharacterActions.Idle && this.transform.position == target.pos)//have i reached the target
         {
             //Debug.Log("Idling");
+            target.occupied = true;
             currAction = CharacterActions.Idle;
         }
 
@@ -53,13 +57,24 @@ public class CharacterController : MonoBehaviour {
 
         if (currAction == CharacterActions.Move)
         {
-
+            target.occupied = false;
             float distCovered = (Time.time - startTime) * moveSpeed;
             float fracJourney = distCovered / journeyLength;
             transform.position = Vector3.Lerp(startPoint.transform.position, target.transform.position, fracJourney);
         }
 
+        if(currAction == CharacterActions.Idle)
+        {
+            timeSinceLastAction += Time.deltaTime;
+        }
 
+
+    }
+
+    public void MoveToPoint(Waypoint point)
+    {
+        target = point;
+        currAction = CharacterActions.StartMove;
     }
 
     public void Speak(DialogueType toSpeak)
@@ -78,4 +93,5 @@ public enum CharacterActions
     Speak,
     StartMove,
     Move,
+    InForest,
 }
