@@ -23,32 +23,31 @@ public class CharacterController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        currAction = CharacterActions.Idle;
-
-        character = new Character();
-
-        Speak(DialogueType.NeedWoodPrompt);
+        //currAction = CharacterActions.Idle;
+        //Speak(DialogueType.NeedWoodPrompt);//TESTING
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+       
 
-        if(currAction == CharacterActions.StartMove)
+        if (currAction == CharacterActions.StartMove)
         {
+            Debug.Log("Starting Movment");
             startPoint.occupied = false;
 
             startTime = Time.time;
             journeyLength = Vector3.Distance(startPoint.transform.position, target.transform.position);
 
-            //Debug.Log("Starting Movment");
+            
             currAction = CharacterActions.Move;
         }
         
         
         if(currAction != CharacterActions.Idle && this.transform.position == target.pos)//have i reached the target
         {
-            //Debug.Log("Idling");
+            Debug.Log("Idling");
             target.occupied = true;
             currAction = CharacterActions.Idle;
         }
@@ -71,14 +70,18 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    public void MoveToPoint(Waypoint point)
+    public void MoveToPoint(Waypoint _point, Waypoint _startPoint)
     {
-        target = point;
+        target = _point;
+        startPoint = _startPoint;
         currAction = CharacterActions.StartMove;
+
     }
 
     public void Speak(DialogueType toSpeak)
     {
+        currAction = CharacterActions.Speak;
+
         Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
 
 

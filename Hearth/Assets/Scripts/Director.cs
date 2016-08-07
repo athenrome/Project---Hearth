@@ -66,7 +66,10 @@ public class Director : MonoBehaviour {
 
         activeCharacters.Add(newChar);
 
-        newChar
+
+
+
+        newChar.MoveToPoint(closePoints[0], characterEntry);
         
 
         
