@@ -15,19 +15,22 @@ public class Director : MonoBehaviour {
     public Waypoint characterEntry;
     public Waypoint forestExit;
 
-   
 
-    
 
+
+    int availablePoints = 9;
 
     bool closeActive;
     public List<Waypoint> closePoints;//waypoints closest to the fire
+    int availableClose = 3;
 
     bool midActive;
     public List<Waypoint> midPoints;
+    int availableMid = 3;
 
     bool farActive;
     public List<Waypoint> farPoints;
+    int availableFar = 3;
 
     public float spawnInterval;
     float currSpawnInterval;
@@ -37,6 +40,9 @@ public class Director : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        availablePoints = availableClose + availableMid + availableFar;
+
         CharacterPool.Add(new Character());//TESTING 
 
         SpawnCharacter();
@@ -58,6 +64,8 @@ public class Director : MonoBehaviour {
 
     void SpawnCharacter()
     {
+        availablePoints--;
+
         GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, characterEntry.transform.position, characterEntry.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
@@ -66,10 +74,41 @@ public class Director : MonoBehaviour {
 
         activeCharacters.Add(newChar);
 
+        Waypoint targetPoint = characterEntry;//initlising to character entry
+
+        if(availableClose > 0)
+        {
+            foreach(Waypoint point in closePoints)
+            {
+                if(point.occupied == false)
+                {
+                    targetPoint = point;
+                }
+            }
+        }
+        else if(availableMid > 0)
+        {
+            foreach (Waypoint point in midPoints)
+            {
+                if (point.occupied == false)
+                {
+                    targetPoint = point;
+                }
+            }
+        }
+        else if (availableFar > 0)
+        {
+            foreach (Waypoint point in farPoints)
+            {
+                if (point.occupied == false)
+                {
+                    targetPoint = point;
+                }
+            }
+        }
 
 
-
-        newChar.MoveToPoint(closePoints[0], characterEntry);
+        newChar.MoveToPoint(targetPoint, characterEntry);
         
 
         
