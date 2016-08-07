@@ -31,6 +31,10 @@ public class Character : MonoBehaviour {
 
     public float deadTime;//time since this character has last spoken or perfomred an action
 
+    public Character()
+    {
+
+    }
 
 	// Use this for initialization
 	void Start () {

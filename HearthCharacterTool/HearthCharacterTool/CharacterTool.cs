@@ -21,5 +21,25 @@ namespace HearthCharacterTool
         {
 
         }
+
+        void LoadData()
+        {
+
+        }
+
+        void SaveData()
+        {
+
+        }
+    }
+
+    class Character
+    {
+
+    }
+
+    class CharacterData
+    {
+
     }
 }
