@@ -22,18 +22,19 @@ public class Director : MonoBehaviour {
 
     bool closeActive;
     public List<Waypoint> closePoints;//waypoints closest to the fire
-    int availableClose = 3;
+    int availableClose;
 
     bool midActive;
     public List<Waypoint> midPoints;
-    int availableMid = 3;
+    int availableMid;
 
     bool farActive;
     public List<Waypoint> farPoints;
-    int availableFar = 3;
+    int availableFar;
 
     public float spawnInterval;
     float currSpawnInterval;
+    public int spawnChance;//chance for a character to spawn after the spawn interval
 
 
 
@@ -41,13 +42,17 @@ public class Director : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        availableClose = closePoints.Count;
+        availableMid = midPoints.Count;
+        availableFar = farPoints.Count;
+
         availablePoints = availableClose + availableMid + availableFar;
 
         CharacterPool.Add(new Character());//TESTING 
 
         SpawnCharacter();
-	
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -58,9 +63,20 @@ public class Director : MonoBehaviour {
         if (firePit.fireSize >= 15) {farActive = true;} else {farActive = false; }
 
 
+        if(currSpawnInterval <= 0)
+        {
+            int spawnChooser = Random.Range(0, 100);
 
+            if(spawnChooser >= spawnChance)
+            {
+                SpawnCharacter();
+            }
+
+            currSpawnInterval = spawnInterval;
+        }
 
     }
+
 
     void SpawnCharacter()
     {
@@ -107,6 +123,7 @@ public class Director : MonoBehaviour {
             }
         }
 
+        
 
         newChar.MoveToPoint(targetPoint, characterEntry);
         

@@ -19,6 +19,7 @@ public class CharacterController : MonoBehaviour {
     public float moveSpeed = 1f;
     float startTime;
     float journeyLength;
+    bool reachedDest;
 
 
     // Use this for initialization
@@ -42,14 +43,16 @@ public class CharacterController : MonoBehaviour {
 
             
             currAction = CharacterActions.Move;
+            reachedDest = false;
         }
         
         
-        if(currAction != CharacterActions.Idle && this.transform.position == target.pos)//have i reached the target
+        if(reachedDest == false && this.transform.position == target.pos)//have i reached the target
         {
             Debug.Log("Idling");
             target.occupied = true;
             currAction = CharacterActions.Idle;
+            ArriveAtPoint();
         }
 
 
@@ -76,6 +79,12 @@ public class CharacterController : MonoBehaviour {
         startPoint = _startPoint;
         currAction = CharacterActions.StartMove;
 
+    }
+
+    public void ArriveAtPoint()
+    {
+        Speak(DialogueType.NeedWoodPrompt);
+        reachedDest = true;
     }
 
     public void Speak(DialogueType toSpeak)

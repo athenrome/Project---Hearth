@@ -66,6 +66,8 @@ public class Character : MonoBehaviour {
 
     }
 
+    
+
     public Dialogue ChooseDialogue(DialogueType _type)
     {
         Dialogue chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
