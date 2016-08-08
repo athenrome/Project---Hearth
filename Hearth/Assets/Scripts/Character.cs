@@ -70,9 +70,7 @@ public class Character : MonoBehaviour {
 
     public Dialogue ChooseDialogue(DialogueType _type)
     {
-        Dialogue chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
-
-        float diagScore = 0;
+        Dialogue chosenDiag = new Dialogue("default", DialogueType.Dummy);
 
         switch(_type)
         {
@@ -118,7 +116,6 @@ public class Character : MonoBehaviour {
 
 
         }
-        chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
 
         return chosenDiag;
     }

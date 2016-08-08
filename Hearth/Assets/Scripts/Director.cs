@@ -11,7 +11,9 @@ public class Director : MonoBehaviour {
     List<Character> forestCharacters;
 
     int characterCount;
-    int maxCharacters = 3;
+    int maxCharacters = 9;
+
+    public int getWoodThreshold;//if wood is below this level send someone to get wood
 
     public GameObject characterPrefab;
 
@@ -21,7 +23,7 @@ public class Director : MonoBehaviour {
 
 
 
-    int unlockedPoints = 9;//avalable point indexes
+    public int unlockedPoints;//avalable point indexes
     public List<Waypoint> availablePoints;//waypoints closest to the fire
 
 
@@ -30,14 +32,14 @@ public class Director : MonoBehaviour {
     float currSpawnInterval;
     public int spawnChance;//chance for a character to spawn after the spawn interval
 
-    CharacterActions actionRequest;
+    bool woodRequested = false;
 
 
 
 	// Use this for initialization
 	void Start () {
 
-        currSpawnInterval = spawnInterval;
+        currSpawnInterval = 1;
 
         CharacterPool.Add(new Character());//TESTING 
     }
@@ -53,15 +55,15 @@ public class Director : MonoBehaviour {
 
     void CheckFire()
     {
-        //enable or disable firepit slots
-        if (firePit.fireSize >= 5) { unlockedPoints += 3; } else { unlockedPoints -= 3; }
-        if (firePit.fireSize >= 10) { unlockedPoints += 3; } else { unlockedPoints -= 3; }
-        if (firePit.fireSize >= 15) { unlockedPoints += 3; } else { unlockedPoints -= 3; }
+        unlockedPoints = firePit.fireSize;
     }
 
     void CheckWood()
     {
-
+        if(woodPile.woodCount < getWoodThreshold)
+        {
+            woodRequested = true;
+        }
     }
 
     void CheckCharacters()
@@ -76,7 +78,24 @@ public class Director : MonoBehaviour {
             {
                 if (characterCount < maxCharacters)
                 {
-                    //SpawnCharacter();
+                    CharacterController spawnedChar = SpawnCharacter();
+
+                    bool foundMovePoint = false;
+                    Waypoint movePoint = characterEntry;
+
+                    for(int i = 0; i < unlockedPoints; i++)
+                    {
+                        if (foundMovePoint == false)
+                        {
+                            if (availablePoints[i].locked == false)
+                            {
+                                spawnedChar.MoveToPoint(availablePoints[i]);
+                                foundMovePoint = true;
+                                availablePoints[i].locked = true;
+                            }
+                        }
+                        
+                    }
                 }
 
             }
@@ -96,6 +115,8 @@ public class Director : MonoBehaviour {
         newChar.character = CharacterPool[0];//assign characer to new character
 
         activeCharacters.Add(newChar);
+
+        Debug.Log("Spawned Character");
 
         return newChar;
         

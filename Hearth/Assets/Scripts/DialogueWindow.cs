@@ -5,13 +5,16 @@ public class DialogueWindow : MonoBehaviour {
 
     public TextMesh diagText;
 
-    Dialogue targetDialogue;//the diaglogue to be written to screen
+    List<Dialogue> toWrite = new List<Dialogue>();//the diaglogue to be written to screen
 
-    string toWrite;
+    string currText;
+
+    public float lifeTime;//how long the text will stay active after it has finished writing
 
     public float letterInterval = 5; //time it takes between letter writes
     float currInterval;
 
+    int currDialogueLoc;//piece of dialogue that is currently being written
     int currLetter;
 
     bool canWrite;
@@ -26,7 +29,7 @@ public class DialogueWindow : MonoBehaviour {
 
         if(canWrite == true)
         {
-            if (currLetter < targetDialogue.length)
+            if (currLetter < toWrite[currDialogueLoc].length)
             {
                 if (currInterval > 0)
                 {
@@ -43,26 +46,42 @@ public class DialogueWindow : MonoBehaviour {
         
 	}
 
-    public void WriteDialogue(Dialogue _dialogue)
+    public void WriteStory(List<Dialogue> _toWrite)
     {
-        targetDialogue = _dialogue;
+
+    }
+
+    public void WriteDialogue(Dialogue _toWrite)
+    {
+        toWrite.Add(_toWrite);
         currLetter = 0;
         canWrite = true;
     }
 
+    public void HideWindow()
+    {
+        
+    }
+
     void WriteLetter()
     {
-        char nextchar = targetDialogue.text[currLetter];
+        char nextchar = toWrite[currDialogueLoc].text[currLetter];
 
-        toWrite = toWrite + nextchar;
+        currText = currText + nextchar;
 
-        diagText.text = toWrite;
+        diagText.text = currText;
 
         currLetter++;
 
-        if(currLetter >= targetDialogue.length)
+        if(currLetter >= toWrite[currDialogueLoc].length)
         {
             canWrite = false;
+
+            if(currDialogueLoc < toWrite.Count)
+            {
+                currDialogueLoc++;
+                canWrite = true;
+            }
         }
     }
 }

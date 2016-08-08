@@ -14,7 +14,7 @@ public class CharacterController : MonoBehaviour {
     float timeSinceLastAction;
 
     Waypoint target;
-    Waypoint startPoint;
+
 
     public float moveSpeed = 1f;
     float startTime;
@@ -36,10 +36,9 @@ public class CharacterController : MonoBehaviour {
         if (currAction == CharacterActions.StartMove)
         {
             Debug.Log("Starting Movment");
-            startPoint.occupied = false;
 
             startTime = Time.time;
-            journeyLength = Vector3.Distance(startPoint.transform.position, target.transform.position);
+            journeyLength = Vector3.Distance(this.transform.position, target.transform.position);
 
             
             currAction = CharacterActions.Move;
@@ -50,7 +49,7 @@ public class CharacterController : MonoBehaviour {
         if(currAction == CharacterActions.Move && reachedDest == false && this.transform.position == target.pos)//have i reached the target
         {
             Debug.Log("Idling");
-            target.occupied = true;
+            target.locked = true;
             currAction = CharacterActions.Idle;
             ArriveAtPoint();
         }
@@ -59,10 +58,10 @@ public class CharacterController : MonoBehaviour {
 
         if (currAction == CharacterActions.Move)
         {
-            target.occupied = false;
+            target.locked = false;
             float distCovered = (Time.time - startTime) * moveSpeed;
             float fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(startPoint.transform.position, target.transform.position, fracJourney);
+            transform.position = Vector3.Lerp(this.transform.position, target.transform.position, fracJourney);
         }
 
         if(currAction == CharacterActions.Idle)
@@ -73,17 +72,16 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    public void MoveToPoint(Waypoint _point, Waypoint _startPoint)
+    public void MoveToPoint(Waypoint _point)
     {
         target = _point;
-        startPoint = _startPoint;
-        currAction = CharacterActions.StartMove;
 
+        currAction = CharacterActions.StartMove;
     }
 
     public void ArriveAtPoint()
     {
-        Speak(DialogueType.NeedWoodPrompt);
+        Speak(DialogueType.Dummy);
         reachedDest = true;
     }
 
