@@ -7,7 +7,7 @@ public class Waypoint : MonoBehaviour {
 
     public Vector3 pos;
 
-    public bool occupied;
+    public bool locked;
 
     public PointType type;
 
