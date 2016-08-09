@@ -5,7 +5,7 @@ public class CharacterController : MonoBehaviour {
 
     public DialogueWindow diagWin; // where character dialogue is presented
 
-
+    Director director;
 
     public Character character;
 
@@ -26,8 +26,9 @@ public class CharacterController : MonoBehaviour {
     void Start () {
         //currAction = CharacterActions.Idle;
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
-	
-	}
+        director = FindObjectOfType<Director>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -87,23 +88,33 @@ public class CharacterController : MonoBehaviour {
 
     public void Speak(DialogueType toSpeak)
     {
-        currAction = CharacterActions.Speak;
-
-        if(toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
+        if(director.canTalk == true)
         {
-            DialogueStory targetStory = character.ChooseStory(toSpeak);
-            diagWin.WriteStory(targetStory);
+            currAction = CharacterActions.Speak;
+
+            if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
+            {
+                DialogueStory targetStory = character.ChooseStory(toSpeak);
+                diagWin.WriteStory(targetStory);
+            }
+            else
+            {
+                Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
+                diagWin.WriteDialogue(targetDialogue);
+            }
+
+            director.canTalk = false;
         }
         else
         {
-            Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
-            diagWin.WriteDialogue(targetDialogue);
+            Debug.Log("Talking blocked");
         }
-        
 
 
 
-        
+
+
+
     }
 }
 

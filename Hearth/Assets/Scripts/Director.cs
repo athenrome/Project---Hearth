@@ -10,6 +10,8 @@ public class Director : MonoBehaviour {
     List<CharacterController> activeCharacters = new List<CharacterController>();
     List<Character> forestCharacters;
 
+    public bool canTalk;
+
     int characterCount;
     int maxCharacters = 9;
 
@@ -40,7 +42,7 @@ public class Director : MonoBehaviour {
 	void Start () {
 
         currSpawnInterval = 1;
-
+        canTalk = true;
         CharacterPool.Add(new Character());//TESTING 
     }
 	

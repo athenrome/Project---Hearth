@@ -20,60 +20,76 @@ public class DialogueWindow : MonoBehaviour {
 
     bool canWrite;
 
-	// Use this for initialization
-	void Start () {
+    bool finished;
+    
+
+    // Use this for initialization
+    void Start () {
+
         diagText.text = "";//clear the text
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-        if(canWrite == true)
+        if(finished == false)
         {
-            if (currLetter < toWrite[currDialogueLoc].length)
+            if (canWrite == true)
             {
-                if (currInterval > 0)
+                if (currLetter < toWrite[currDialogueLoc].length)
                 {
-                    currInterval -= Time.deltaTime;
+                    if (currInterval > 0)
+                    {
+                        currInterval -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        currInterval = letterInterval;
+                        WriteLetter();
+                    }
                 }
-                else
+            }
+
+            if (canWrite == false)
+            {
+                currLifetime -= Time.deltaTime;
+
+                if (currLifetime <= 0)
                 {
-                    currInterval = letterInterval;
-                    WriteLetter();
+
+
+                    if (currDialogueLoc + 1 < toWrite.Count)//next line
+                    {
+
+                        canWrite = true;
+                        Debug.Log("Now writing: " + toWrite[currDialogueLoc].text);
+
+                        //reset ecerything or next writing cylce
+                        diagText.text = "";
+                        currText = "";
+                        currDialogueLoc++;
+                        currLetter = 0;
+                    }
+                    else//time to stop talking
+                    {
+                        //reset ecerything or next writing cylce
+                        diagText.text = "";
+                        currText = "";
+                        currDialogueLoc = 0;
+                        currLetter = 0;
+                        canWrite = false;
+                        finished = true;
+                    }
                 }
             }
         }
-
-        if(canWrite == false)
+        else
         {
-            currLifetime -= Time.deltaTime;
-
-            if(currLifetime <= 0)
-            {
-                if (currDialogueLoc + 1 < toWrite.Count)
-                {
-                    
-                    canWrite = true;
-                    Debug.Log("Next Line");
-                    Debug.Log("Now writing: " + toWrite[currDialogueLoc].text);
-
-                    //reset ecerything or next writing cylce
-                    diagText.text = "";
-                    currText = "";
-                    currDialogueLoc++;
-                    currLetter = 0;
-                }
-                else
-                {
-                    //reset ecerything or next writing cylce
-                    diagText.text = "";
-                    currText = "";
-                    currDialogueLoc = 0;
-                    currLetter = 0;
-                    canWrite = false;
-                }
-            }
+            diagText.text = "";
+            currText = "";
         }
+
+        
 
 
         
@@ -87,6 +103,7 @@ public class DialogueWindow : MonoBehaviour {
         currDialogueLoc = 0;
         currLetter = 0;
         canWrite = true;
+        finished = false;
     }
 
     public void WriteDialogue(Dialogue _toWrite)
@@ -97,12 +114,9 @@ public class DialogueWindow : MonoBehaviour {
         currDialogueLoc = 0;
         currLetter = 0;
         canWrite = true;
+        finished = false;
     }
 
-    public void HideWindow()
-    {
-        
-    }
 
     void WriteLetter()
     {
