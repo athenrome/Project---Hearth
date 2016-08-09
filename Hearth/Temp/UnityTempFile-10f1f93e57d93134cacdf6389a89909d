@@ -84,6 +84,7 @@ Assets/Scripts/DialogueWindow.cs
 Assets/Scripts/Director.cs
 Assets/Scripts/FirePit.cs
 Assets/Scripts/Flame.cs
+Assets/Scripts/Tree.cs
 Assets/Scripts/Waypoint.cs
 Assets/Scripts/Wood.cs
 Assets/Scripts/WoodPile.cs

@@ -10,6 +10,7 @@ public class DialogueWindow : MonoBehaviour {
     string currText;
 
     public float lifeTime;//how long the text will stay active after it has finished writing
+    float currLifetime = 0;
 
     public float letterInterval = 5; //time it takes between letter writes
     float currInterval;
@@ -42,6 +43,26 @@ public class DialogueWindow : MonoBehaviour {
                 }
             }
         }
+
+        if(canWrite == false)
+        {
+            currLifetime -= Time.deltaTime;
+
+            if(currLifetime <= 0)
+            {
+                if (currDialogueLoc + 1 < toWrite.Count)
+                {
+                    currDialogueLoc++;
+                    canWrite = true;
+                    Debug.Log("Next Line");
+                }
+                else
+                {
+                    diagText.text = "";
+                }
+            }
+        }
+
 
         
 	}
@@ -76,12 +97,7 @@ public class DialogueWindow : MonoBehaviour {
         if(currLetter >= toWrite[currDialogueLoc].length)
         {
             canWrite = false;
-
-            if(currDialogueLoc < toWrite.Count)
-            {
-                currDialogueLoc++;
-                canWrite = true;
-            }
+            currLifetime = lifeTime;
         }
     }
 }

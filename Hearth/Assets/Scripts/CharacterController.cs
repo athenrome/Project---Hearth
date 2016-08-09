@@ -48,7 +48,7 @@ public class CharacterController : MonoBehaviour {
         
         if(currAction == CharacterActions.Move && reachedDest == false && this.transform.position == target.pos)//have i reached the target
         {
-            Debug.Log("Idling");
+
             target.locked = true;
             currAction = CharacterActions.Idle;
             ArriveAtPoint();
