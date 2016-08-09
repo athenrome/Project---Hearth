@@ -10,6 +10,8 @@ public class Director : MonoBehaviour {
     List<CharacterController> activeCharacters = new List<CharacterController>();
     List<Character> forestCharacters;
 
+    CharacterController currActiveCharacter;
+
     public bool canTalk;
 
     int characterCount;
@@ -33,8 +35,6 @@ public class Director : MonoBehaviour {
     public float spawnInterval;
     float currSpawnInterval;
     public int spawnChance;//chance for a character to spawn after the spawn interval
-
-    bool woodRequested = false;
 
 
 
@@ -64,7 +64,7 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount < getWoodThreshold)
         {
-            woodRequested = true;
+            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
         }
     }
 
@@ -103,7 +103,13 @@ public class Director : MonoBehaviour {
             }
 
             currSpawnInterval = spawnInterval;
-        }
+        }       
+
+    }
+
+    public void OrderCharacter(CharacterController character, CharacterOrders order)
+    {
+        character.ReceiveOrder(order);
     }
 
     CharacterController SpawnCharacter()
@@ -124,5 +130,23 @@ public class Director : MonoBehaviour {
         
     }
 
+    CharacterController GetActiveCharacter()
+    {
+        CharacterController foundCharacter = activeCharacters[0];
+        float score = 0;
 
+        foreach(CharacterController character in activeCharacters)
+        {
+            if(character.timeSinceLastAction > score)
+            {
+                foundCharacter = character;
+                score = character.timeSinceLastAction;
+            }
+        }
+
+
+        currActiveCharacter = foundCharacter;
+
+        return currActiveCharacter;
+    }
 }

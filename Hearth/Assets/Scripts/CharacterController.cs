@@ -9,9 +9,9 @@ public class CharacterController : MonoBehaviour {
 
     public Character character;
 
-    CharacterActions currAction;
-    CharacterActions lastAction;
-    float timeSinceLastAction;
+    CharacterOrders currOrder;
+    CharacterOrders lastOrder;
+    public float timeSinceLastAction;
 
     Waypoint target;
 
@@ -34,30 +34,30 @@ public class CharacterController : MonoBehaviour {
 	void Update () {
        
 
-        if (currAction == CharacterActions.StartMove)
+        if (currOrder == CharacterOrders.StartMove)
         {
             Debug.Log("Starting Movment");
 
             startTime = Time.time;
             journeyLength = Vector3.Distance(this.transform.position, target.transform.position);
 
-            
-            currAction = CharacterActions.Move;
+
+            currOrder = CharacterOrders.Move;
             reachedDest = false;
         }
         
         
-        if(currAction == CharacterActions.Move && reachedDest == false && this.transform.position == target.pos)//have i reached the target
+        if(currOrder == CharacterOrders.Move && reachedDest == false && this.transform.position == target.pos)//have i reached the target
         {
 
             target.locked = true;
-            currAction = CharacterActions.Idle;
+            currOrder = CharacterOrders.Idle;
             ArriveAtPoint();
         }
 
 
 
-        if (currAction == CharacterActions.Move)
+        if (currOrder == CharacterOrders.Move)
         {
             target.locked = false;
             float distCovered = (Time.time - startTime) * moveSpeed;
@@ -65,7 +65,7 @@ public class CharacterController : MonoBehaviour {
             transform.position = Vector3.Lerp(this.transform.position, target.transform.position, fracJourney);
         }
 
-        if(currAction == CharacterActions.Idle)
+        if(currOrder == CharacterOrders.Idle)
         {
             timeSinceLastAction += Time.deltaTime;
         }
@@ -73,16 +73,24 @@ public class CharacterController : MonoBehaviour {
 
     }
 
+    public void ReceiveOrder(CharacterOrders order)
+    {
+        switch(order)
+        {
+
+        }
+    }
+
     public void MoveToPoint(Waypoint _point)
     {
         target = _point;
 
-        currAction = CharacterActions.StartMove;
+        currOrder = CharacterOrders.StartMove;
     }
 
     public void ArriveAtPoint()
     {
-        Speak(DialogueType.GhostStory);
+        //Testing     Speak(DialogueType.GhostStory);
         reachedDest = true;
     }
 
@@ -90,7 +98,7 @@ public class CharacterController : MonoBehaviour {
     {
         if(director.canTalk == true)
         {
-            currAction = CharacterActions.Speak;
+            currOrder = CharacterOrders.Speak;
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
             {
@@ -118,11 +126,14 @@ public class CharacterController : MonoBehaviour {
     }
 }
 
-public enum CharacterActions
+public enum CharacterOrders
 {
     Idle,
     Speak,
     StartMove,
     Move,
+
     InForest,
+    GetWood,
+    WoodToPile,    
 }
