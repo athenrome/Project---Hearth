@@ -52,7 +52,7 @@ public class Wood : MonoBehaviour {
         {
             FirePit pit = col.gameObject.GetComponent<FirePit>();
 
-            Debug.Log("Entered pit");
+            //Debug.Log("Entered pit");
 
             pit.AddWood(this);
 
@@ -64,7 +64,7 @@ public class Wood : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        Debug.Log("Exited pit");
+        //Debug.Log("Exited pit");
     }
     //END FIREPIT
 
@@ -81,7 +81,7 @@ public class Wood : MonoBehaviour {
 
 
 
-        Debug.Log("Selected Log");
+        //Debug.Log("Selected Log");
 
     }
 

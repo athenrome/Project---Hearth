@@ -21,8 +21,8 @@ public class Director : MonoBehaviour {
 
     public GameObject characterPrefab;
 
-    public Waypoint characterEntry;
-    public Waypoint forestExit;
+    public Waypoint entryPoint;
+    public Waypoint forestPoint;
 
 
 
@@ -35,6 +35,9 @@ public class Director : MonoBehaviour {
     public float spawnInterval;
     float currSpawnInterval;
     public int spawnChance;//chance for a character to spawn after the spawn interval
+
+    //order restrictions
+    bool woodOrdered;
 
 
 
@@ -62,9 +65,10 @@ public class Director : MonoBehaviour {
 
     void CheckWood()
     {
-        if(woodPile.woodCount < getWoodThreshold)
+        if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
         {
             OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+            woodOrdered = true;
         }
     }
 
@@ -83,7 +87,7 @@ public class Director : MonoBehaviour {
                     CharacterController spawnedChar = SpawnCharacter();
 
                     bool foundMovePoint = false;
-                    Waypoint movePoint = characterEntry;
+                    Waypoint movePoint = entryPoint;
 
                     for(int i = 0; i < unlockedPoints; i++)
                     {
@@ -116,7 +120,7 @@ public class Director : MonoBehaviour {
     {
         characterCount++;
 
-        GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, characterEntry.transform.position, characterEntry.transform.rotation) as GameObject;
+        GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, entryPoint.transform.position, entryPoint.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
 

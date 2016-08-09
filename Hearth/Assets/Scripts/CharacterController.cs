@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour {
     CharacterOrders lastOrder;
     public float timeSinceLastAction;
 
-    Waypoint target;
+    Waypoint waypointTarget;
 
 
     public float moveSpeed = 1f;
@@ -39,31 +39,35 @@ public class CharacterController : MonoBehaviour {
             Debug.Log("Starting Movment");
 
             startTime = Time.time;
-            journeyLength = Vector3.Distance(this.transform.position, target.transform.position);
+            journeyLength = Vector3.Distance(this.transform.position, waypointTarget.transform.position);
 
 
             currOrder = CharacterOrders.Move;
             reachedDest = false;
+            waypointTarget.locked = true;
         }
-        
-        
-        if(currOrder == CharacterOrders.Move && reachedDest == false && this.transform.position == target.pos)//have i reached the target
+
+        if (currOrder == CharacterOrders.Move)
+        {
+            
+            float distCovered = (Time.time - startTime) * moveSpeed;
+            float fracJourney = distCovered / journeyLength;
+            transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
+        }
+
+        if (currOrder == CharacterOrders.Move && this.transform.position == waypointTarget.pos)//have i reached the target
         {
 
-            target.locked = true;
+            reachedDest = true;
+
+            waypointTarget.locked = true;
             currOrder = CharacterOrders.Idle;
             ArriveAtPoint();
         }
 
 
 
-        if (currOrder == CharacterOrders.Move)
-        {
-            target.locked = false;
-            float distCovered = (Time.time - startTime) * moveSpeed;
-            float fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(this.transform.position, target.transform.position, fracJourney);
-        }
+       
 
         if(currOrder == CharacterOrders.Idle)
         {
@@ -73,17 +77,25 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    public void ReceiveOrder(CharacterOrders order)
+    public void ReceiveOrder(CharacterOrders _order)
     {
-        switch(order)
+        switch(_order)
         {
+            case CharacterOrders.GetWood:
+                waypointTarget = director.forestPoint;
+                currOrder = CharacterOrders.StartMove;
+                Debug.Log("Get Wood");
 
+                break;
+
+                
         }
+        
     }
 
     public void MoveToPoint(Waypoint _point)
     {
-        target = _point;
+        waypointTarget = _point;
 
         currOrder = CharacterOrders.StartMove;
     }

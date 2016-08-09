@@ -65,7 +65,7 @@ public class WoodPile : MonoBehaviour {
             GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation);
             woodCount--;
             pileChanged = true;
-            Debug.Log("Spawn Log");
+            //Debug.Log("Spawn Log");
         }
     }
 
