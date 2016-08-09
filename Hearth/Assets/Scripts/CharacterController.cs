@@ -98,12 +98,28 @@ public class CharacterController : MonoBehaviour {
         waypointTarget = _point;
 
         currOrder = CharacterOrders.StartMove;
+
+        
     }
 
     public void ArriveAtPoint()
     {
         //Testing     Speak(DialogueType.GhostStory);
         reachedDest = true;
+
+        if(this.transform.position == director.forestPoint.pos)
+        {
+            Debug.Log("Character entred forest");
+
+            Debug.Log(director.activeCharacters.Count);
+            director.activeCharacters.Remove(this);
+            Debug.Log(director.activeCharacters.Count);
+
+            director.forestCharacters.Add(this.character);
+
+            GameObject.Destroy(this.gameObject);
+
+        }
     }
 
     public void Speak(DialogueType toSpeak)

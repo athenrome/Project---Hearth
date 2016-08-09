@@ -7,12 +7,15 @@ public class Director : MonoBehaviour {
     public WoodPile woodPile;
 
     List<Character> CharacterPool = new List<Character>();
-    List<CharacterController> activeCharacters = new List<CharacterController>();
-    List<Character> forestCharacters;
+    public List<CharacterController> activeCharacters = new List<CharacterController>();
+    public List<Character> forestCharacters = new List<Character>();
 
     CharacterController currActiveCharacter;
 
     public bool canTalk;
+
+    public float deathChance;
+    bool characterDeath;
 
     int characterCount;
     int maxCharacters = 9;
@@ -24,7 +27,8 @@ public class Director : MonoBehaviour {
     public Waypoint entryPoint;
     public Waypoint forestPoint;
 
-
+    public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
+    public int gatherWoodCount; //how much wood characters bring back from the forest
 
 
     public int unlockedPoints;//avalable point indexes
@@ -43,7 +47,7 @@ public class Director : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        characterDeath = true;
         currSpawnInterval = 1;
         canTalk = true;
         CharacterPool.Add(new Character());//TESTING 
@@ -54,8 +58,53 @@ public class Director : MonoBehaviour {
 
         CheckFire();
         CheckWood();
+        CheckForest();
         CheckCharacters();
 
+    }
+
+    void CheckForest()
+    {
+        if(forestCharacters.Count > 0)
+        {
+            foreach(Character character in forestCharacters)
+            {
+                character.forestTime += Time.deltaTime;
+
+                if (character.forestTime >= forestReturnTime)//return or die character
+                {
+                    int deathRoll = Random.Range(0, 100);
+
+                    if (deathRoll >= deathChance)//return character
+                    {
+                        ReturnForestCharacter(character);
+                        Debug.Log("CHARACTER RETURN");
+                    }
+                    else//character dies
+                    {
+                        characterDeath = true;
+                        forestCharacters.Remove(character);
+                        characterCount--;
+                        Debug.Log("CHARACTER DEATH");
+                    }
+
+                    
+                }
+            }
+
+
+        }
+    }
+
+    void ReturnForestCharacter(Character _toReturn)
+    {
+        GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, forestPoint.transform.position, forestPoint.transform.rotation) as GameObject;
+
+        CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
+
+        newChar.character = CharacterPool[0];//assign characer to new character
+
+        activeCharacters.Add(newChar);
     }
 
     void CheckFire()

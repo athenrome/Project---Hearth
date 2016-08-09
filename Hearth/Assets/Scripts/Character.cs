@@ -24,7 +24,7 @@ public class Character : MonoBehaviour {
     List<Dialogue> PositiveReactions;
     List<Dialogue> NegativeReations;
 
-    
+    public float forestTime;// how long a character has been in the forest
 
     public int efficiency;
     public int hopeLevel;
