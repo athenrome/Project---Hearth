@@ -67,6 +67,33 @@ public class Character : MonoBehaviour {
     }
 
     
+    public DialogueStory ChooseStory(DialogueType _type)
+    {
+        List<Dialogue> dummyStory = new List<Dialogue>();
+        dummyStory.Add(new Dialogue("Part 1 of a story", DialogueType.DarknessPrompt));
+        dummyStory.Add(new Dialogue("Part 2 of a story", DialogueType.DarknessPrompt));
+
+        DialogueStory chosenStory = new DialogueStory(dummyStory, DialogueType.Dummy);
+
+        switch (_type)
+        {
+            case DialogueType.DarknessPrompt:
+                break;
+
+            case DialogueType.DecreasedSanityPrompt:
+
+                break;
+
+            default:
+                
+                break;
+
+
+
+        }
+
+        return chosenStory;
+    }
 
     public Dialogue ChooseDialogue(DialogueType _type)
     {

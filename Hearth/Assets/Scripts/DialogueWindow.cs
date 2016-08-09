@@ -52,13 +52,25 @@ public class DialogueWindow : MonoBehaviour {
             {
                 if (currDialogueLoc + 1 < toWrite.Count)
                 {
-                    currDialogueLoc++;
+                    
                     canWrite = true;
                     Debug.Log("Next Line");
+                    Debug.Log("Now writing: " + toWrite[currDialogueLoc].text);
+
+                    //reset ecerything or next writing cylce
+                    diagText.text = "";
+                    currText = "";
+                    currDialogueLoc++;
+                    currLetter = 0;
                 }
                 else
                 {
+                    //reset ecerything or next writing cylce
                     diagText.text = "";
+                    currText = "";
+                    currDialogueLoc = 0;
+                    currLetter = 0;
+                    canWrite = false;
                 }
             }
         }
@@ -67,14 +79,22 @@ public class DialogueWindow : MonoBehaviour {
         
 	}
 
-    public void WriteStory(List<Dialogue> _toWrite)
+    public void WriteStory(DialogueStory _toWrite)
     {
-
+        toWrite = _toWrite.storyText;
+        diagText.text = "";
+        currText = "";
+        currDialogueLoc = 0;
+        currLetter = 0;
+        canWrite = true;
     }
 
     public void WriteDialogue(Dialogue _toWrite)
     {
         toWrite.Add(_toWrite);
+        diagText.text = "";
+        currText = "";
+        currDialogueLoc = 0;
         currLetter = 0;
         canWrite = true;
     }
