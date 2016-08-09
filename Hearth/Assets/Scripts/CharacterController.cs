@@ -81,7 +81,7 @@ public class CharacterController : MonoBehaviour {
 
     public void ArriveAtPoint()
     {
-        Speak(DialogueType.Dummy);
+        Speak(DialogueType.GhostStory);
         reachedDest = true;
     }
 
@@ -89,11 +89,21 @@ public class CharacterController : MonoBehaviour {
     {
         currAction = CharacterActions.Speak;
 
-        Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
+        if(toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
+        {
+            DialogueStory targetStory = character.ChooseStory(toSpeak);
+            diagWin.WriteStory(targetStory);
+        }
+        else
+        {
+            Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
+            diagWin.WriteDialogue(targetDialogue);
+        }
+        
 
 
 
-        diagWin.WriteDialogue(targetDialogue);
+        
     }
 }
 
