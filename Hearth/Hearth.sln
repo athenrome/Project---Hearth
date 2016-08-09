@@ -1,7 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearth.CSharp.Plugins", "Hearth.CSharp.Plugins.csproj", "{41FDBBF8-3954-057F-BBBF-FBD7A5C096D4}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearth.CSharp", "Hearth.CSharp.csproj", "{FBDFDCA8-9BE6-6805-520B-118459E6A180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearth.CSharp.Editor.Plugins", "Hearth.CSharp.Editor.Plugins.csproj", "{0C5F7F4E-152B-73FD-B791-0F9B1CC0E189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearth.CSharp.Editor", "Hearth.CSharp.Editor.csproj", "{435754B2-62FD-BC7D-9DAC-F8A6C7E32201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +15,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41FDBBF8-3954-057F-BBBF-FBD7A5C096D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FDBBF8-3954-057F-BBBF-FBD7A5C096D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FDBBF8-3954-057F-BBBF-FBD7A5C096D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FDBBF8-3954-057F-BBBF-FBD7A5C096D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FBDFDCA8-9BE6-6805-520B-118459E6A180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FBDFDCA8-9BE6-6805-520B-118459E6A180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBDFDCA8-9BE6-6805-520B-118459E6A180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBDFDCA8-9BE6-6805-520B-118459E6A180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C5F7F4E-152B-73FD-B791-0F9B1CC0E189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5F7F4E-152B-73FD-B791-0F9B1CC0E189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5F7F4E-152B-73FD-B791-0F9B1CC0E189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5F7F4E-152B-73FD-B791-0F9B1CC0E189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{435754B2-62FD-BC7D-9DAC-F8A6C7E32201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435754B2-62FD-BC7D-9DAC-F8A6C7E32201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435754B2-62FD-BC7D-9DAC-F8A6C7E32201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435754B2-62FD-BC7D-9DAC-F8A6C7E32201}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
