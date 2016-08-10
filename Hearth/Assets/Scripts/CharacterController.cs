@@ -117,9 +117,7 @@ public class CharacterController : MonoBehaviour {
         {
             Debug.Log("Character entred forest");
 
-            Debug.Log(director.activeCharacters.Count);
             director.activeCharacters.Remove(this);
-            Debug.Log(director.activeCharacters.Count);
 
             director.forestCharacters.Add(this.character);
 

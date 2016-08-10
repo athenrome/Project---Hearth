@@ -5,7 +5,7 @@ public class Character : MonoBehaviour {
 
     public string charName;
 
-    public bool isCharacter;
+    public int efficiency;
 
     List<DialogueStory> HopefulStorys = new List<DialogueStory>();
     List<DialogueStory> GhostStorys = new List<DialogueStory>();
@@ -26,7 +26,6 @@ public class Character : MonoBehaviour {
 
     public float forestTime;// how long a character has been in the forest
 
-    public int efficiency;
     public int hopeLevel;
     public int carryWood;//how much wood the character is currently carrying
 

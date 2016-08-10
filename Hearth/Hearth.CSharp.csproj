@@ -68,8 +68,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ScriptableObjects\CharacterScriptBeh.cs" />
-    <Compile Include="Assets\ScriptableObjects\CharacterScriptObj.cs" />
+    <Compile Include="Assets\ScriptableObjects\CharacterObj.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\CharacterController.cs" />
     <Compile Include="Assets\Scripts\DataController.cs" />

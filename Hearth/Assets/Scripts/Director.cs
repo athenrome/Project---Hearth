@@ -6,7 +6,10 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
-    List<Character> CharacterPool = new List<Character>();
+    public List<CharacterObj> CharacterObjPool;
+
+    List<CharacterObj> CharacterPool;
+
     public List<CharacterController> activeCharacters = new List<CharacterController>();
     public List<Character> forestCharacters = new List<Character>();
 
@@ -58,32 +61,39 @@ public class Director : MonoBehaviour {
         currSpawnInterval = 1;
         canTalk = true;
         CharacterPool.Add(new Character());//TESTING 
+
+        LoadCharacters();
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        CheckFire();
-        CheckWood();
-        CheckForest();
-        CheckCharacters();
+        //CheckFire();
+        //CheckWood();
+        //CheckForest();
+        //CheckCharacters();
 
         
 
-        if(currCooldown <= 0)
-        {
-            CheckCharacterOrders();
+        //if(currCooldown <= 0)
+        //{
+        //    CheckCharacterOrders();
 
-            if(actionTaken == true)
-            {
-                currCooldown = orderCooldown;
-            }
+        //    if(actionTaken == true)
+        //    {
+        //        currCooldown = orderCooldown;
+        //    }
             
-        }
-        else
-        {
-            currCooldown -= Time.deltaTime;
-        }
+        //}
+        //else
+        //{
+        //    currCooldown -= Time.deltaTime;
+        //}
+    }
+
+    void LoadCharacters()
+    {
+
     }
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
