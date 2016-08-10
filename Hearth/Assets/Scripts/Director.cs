@@ -88,21 +88,24 @@ public class Director : MonoBehaviour {
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
     {
-
-
-        if(woodOrdered == true && askedForWood == true)
+        if(actionTaken = false && activeCharacters.Count > 0)
         {
-            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
-            actionTaken = true;
-        }
-        else if(askedForWood == true)
-        {
-            CharacterController toSpeak = GetActiveCharacter();
-            toSpeak.Speak(DialogueType.NeedWoodPrompt);
+            if (woodOrdered == true && askedForWood == true)
+            {
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+                actionTaken = true;
+            }
+            else if (askedForWood == true)
+            {
+                CharacterController toSpeak = GetActiveCharacter();
+                toSpeak.Speak(DialogueType.NeedWoodPrompt);
 
-            actionTaken = true;
-            woodOrdered = true;
+                //actionTaken = true;
+                woodOrdered = true;
+            }
         }
+
+        
     }
 
     void CheckForest()

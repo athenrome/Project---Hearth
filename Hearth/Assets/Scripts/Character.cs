@@ -124,7 +124,25 @@ public class Character : MonoBehaviour {
                 break;
 
             case DialogueType.NeedWoodPrompt:
-                chosenDiag = GetOldestDialogue(NeedWoodPrompts);
+
+                Debug.Log("a");
+
+                Dialogue toReturn = NeedWoodPrompts[0];
+                float oldestTime = 0;
+
+                foreach (Dialogue diag in NeedWoodPrompts)
+                {
+                    if (diag.deadTime > oldestTime)
+                    {
+                        oldestTime = diag.deadTime;
+                        toReturn = diag;
+
+                        toReturn.deadTime = 0;
+                    }
+                }
+
+                chosenDiag = toReturn;
+
                 break;
 
             case DialogueType.NegativeReation:
@@ -152,19 +170,23 @@ public class Character : MonoBehaviour {
 
     Dialogue GetOldestDialogue(List<Dialogue> source)
     {
+        //Debug.Log("1");
+
         Dialogue toReturn = source[0];
-        float oldestTime = 0;
+        //float oldestTime = 0;
 
-        foreach(Dialogue diag in source)
-        {
-            if(diag.deadTime > oldestTime)
-            {
-                oldestTime = diag.deadTime;
-                toReturn = diag;
+        //Debug.Log("2");
 
-                toReturn.deadTime = 0;
-            }
-        }
+        //foreach (Dialogue diag in source)
+        //{
+        //    if(diag.deadTime > oldestTime)
+        //    {
+        //        oldestTime = diag.deadTime;
+        //        toReturn = diag;
+
+        //        toReturn.deadTime = 0;
+        //    }
+        //}
 
         return toReturn;
     }
