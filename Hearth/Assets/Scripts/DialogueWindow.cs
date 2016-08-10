@@ -69,6 +69,8 @@ public class DialogueWindow : MonoBehaviour {
                         currText = "";
                         currDialogueLoc++;
                         currLetter = 0;
+
+                        toWrite[currDialogueLoc].deadTime = 0;
                     }
                     else//time to stop talking
                     {
@@ -79,6 +81,8 @@ public class DialogueWindow : MonoBehaviour {
                         currLetter = 0;
                         canWrite = false;
                         finished = true;
+                        toWrite[currDialogueLoc].deadTime = 0;
+
                     }
                 }
             }

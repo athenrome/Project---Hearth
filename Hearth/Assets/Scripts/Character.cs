@@ -7,22 +7,22 @@ public class Character : MonoBehaviour {
 
     public bool isCharacter;
 
-    List<DialogueStory> HopefulStorys;
-    List<DialogueStory> GhostStorys;
+    List<DialogueStory> HopefulStorys = new List<DialogueStory>();
+    List<DialogueStory> GhostStorys = new List<DialogueStory>();
 
-    List<Dialogue> NeedWoodPrompts;
-    List<Dialogue> WoodArrivesPrompts;
+    List<Dialogue> NeedWoodPrompts = new List<Dialogue>();
+    List<Dialogue> WoodArrivesPrompts = new List<Dialogue>();
 
-    List<Dialogue> LightDropPrompts;
-    List<Dialogue> LightBoostPrompts;
+    List<Dialogue> LightDropPrompts = new List<Dialogue>();
+    List<Dialogue> LightBoostPrompts = new List<Dialogue>();
 
-    List<Dialogue> darknessPrompts;    
+    List<Dialogue> darknessPrompts = new List<Dialogue>();
 
-    List<Dialogue> DecreasedSanityPrompts;
-    List<Dialogue> IncreasedSanityPrompts;
+    List<Dialogue> DecreasedSanityPrompts = new List<Dialogue>();
+    List<Dialogue> IncreasedSanityPrompts = new List<Dialogue>();
 
-    List<Dialogue> PositiveReactions;
-    List<Dialogue> NegativeReations;
+    List<Dialogue> PositiveReactions = new List<Dialogue>();
+    List<Dialogue> NegativeReations = new List<Dialogue>();
 
     public float forestTime;// how long a character has been in the forest
 
@@ -112,7 +112,6 @@ public class Character : MonoBehaviour {
 
             case DialogueType.IncreasedSanityPrompt:
                 chosenDiag = GetOldestDialogue(IncreasedSanityPrompts);
-
                 break;
 
             case DialogueType.LightBoostPrompt:

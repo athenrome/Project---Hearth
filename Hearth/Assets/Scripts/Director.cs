@@ -13,7 +13,13 @@ public class Director : MonoBehaviour {
     CharacterController currActiveCharacter;
 
     public bool canTalk;
-    public bool woodOrdered;
+
+    public float orderCooldown;//how long before a new action can be made
+    float currCooldown;
+    public bool actionTaken;
+
+    public bool askedForWood;//if a wood request has been given
+    public bool woodOrdered;//if someone has been sent to get wood
 
     public float deathChance;
     bool characterDeath;
@@ -62,6 +68,41 @@ public class Director : MonoBehaviour {
         CheckForest();
         CheckCharacters();
 
+        
+
+        if(currCooldown <= 0)
+        {
+            CheckCharacterOrders();
+
+            if(actionTaken == true)
+            {
+                currCooldown = orderCooldown;
+            }
+            
+        }
+        else
+        {
+            currCooldown -= Time.deltaTime;
+        }
+    }
+
+    void CheckCharacterOrders()//manages when and what is poken by ceratian characters
+    {
+
+
+        if(woodOrdered == true && askedForWood == true)
+        {
+            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+            actionTaken = true;
+        }
+        else if(askedForWood == true)
+        {
+            CharacterController toSpeak = GetActiveCharacter();
+            toSpeak.Speak(DialogueType.NeedWoodPrompt);
+
+            actionTaken = true;
+            woodOrdered = true;
+        }
     }
 
     void CheckForest()
@@ -127,8 +168,8 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
         {
-            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
-            woodOrdered = true;
+            //OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+            askedForWood = true;
         }
     }
 

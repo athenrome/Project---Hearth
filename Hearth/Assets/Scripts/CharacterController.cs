@@ -125,12 +125,11 @@ public class CharacterController : MonoBehaviour {
 
         if(NearLocation(director.woodPilePoint))
         {
-            if(director.woodOrdered == true)
+            if(character.carryWood > 0)
             {
                 Debug.Log("Place Wood");
                 director.woodPile.AddWood(character.carryWood);
-                director.woodOrdered = false;
-                
+                character.carryWood = 0;
             }
         }
     }
