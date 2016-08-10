@@ -21,7 +21,7 @@ public class Dialogue : MonoBehaviour {
 
     public void UpdateDialogue()
     {
-            deadTime += Time.deltaTime;
+        deadTime += Time.deltaTime;
     }
 }
 

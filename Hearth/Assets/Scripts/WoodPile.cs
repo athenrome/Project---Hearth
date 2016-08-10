@@ -16,6 +16,8 @@ public class WoodPile : MonoBehaviour {
     List<GameObject> pileLogs = new List<GameObject>();
 
 
+
+
     bool pileChanged = false;
 
 	// Use this for initialization

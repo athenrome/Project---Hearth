@@ -71,7 +71,6 @@ public class Director : MonoBehaviour {
 
         LoadCharacters();
 
-        SpawnCharacter();
     }
 	
 	// Update is called once per frame
@@ -80,24 +79,17 @@ public class Director : MonoBehaviour {
         CheckFire();
         CheckWood();
         CheckForest();
-        CheckCharacters();
 
-
-        
-        if (currOrderCooldown <= 0)
+        if (characterCount > 0)//if there are characters
         {
-            CheckCharacterOrders();
-
-            if (actionTaken == true)
-            {
-                currOrderCooldown = orderCooldown;
-            }
 
         }
         else
         {
-            currOrderCooldown -= Time.deltaTime;
+            SpawnCharacter();
         }
+
+        
     }
 
 
@@ -186,7 +178,7 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
         {
-            //OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
             askedForWood = true;
         }
     }
@@ -231,6 +223,8 @@ public class Director : MonoBehaviour {
 
         newChar.character = CharacterPool[0];//assign characer to new character
 
+        CharacterPool.Remove(newChar.character);//remove this character from circulation
+
         activeCharacters.Add(newChar);
 
         Debug.Log("Spawned Character: " + newChar.character.charName);
@@ -246,7 +240,7 @@ public class Director : MonoBehaviour {
         bool foundMovePoint = false;
         Waypoint movePoint = entryPoint;
 
-        for (int i = 0; i < unlockedPoints; i++)
+        for (int i = 0; i < unlockedPoints || foundMovePoint == true; i++)
         {
             if (foundMovePoint == false)
             {
@@ -293,4 +287,29 @@ public class Director : MonoBehaviour {
     }
 
     
+}
+
+public enum WorldEvents //usedto trigger events
+{
+    LightUp,
+    LightDrop,
+    DarknessPrompt,
+
+    ForestDeath,
+    ForestReturn,
+
+    WoodLow,
+
+    WoodConsumed,
+
+    CharacterArrive,
+    CharacterLeave,
+
+    GameStart,
+    GameEnd,
+
+    HopefulStory,
+    GhostStory,
+
+
 }

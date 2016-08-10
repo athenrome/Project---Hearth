@@ -100,7 +100,7 @@ public class CharacterController : MonoBehaviour {
     public void MoveToPoint(Waypoint _point)
     {
         waypointTarget = _point;
-
+        Debug.Log("Move to Point");
         currOrder = CharacterOrders.StartMove;
 
         

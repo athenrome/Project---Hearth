@@ -8,6 +8,8 @@ public class FirePit : MonoBehaviour {
 
     public int fireSize;
 
+    public float adjustmentAmount;//how much the fire increases per unit of wood
+
 	// Use this for initialization
 	void Start () {
 	
@@ -16,6 +18,8 @@ public class FirePit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         fireSize = Mathf.RoundToInt(centralFlame.intensity);
+
+        UpdateFire();
         
 	}
 
@@ -24,20 +28,24 @@ public class FirePit : MonoBehaviour {
         woodInFire.Add(toAdd);
         centralFlame.intensity += 5;
 
+        Debug.Log("Fuel Fire");
+
         fireSize++;
     }
 
-    public void RemoveWood(Wood toRemove)
+    public void RemoveWood()
     {
-        woodInFire.Remove(toRemove);
+        woodInFire.Remove(woodInFire[0]);
+        Debug.Log("Wood Consumed");
         fireSize--;       
     }
 
     void UpdateFire()
     {
-        float targetIntensity = woodInFire.Count * 5;
-
-        centralFlame.intensity = targetIntensity;
+        foreach (Wood fireWood in woodInFire)
+        {
+            fireWood.BurnWood();
+        }
     }
 
 }
