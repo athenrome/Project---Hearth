@@ -32,37 +32,15 @@ public class CharacterData : ScriptableObject
     public List<string> missionFailPromptsText;
     public List<string> missionSuceedPromptsText;
 
-
-    public int IgnoreEverythingForward;
-
-    public List<DialogueStory> HopefulStorys;
-    public List<DialogueStory> GhostStorys;
-
-    public List<Dialogue> needWoodPrompts;
-    public List<Dialogue> woodArrivesPrompts;
-
-    public List<Dialogue> lightDropPrompts;
-    public List<Dialogue> lightBoostPrompts;
-    public List<Dialogue> darknessPrompts;
-
-    public List<Dialogue> decreasedSanityPrompts;
-    public List<Dialogue> increasedSanityPrompts;
-
-    public List<Dialogue> positiveReactions;
-    public List<Dialogue> negativeReations;
-
-    public List<Dialogue> missionStartPrompts;
-    public List<Dialogue> missionEndPrompts;
-    public List<Dialogue> missionFailPrompts;
-    public List<Dialogue> missionSuceedPrompts;
-
-
-
-
-
-
-
     
+
+
+
+
+
+
+
+
 }
 
 

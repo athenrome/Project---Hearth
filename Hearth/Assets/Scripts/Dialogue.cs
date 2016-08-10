@@ -7,7 +7,7 @@ public class Dialogue : MonoBehaviour {
     public DialogueType type;
     public int length;//total number of letters to be written
 
-    public bool available; //if this piece of dialogue can be used
+    //public bool available; //if this piece of dialogue can be used
     public float deadTime; //the time since this dialogue was last used
 
     public Dialogue(string _text, DialogueType _type)
@@ -16,14 +16,12 @@ public class Dialogue : MonoBehaviour {
         type = _type;
 
         length = text.Length;
+        deadTime = Random.Range(0,3);
     }
 
     public void UpdateDialogue()
     {
-        if(available == false)
-        {
             deadTime += Time.deltaTime;
-        }
     }
 }
 

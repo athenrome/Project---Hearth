@@ -67,6 +67,8 @@ public class Director : MonoBehaviour {
         canTalk = true;
         actionTaken = false;
 
+        maxCharacters = CharacterPool.Count;
+
         LoadCharacters();
 
         SpawnCharacter();
@@ -103,14 +105,22 @@ public class Director : MonoBehaviour {
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
     {
         CharacterController toOrder = GetActiveCharacter();
-        
-        if(actionTaken = false && activeCharacters.Count > 0)
+
+        if (activeCharacters.Count > 0)
         {
             toOrder.Speak(DialogueType.NeedWoodPrompt);
-            Debug.Log("asdf");
+            
+
+            actionTaken = true;
         }
 
         
+    }
+
+    public void OrderCharacter(CharacterController character, CharacterOrders order)
+    {
+        character.ReceiveOrder(order);
+        actionTaken = true;
     }
 
     void CheckForest()
@@ -209,10 +219,7 @@ public class Director : MonoBehaviour {
 
     }
 
-    public void OrderCharacter(CharacterController character, CharacterOrders order)
-    {
-        character.ReceiveOrder(order);
-    }
+
 
     CharacterController SpawnCharacter()
     {
@@ -270,7 +277,7 @@ public class Director : MonoBehaviour {
         }
 
 
-        Debug.Log("Active character is: " + foundCharacter.character.charName);
+
 
         return foundCharacter;
     }
@@ -280,77 +287,10 @@ public class Director : MonoBehaviour {
 
         foreach (CharacterData character in masterCharacterPool)
         {
-            ProcessDialogueData(character);
             CharacterPool.Add(new Character(character));
             Debug.Log("Created character: " + CharacterPool.Count + character.characterName);
         }
     }
 
-    void ProcessDialogueData(CharacterData character)
-    {
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.NeedWoodPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.WoodArrivesPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.LightDropPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.LightBoostPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.DarknessPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.DecreasedSanityPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.IncreasedSanityPrompt));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.PositiveReaction));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.NegativeReation));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionStart));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionEnd));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionFail));
-        }
-
-        foreach (string text in character.needWoodPromptsText)
-        {
-            character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionSuceed));
-        }
-    }
+    
 }
