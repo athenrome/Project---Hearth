@@ -78,7 +78,7 @@ public class Director : MonoBehaviour {
 
         CheckFire();
         CheckWood();
-        CheckForest();
+        //CheckForest();
 
         if (characterCount > 0)//if there are characters
         {

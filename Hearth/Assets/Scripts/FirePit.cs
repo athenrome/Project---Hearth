@@ -26,7 +26,7 @@ public class FirePit : MonoBehaviour {
     public void AddWood(Wood toAdd)
     {
         woodInFire.Add(toAdd);
-        centralFlame.intensity += 5;
+        centralFlame.intensity += adjustmentAmount;
 
         Debug.Log("Fuel Fire");
 
@@ -36,6 +36,8 @@ public class FirePit : MonoBehaviour {
     public void RemoveWood()
     {
         woodInFire.Remove(woodInFire[0]);
+        centralFlame.intensity -= adjustmentAmount;
+
         Debug.Log("Wood Consumed");
         fireSize--;       
     }
