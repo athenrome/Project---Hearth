@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/Ryan/Documents/BattlePets/Battle Pets/Assets/Scenes/Game.unity
+- path: Assets/Scenes/RyanTest.unity
   isLoaded: 1
   isActive: 1

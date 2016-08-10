@@ -11,8 +11,13 @@ public class CharacterData : ScriptableObject
 
     //STRINGS TO BE USED CREATE DIALOGUE
 
-    public List<List<string>> HopefulStorysText;
-    public List<List<string>> GhostStoryText;
+    public List<string> HopefulStorys1Text;
+    public List<string> HopefulStorys2Text;
+    public List<string> HopefulStorys3Text;
+
+    public List<string> GhostStory1Text;
+    public List<string> GhostStory2Text;
+    public List<string> GhostStory3Text;
 
     public List<string> needWoodPromptsText;
     public List<string> woodArrivesPromptsText;

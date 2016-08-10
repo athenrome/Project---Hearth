@@ -41,9 +41,7 @@ public class Wood : MonoBehaviour {
 
         if (currBurnTime <= 0)
         {
-            burning = false;
-
-            
+            burning = false;            
             pit.RemoveWood();
             
         }

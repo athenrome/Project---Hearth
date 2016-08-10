@@ -265,6 +265,76 @@ public class Character : MonoBehaviour {
             needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionSuceed));
         }
     }
+
+    void GetStoryData()
+    {
+        List<Dialogue> hope1Diag = new List<Dialogue>();
+        List<Dialogue> hope2Diag = new List<Dialogue>();
+        List<Dialogue> hope3Diag = new List<Dialogue>();
+
+        List<Dialogue> ghost1Diag = new List<Dialogue>();
+        List<Dialogue> ghost2Diag = new List<Dialogue>();
+        List<Dialogue> ghost3Diag = new List<Dialogue>();
+
+
+        //HOPEFUL
+        foreach (string text in data.HopefulStorys1Text)
+        {
+            hope1Diag.Add(new Dialogue(text, DialogueType.HopefulStory));
+        }
+
+        HopefulStorys.Add(new DialogueStory(hope1Diag, DialogueType.HopefulStory));
+
+
+
+        foreach (string text in data.HopefulStorys2Text)
+        {
+            hope2Diag.Add(new Dialogue(text, DialogueType.HopefulStory));
+        }
+
+        HopefulStorys.Add(new DialogueStory(hope2Diag, DialogueType.HopefulStory));
+
+
+
+        foreach (string text in data.HopefulStorys3Text)
+        {
+            hope3Diag.Add(new Dialogue(text, DialogueType.HopefulStory));
+        }
+
+        HopefulStorys.Add(new DialogueStory(hope3Diag, DialogueType.HopefulStory));
+
+
+
+
+
+
+
+        //GHOST
+        foreach (string text in data.GhostStory1Text)
+        {
+            ghost1Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+        }
+
+        GhostStorys.Add(new DialogueStory(ghost1Diag, DialogueType.GhostStory));
+
+
+
+        foreach (string text in data.GhostStory2Text)
+        {
+            hope2Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+        }
+
+        GhostStorys.Add(new DialogueStory(hope2Diag, DialogueType.GhostStory));
+
+
+
+        foreach (string text in data.GhostStory3Text)
+        {
+            hope3Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+        }
+
+        GhostStorys.Add(new DialogueStory(hope3Diag, DialogueType.GhostStory));
+    }
 }
 
 
