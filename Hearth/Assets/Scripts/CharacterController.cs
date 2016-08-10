@@ -55,7 +55,7 @@ public class CharacterController : MonoBehaviour {
             transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
         }
 
-        if (currOrder == CharacterOrders.Move && this.transform.position == waypointTarget.pos)//have i reached the target
+        if (currOrder == CharacterOrders.Move && NearLocation(waypointTarget) == true)//have i reached the target
         {
 
             reachedDest = true;
@@ -107,7 +107,9 @@ public class CharacterController : MonoBehaviour {
         //Testing     Speak(DialogueType.GhostStory);
         reachedDest = true;
 
-        if(this.transform.position == director.forestPoint.pos)
+
+
+        if(NearLocation(director.forestPoint) == true)
         {
             Debug.Log("Character entred forest");
 
@@ -120,6 +122,21 @@ public class CharacterController : MonoBehaviour {
             GameObject.Destroy(this.gameObject);
 
         }
+    }
+
+    bool NearLocation(Waypoint targetPoint)
+    {
+        bool result = false;
+
+        float acceptableDrift = 0.5f;//error distance
+
+        if(Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift || Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift)
+        {
+            Debug.Log("At Point");
+            result = true;
+        }
+
+        return result;
     }
 
     public void Speak(DialogueType toSpeak)

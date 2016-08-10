@@ -28,4 +28,5 @@ public enum PointType
     FirepitSlot,
     EntryPoint,
     ForestPoint,
+    WoodPile,
 }

@@ -17,7 +17,7 @@ public class Director : MonoBehaviour {
     public float deathChance;
     bool characterDeath;
 
-    int characterCount;
+    int characterCount = 0;
     int maxCharacters = 9;
 
     public int getWoodThreshold;//if wood is below this level send someone to get wood
@@ -26,6 +26,7 @@ public class Director : MonoBehaviour {
 
     public Waypoint entryPoint;
     public Waypoint forestPoint;
+    public Waypoint woodPilePoint;
 
     public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
     public int gatherWoodCount; //how much wood characters bring back from the forest
@@ -78,6 +79,7 @@ public class Director : MonoBehaviour {
                     if (deathRoll >= deathChance)//return character
                     {
                         ReturnForestCharacter(character);
+                        forestCharacters.Remove(character);
                         Debug.Log("CHARACTER RETURN");
                     }
                     else//character dies
@@ -103,6 +105,8 @@ public class Director : MonoBehaviour {
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
 
         newChar.character = CharacterPool[0];//assign characer to new character
+
+        newChar.MoveToPoint(woodPilePoint);
 
         activeCharacters.Add(newChar);
     }
