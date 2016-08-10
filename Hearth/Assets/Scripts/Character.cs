@@ -19,11 +19,13 @@ public class Character : MonoBehaviour {
     public Character(CharacterData _data)
     {
         data = _data;
+        charName = data.characterName;
     }
 
 	// Use this for initialization
 	void Start () {
-    
+
+        
 
     }
 	

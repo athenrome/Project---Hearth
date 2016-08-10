@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class WoodPile : MonoBehaviour {
 
-    public int woodCount = 0;
-    public int maxWood = 5;
+    public int woodCount;
+    int maxWood;
 
     public List<Transform> woodPileSpawns;
 
@@ -20,6 +20,8 @@ public class WoodPile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        maxWood = woodPileSpawns.Count;
+
         AddWood(6);
 
 
