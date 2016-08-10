@@ -65,6 +65,11 @@ public enum DialogueType
     PositiveReaction,
     NegativeReation,
 
+    MissionStart,
+    MissionEnd,
+    MissionFail,
+    MissionSuceed,
+
     HopefulStory,
     GhostStory,
 

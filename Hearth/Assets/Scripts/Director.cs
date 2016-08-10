@@ -6,9 +6,9 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
-    public List<CharacterObj> CharacterObjPool;
+    public List<CharacterData> masterCharacterPool;
 
-    List<CharacterObj> CharacterPool;
+    List<Character> CharacterPool = new List<Character>();
 
     public List<CharacterController> activeCharacters = new List<CharacterController>();
     public List<Character> forestCharacters = new List<Character>();
@@ -60,7 +60,7 @@ public class Director : MonoBehaviour {
         characterDeath = true;
         currSpawnInterval = 1;
         canTalk = true;
-        CharacterPool.Add(new Character());//TESTING 
+        
 
         LoadCharacters();
     }
@@ -93,7 +93,77 @@ public class Director : MonoBehaviour {
 
     void LoadCharacters()
     {
+        //storys
 
+
+        //dialogue
+        foreach(CharacterData character in masterCharacterPool)
+        {
+            foreach(string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.NeedWoodPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.WoodArrivesPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.LightDropPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.LightBoostPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.DarknessPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.DecreasedSanityPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.IncreasedSanityPrompt));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.PositiveReaction));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.NegativeReation));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionStart));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionEnd));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionFail));
+            }
+
+            foreach (string text in character.needWoodPromptsText)
+            {
+                character.needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionSuceed));
+            }
+        }
     }
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
