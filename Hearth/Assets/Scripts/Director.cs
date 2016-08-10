@@ -13,6 +13,7 @@ public class Director : MonoBehaviour {
     CharacterController currActiveCharacter;
 
     public bool canTalk;
+    public bool woodOrdered;
 
     public float deathChance;
     bool characterDeath;
@@ -42,7 +43,6 @@ public class Director : MonoBehaviour {
     public int spawnChance;//chance for a character to spawn after the spawn interval
 
     //order restrictions
-    bool woodOrdered;
 
 
 
@@ -104,11 +104,18 @@ public class Director : MonoBehaviour {
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
 
-        newChar.character = CharacterPool[0];//assign characer to new character
+        newChar.character = forestCharacters[0];//assign characer to new character
 
-        newChar.MoveToPoint(woodPilePoint);
 
+
+        
+
+        forestCharacters.Remove(newChar.character);
         activeCharacters.Add(newChar);
+
+        //after return actions
+        newChar.MoveToPoint(woodPilePoint);
+        newChar.character.carryWood = Random.Range(0, newChar.character.efficiency);
     }
 
     void CheckFire()

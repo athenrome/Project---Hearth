@@ -122,6 +122,17 @@ public class CharacterController : MonoBehaviour {
             GameObject.Destroy(this.gameObject);
 
         }
+
+        if(NearLocation(director.woodPilePoint))
+        {
+            if(director.woodOrdered == true)
+            {
+                Debug.Log("Place Wood");
+                director.woodPile.AddWood(character.carryWood);
+                director.woodOrdered = false;
+                
+            }
+        }
     }
 
     bool NearLocation(Waypoint targetPoint)

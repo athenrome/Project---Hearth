@@ -20,12 +20,8 @@ public class WoodPile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        AddWood();
-        AddWood();
-        AddWood();
-        AddWood();
-        AddWood();
-        AddWood();
+        AddWood(6);
+
 
         pileChanged = true;
 
@@ -58,7 +54,7 @@ public class WoodPile : MonoBehaviour {
 	
 	}
 
-    void RemoveWood()
+    public void RemoveWood()
     {
         if (woodCount >= 1)
         {
@@ -69,13 +65,16 @@ public class WoodPile : MonoBehaviour {
         }
     }
 
-    void AddWood()
+    public void AddWood(int toAdd)
     {
-        if(woodCount < maxWood)
+        for(int i = 0; i < toAdd; i++)
         {
-            woodCount++;
-            pileChanged = true;
-            
+            if (woodCount < maxWood)
+            {
+                woodCount++;
+                pileChanged = true;
+
+            }
         }
     }
 

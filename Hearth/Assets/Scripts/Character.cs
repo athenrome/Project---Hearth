@@ -28,6 +28,7 @@ public class Character : MonoBehaviour {
 
     public int efficiency;
     public int hopeLevel;
+    public int carryWood;//how much wood the character is currently carrying
 
     public float deadTime;//time since this character has last spoken or perfomred an action
 
@@ -102,38 +103,41 @@ public class Character : MonoBehaviour {
         switch(_type)
         {
             case DialogueType.DarknessPrompt:
+                chosenDiag = GetOldestDialogue(darknessPrompts);
                 break;
 
             case DialogueType.DecreasedSanityPrompt:
-
+                chosenDiag = GetOldestDialogue(DecreasedSanityPrompts);
                 break;
 
             case DialogueType.IncreasedSanityPrompt:
+                chosenDiag = GetOldestDialogue(IncreasedSanityPrompts);
 
                 break;
 
             case DialogueType.LightBoostPrompt:
+                chosenDiag = GetOldestDialogue(LightBoostPrompts);
 
                 break;
 
             case DialogueType.LightDropPrompt:
-
+                chosenDiag = GetOldestDialogue(LightDropPrompts);
                 break;
 
             case DialogueType.NeedWoodPrompt:
-
+                chosenDiag = GetOldestDialogue(NeedWoodPrompts);
                 break;
 
             case DialogueType.NegativeReation:
-
+                chosenDiag = GetOldestDialogue(NegativeReations);
                 break;
 
             case DialogueType.PositiveReaction:
-
+                chosenDiag = GetOldestDialogue(PositiveReactions);
                 break;
 
             case DialogueType.WoodArrivesPrompt:
-
+                chosenDiag = GetOldestDialogue(WoodArrivesPrompts);
                 break;
 
             default:
@@ -145,6 +149,25 @@ public class Character : MonoBehaviour {
         }
 
         return chosenDiag;
+    }
+
+    Dialogue GetOldestDialogue(List<Dialogue> source)
+    {
+        Dialogue toReturn = source[0];
+        float oldestTime = 0;
+
+        foreach(Dialogue diag in source)
+        {
+            if(diag.deadTime > oldestTime)
+            {
+                oldestTime = diag.deadTime;
+                toReturn = diag;
+
+                toReturn.deadTime = 0;
+            }
+        }
+
+        return toReturn;
     }
 }
 
