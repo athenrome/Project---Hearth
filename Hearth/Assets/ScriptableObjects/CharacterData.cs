@@ -33,7 +33,6 @@ public class CharacterData : ScriptableObject
     public List<string> negativeReationsText;
 
     public List<string> missionStartPromptsText;
-    public List<string> missionEndPromptsText;
     public List<string> missionFailPromptsText;
     public List<string> missionSuceedPromptsText;
 
