@@ -126,7 +126,7 @@ public class CharacterController : MonoBehaviour {
 
         }
 
-        if(NearLocation(director.woodPilePoint))
+        if(NearLocation(director.woodPilePoint) && character.carryWood > 0)
         {
             if(character.carryWood > 0)
             {

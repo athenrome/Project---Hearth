@@ -15,6 +15,8 @@ public class WoodPile : MonoBehaviour {
 
     List<GameObject> pileLogs = new List<GameObject>();
 
+    public Director dir;
+
 
 
 
@@ -65,6 +67,8 @@ public class WoodPile : MonoBehaviour {
 
             }
         }
+
+        dir.woodOrdered = false;
     }
 
     void SetWoodPositions()

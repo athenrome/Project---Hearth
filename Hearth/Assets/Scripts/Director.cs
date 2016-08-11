@@ -63,7 +63,7 @@ public class Director : MonoBehaviour {
     WorldState lastState;
 
 
-    bool woodOrdered = false;
+    public bool woodOrdered = false;
 
 	// Use this for initialization
 	void Start () {
@@ -299,7 +299,6 @@ public class Director : MonoBehaviour {
         
     }
 
-
     CharacterController GetActiveCharacter()
     {
         CharacterController foundCharacter = activeCharacters[0];
@@ -331,7 +330,6 @@ public class Director : MonoBehaviour {
             Debug.Log("Loaded character: " + CharacterPool.Count + character.characterName);
         }
     }
-
 
     public Waypoint GetForestPoint()
     {
