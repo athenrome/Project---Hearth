@@ -7,6 +7,10 @@ public class Director : MonoBehaviour {
     public WoodPile woodPile;
 
     public List<CharacterData> masterCharacterPool;
+    public CharacterData survivorData;
+
+    Character survivor;
+
     List<Character> CharacterPool = new List<Character>();
 
     public List<CharacterController> activeCharacters = new List<CharacterController>();
@@ -77,20 +81,19 @@ public class Director : MonoBehaviour {
 
         currState = WorldState.GameStart;
 
+        SpawnCharacter();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+
+
         CheckFire();
         CheckWood();
         CheckForest();
 
-
-        if(characterCount < maxCharacters)
-        {
-            SpawnCharacter();
-        }
 
         if(actionInProgress == false)
         {
@@ -261,24 +264,30 @@ public class Director : MonoBehaviour {
 
     void SpawnCharacter()
     {
-        if(CharacterPool.Count > 0)
-        {
-
-        }
-
         characterCount++;
 
         GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, entryPoint.transform.position, entryPoint.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
-        
-        
 
-        newChar.character = CharacterPool[0];//assign characer to new character
+        if (CharacterPool.Count > 0)
+        {
+            newChar.character = CharacterPool[0];//assign characer to new character choose the oldest cahracter
 
-        CharacterPool.Remove(newChar.character);//remove this character from circulation
+            CharacterPool.Remove(newChar.character);//remove this character from circulation
+
+        }
+        else
+        {
+            newChar.character = survivor;
+            
+        }
 
         activeCharacters.Add(newChar);
+
+
+
+
 
         Debug.Log("Spawned Character: " + newChar.character.charName);
 
@@ -311,6 +320,8 @@ public class Director : MonoBehaviour {
 
     void LoadCharacters()
     {
+
+        survivor = new Character(survivorData);
 
         foreach (CharacterData character in masterCharacterPool)
         {
