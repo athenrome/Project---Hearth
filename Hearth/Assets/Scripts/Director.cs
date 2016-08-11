@@ -16,8 +16,6 @@ public class Director : MonoBehaviour {
     public List<CharacterController> activeCharacters = new List<CharacterController>();
     public List<Character> forestCharacters = new List<Character>();
 
-
-
     public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
     public int getWoodThreshold;//if wood is below this level send someone to get wood
 

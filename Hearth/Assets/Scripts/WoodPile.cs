@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class WoodPile : MonoBehaviour {
 
     public int woodCount;
-    int maxWood;
+    public int maxWood;
 
-    public List<Transform> woodPileSpawns;
+    //public List<Transform> woodPileSpawns;
 
     //public GameObject woodModel;//used to show wood amount in pile doesnt not have script attached
     public GameObject woodPrefab;//used to spawn dragable wood
@@ -17,25 +17,38 @@ public class WoodPile : MonoBehaviour {
 
     public Director dir;
 
+    public float woodSpawnTimeout;
+    float currTimeout;
 
+    
 
-
+    int woodToAdd;
     bool pileChanged = false;
 
 	// Use this for initialization
 	void Start () {
-        maxWood = woodPileSpawns.Count;
 
         woodCount = 0;
 
         AddWood(6);
-
-        SetWoodPositions();
-
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(woodToAdd > 0)
+        {
+            if(currTimeout <= 0)
+            {
+                SpawnPileLog();
+                currTimeout = woodSpawnTimeout;
+            }
+            else
+            {
+                currTimeout -= Time.deltaTime;
+            }
+        }
+
 
 	}
 
@@ -52,32 +65,21 @@ public class WoodPile : MonoBehaviour {
 
     public void AddWood(int toAdd)
     {
-        for(int i = 0; i < toAdd; i++)
+        if(woodCount + toAdd >= maxWood)
         {
-            if (woodCount < maxWood)
-            {
-                woodCount++;
-                pileChanged = true;
-
-                GameObject woodObj = GameObject.Instantiate(woodPrefab, woodPileSpawns[i].position, woodPileSpawns[i].rotation) as GameObject;
-                pileLogs.Add(woodObj);
-
-                woodObj.transform.position = woodPileSpawns[woodCount].transform.position;
-                woodObj.transform.rotation = woodPileSpawns[woodCount].transform.rotation;
-
-            }
+            toAdd = maxWood - woodCount;
         }
+
+        woodToAdd = toAdd;
 
         dir.woodOrdered = false;
     }
 
-    void SetWoodPositions()
+    void SpawnPileLog()
     {
-        for(int i = 0; i < pileLogs.Count; i++)
-        {
-            pileLogs[i].transform.position = woodPileSpawns[i].transform.position;
-            pileLogs[i].transform.rotation = woodPileSpawns[i].transform.rotation;
-        }
+        GameObject woodObj = GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation) as GameObject;
+        pileLogs.Add(woodObj);
+        woodToAdd--;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -93,10 +95,10 @@ public class WoodPile : MonoBehaviour {
 
     //public void OnTriggerEnter(Collider enterObj)
     //{
-    //    if(enterObj.GetComponent<Wood>() == true)
+    //    if (enterObj.GetComponent<Wood>() == true)
     //    {
     //        pileLogs.Add(enterObj.gameObject);
-    //        SetWoodPositions();
+    //        woodCount++;
 
     //        Debug.Log("added Log");
     //    }
@@ -107,7 +109,6 @@ public class WoodPile : MonoBehaviour {
         if (exitObj.GetComponent<Wood>() == true)
         {
             pileLogs.Remove(exitObj.gameObject);
-            SetWoodPositions();
             RemoveWood();
 
             Debug.Log("Removed Log");
