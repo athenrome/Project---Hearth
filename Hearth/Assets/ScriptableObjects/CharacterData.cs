@@ -26,9 +26,6 @@ public class CharacterData : ScriptableObject
     public List<string> lightBoostPromptsText;
     public List<string> darknessPromptsText;
 
-    public List<string> decreasedSanityPromptsText;
-    public List<string> increasedSanityPromptsText;
-
     public List<string> positiveReactionsText;
     public List<string> negativeReationsText;
 
