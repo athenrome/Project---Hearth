@@ -58,13 +58,11 @@ public enum DialogueType
     LightDropPrompt,
     LightBoostPrompt,
     DarknessPrompt,
-    DecreasedSanityPrompt,
-    IncreasedSanityPrompt,
+
     PositiveReaction,
     NegativeReation,
 
     MissionStart,
-    MissionEnd,
     MissionFail,
     MissionSuceed,
 

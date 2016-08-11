@@ -26,14 +26,10 @@ public class Character : MonoBehaviour {
     public List<Dialogue> lightBoostPrompts = new List<Dialogue>();
     public List<Dialogue> darknessPrompts = new List<Dialogue>();
 
-    public List<Dialogue> decreasedSanityPrompts = new List<Dialogue>();
-    public List<Dialogue> increasedSanityPrompts = new List<Dialogue>();
-
     public List<Dialogue> positiveReactions = new List<Dialogue>();
     public List<Dialogue> negativeReations = new List<Dialogue>();
 
     public List<Dialogue> missionStartPrompts = new List<Dialogue>();
-    public List<Dialogue> missionEndPrompts = new List<Dialogue>();
     public List<Dialogue> missionFailPrompts = new List<Dialogue>();
     public List<Dialogue> missionSuceedPrompts = new List<Dialogue>();
 
@@ -66,14 +62,11 @@ public class Character : MonoBehaviour {
         foreach (Dialogue diag in lightBoostPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in darknessPrompts) { diag.UpdateDialogue(); }
 
-        foreach (Dialogue diag in decreasedSanityPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in increasedSanityPrompts) { diag.UpdateDialogue(); }
 
         foreach (Dialogue diag in positiveReactions) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in negativeReations) { diag.UpdateDialogue(); }
 
         foreach (Dialogue diag in missionStartPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in missionEndPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in missionFailPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in missionSuceedPrompts) { diag.UpdateDialogue(); }
 
@@ -94,9 +87,6 @@ public class Character : MonoBehaviour {
 
                 break;
 
-            case DialogueType.DecreasedSanityPrompt:
-
-                break;
 
             default:
                 
@@ -137,14 +127,6 @@ public class Character : MonoBehaviour {
                 chosenDiag = GetOldestDialogue(darknessPrompts);
                 break;
 
-            case DialogueType.DecreasedSanityPrompt:
-                chosenDiag = GetOldestDialogue(decreasedSanityPrompts);
-                break;
-
-            case DialogueType.IncreasedSanityPrompt:
-                chosenDiag = GetOldestDialogue(increasedSanityPrompts);
-                break;
-
             case DialogueType.PositiveReaction:
                 chosenDiag = GetOldestDialogue(positiveReactions);
                 break;
@@ -155,10 +137,6 @@ public class Character : MonoBehaviour {
 
             case DialogueType.MissionStart:
                 chosenDiag = GetOldestDialogue(missionStartPrompts);
-                break;
-
-            case DialogueType.MissionEnd:
-                chosenDiag = GetOldestDialogue(missionEndPrompts);
                 break;
 
             case DialogueType.MissionFail:
@@ -228,16 +206,6 @@ public class Character : MonoBehaviour {
 
         foreach (string text in data.needWoodPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.DecreasedSanityPrompt));
-        }
-
-        foreach (string text in data.needWoodPromptsText)
-        {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.IncreasedSanityPrompt));
-        }
-
-        foreach (string text in data.needWoodPromptsText)
-        {
             needWoodPrompts.Add(new Dialogue(text, DialogueType.PositiveReaction));
         }
 
@@ -249,11 +217,6 @@ public class Character : MonoBehaviour {
         foreach (string text in data.needWoodPromptsText)
         {
             needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionStart));
-        }
-
-        foreach (string text in data.needWoodPromptsText)
-        {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionEnd));
         }
 
         foreach (string text in data.needWoodPromptsText)

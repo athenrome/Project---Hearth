@@ -39,8 +39,7 @@ public class Director : MonoBehaviour {
     public GameObject characterPrefab;
 
     public List<Waypoint> availablePoints;//waypoints closest to the fire
-    public Waypoint entryPoint;
-    public Waypoint forestPoint;
+    public List<Waypoint> forestPoints;
     public Waypoint woodPilePoint;
 
 
@@ -65,7 +64,6 @@ public class Director : MonoBehaviour {
 
 
     bool woodOrdered = false;
-
 
 	// Use this for initialization
 	void Start () {
@@ -201,6 +199,8 @@ public class Director : MonoBehaviour {
 
     void ReturnForestCharacter(Character _toReturn)
     {
+        Waypoint forestPoint = GetForestPoint();
+
         GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, forestPoint.transform.position, forestPoint.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
@@ -264,9 +264,11 @@ public class Director : MonoBehaviour {
 
     void SpawnCharacter()
     {
+        Waypoint spawnPoint = GetForestPoint();
+
         characterCount++;
 
-        GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, entryPoint.transform.position, entryPoint.transform.rotation) as GameObject;
+        GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
 
@@ -331,6 +333,11 @@ public class Director : MonoBehaviour {
     }
 
 
+    public Waypoint GetForestPoint()
+    {
+        return forestPoints[Random.Range(0, forestPoints.Count)];//choose a random point out of the forsest points
+    }
+
     Waypoint FindFreeFireSpot()
     {
         Waypoint freeSpot = availablePoints[0];
@@ -343,6 +350,7 @@ public class Director : MonoBehaviour {
             {
                 freeSpot = availablePoints[i];
                 foundPoint = true;
+                
                 Debug.Log("Found Point");
             }
 
