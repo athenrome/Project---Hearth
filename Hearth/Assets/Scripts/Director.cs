@@ -59,6 +59,9 @@ public class Director : MonoBehaviour {
     [Range(0,100)]
     public float moraleLevel;
 
+    WorldState currState;
+    WorldState lastState;
+
 
 	// Use this for initialization
 	void Start () {
@@ -78,7 +81,7 @@ public class Director : MonoBehaviour {
 
         CheckFire();
         CheckWood();
-        //CheckForest();
+        CheckForest();
 
         if (characterCount > 0)//if there are characters
         {
@@ -92,7 +95,24 @@ public class Director : MonoBehaviour {
         
     }
 
+    void CheckWorldState()
+    {
+        switch(currState)
+        {
+            case WorldState.NeedWood:
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+                askedForWood = true;
+                break;
 
+        }
+    }
+
+    void UpdateWorldState(WorldState newState)
+    {
+        lastState = currState;//assign the old state to the last state
+
+        currState = newState;//update the world state
+    }
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
     {
@@ -109,7 +129,7 @@ public class Director : MonoBehaviour {
         
     }
 
-    public void OrderCharacter(CharacterController character, CharacterOrders order)
+    void OrderCharacter(CharacterController character, CharacterOrders order)
     {
         character.ReceiveOrder(order);
         actionTaken = true;
@@ -178,8 +198,7 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
         {
-            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
-            askedForWood = true;
+            UpdateWorldState(WorldState.NeedWood);            
         }
     }
 
@@ -289,7 +308,7 @@ public class Director : MonoBehaviour {
     
 }
 
-public enum WorldEvents //usedto trigger events
+public enum WorldState //usedto trigger events
 {
     LightUp,
     LightDrop,
@@ -298,7 +317,8 @@ public enum WorldEvents //usedto trigger events
     ForestDeath,
     ForestReturn,
 
-    WoodLow,
+    NeedWood,
+    WoodGone,
 
     WoodConsumed,
 
@@ -310,6 +330,8 @@ public enum WorldEvents //usedto trigger events
 
     HopefulStory,
     GhostStory,
+
+    Nothing,
 
 
 }
