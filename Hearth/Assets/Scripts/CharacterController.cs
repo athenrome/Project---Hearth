@@ -134,6 +134,10 @@ public class CharacterController : MonoBehaviour {
                 Debug.Log("Place Wood");
                 director.woodPile.AddWood(character.carryWood);
                 character.carryWood = 0;
+
+                //return back to starting pos
+
+            
             }
         }
     }

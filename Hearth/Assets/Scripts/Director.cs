@@ -137,7 +137,7 @@ public class Director : MonoBehaviour {
         }
     }
 
-    void UpdateWorldState(WorldState newState)
+    public void UpdateWorldState(WorldState newState)
     {
         lastState = currState;//assign the old state to the last state
 
@@ -249,7 +249,7 @@ public class Director : MonoBehaviour {
             {
                 if (characterCount < maxCharacters)
                 {
-                    CharacterController spawnedChar = SpawnCharacter();
+                    SpawnCharacter();
                 }
 
             }
@@ -259,16 +259,19 @@ public class Director : MonoBehaviour {
 
     }
 
-    CharacterController SpawnCharacter()
+    void SpawnCharacter()
     {
+        if(CharacterPool.Count > 0)
+        {
 
+        }
 
         characterCount++;
 
         GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, entryPoint.transform.position, entryPoint.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
-
+        
         
 
         newChar.character = CharacterPool[0];//assign characer to new character
@@ -279,26 +282,12 @@ public class Director : MonoBehaviour {
 
         Debug.Log("Spawned Character: " + newChar.character.charName);
 
-        GoToStartPos(newChar);
+        newChar.MoveToPoint(FindFreeFireSpot());
 
-        return newChar;
+
         
     }
 
-    void GoToStartPos(CharacterController character)
-    {
-        Waypoint movePoint = entryPoint;
-
-        for (int i = 0; i < unlockedPoints; i++)
-        {
-            Debug.Log("Found starting pos");
-            character.MoveToPoint(availablePoints[i]);
-            
-
-
-
-        }
-    }
 
     CharacterController GetActiveCharacter()
     {
@@ -330,6 +319,28 @@ public class Director : MonoBehaviour {
         }
     }
 
+
+    Waypoint FindFreeFireSpot()
+    {
+        Waypoint freeSpot = availablePoints[0];
+
+        bool foundPoint = false;
+
+        for(int i = 0; i < unlockedPoints || foundPoint == false; i++)
+        {
+            if(availablePoints[i].locked == false)
+            {
+                freeSpot = availablePoints[i];
+                foundPoint = true;
+                Debug.Log("Found Point");
+            }
+
+            
+        }
+
+
+        return freeSpot;
+    }
 }
 
 public enum WorldState //usedto trigger events

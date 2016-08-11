@@ -8,10 +8,8 @@ public class Flame : MonoBehaviour {
 
     public Light lightSource;
 
-    public ParticleSystem fireParticl3es;
+    public ParticleSystem fireParticles;
     
-    
-
     [Range(0f, 100f)]
     public float intensity; //flame intesity target
 
