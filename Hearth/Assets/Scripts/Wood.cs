@@ -12,6 +12,8 @@ public class Wood : MonoBehaviour {
 
     FirePit pit;
 
+    bool locked;
+
     public bool burning;
 
     bool inFirepit;
@@ -26,6 +28,7 @@ public class Wood : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        locked = true;
         FirePit pit = FindObjectOfType<FirePit>();
     }
 
