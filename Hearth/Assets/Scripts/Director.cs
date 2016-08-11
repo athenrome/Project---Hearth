@@ -99,6 +99,10 @@ public class Director : MonoBehaviour {
     {
         switch(currState)
         {
+            case WorldState.NeedWood:
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+                askedForWood = true;
+                break;
 
         }
     }
@@ -125,7 +129,7 @@ public class Director : MonoBehaviour {
         
     }
 
-    public void OrderCharacter(CharacterController character, CharacterOrders order)
+    void OrderCharacter(CharacterController character, CharacterOrders order)
     {
         character.ReceiveOrder(order);
         actionTaken = true;
@@ -194,8 +198,7 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
         {
-            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
-            askedForWood = true;
+            UpdateWorldState(WorldState.NeedWood);            
         }
     }
 
@@ -314,7 +317,8 @@ public enum WorldState //usedto trigger events
     ForestDeath,
     ForestReturn,
 
-    WoodLow,
+    NeedWood,
+    WoodGone,
 
     WoodConsumed,
 
