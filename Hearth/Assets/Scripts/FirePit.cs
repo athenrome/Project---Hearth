@@ -9,14 +9,17 @@ public class FirePit : MonoBehaviour {
     public int fireSize;
 
     public float adjustmentAmount;//how much the fire increases per unit of wood
+    public float fogadjustmentAmount;//how much the fog decreases per unit of wood added to the fire
 
-	// Use this for initialization
-	void Start () {
-	
+    // Use this for initialization
+    void Start ()
+    {
+       
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         fireSize = Mathf.RoundToInt(centralFlame.intensity);
 
         UpdateFire();
@@ -48,6 +51,12 @@ public class FirePit : MonoBehaviour {
         {
             fireWood.BurnWood();
         }
+    }
+
+    void UpdateFog()
+    {
+        RenderSettings.fogDensity = 1F;
+        RenderSettings.fog = true;
     }
 
 }
