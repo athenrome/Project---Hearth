@@ -7,33 +7,30 @@ public class Director : MonoBehaviour {
     public WoodPile woodPile;
 
     public List<CharacterData> masterCharacterPool;
-
     List<Character> CharacterPool = new List<Character>();
 
     public List<CharacterController> activeCharacters = new List<CharacterController>();
     public List<Character> forestCharacters = new List<Character>();
 
-    bool canTalk;
 
-    public float orderCooldown;//how long before a new action can be made
-    float currOrderCooldown = 0;
-    public bool actionTaken;
 
     public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
-    public int gatherWoodCount; //how much wood characters bring back from the forest
     public int getWoodThreshold;//if wood is below this level send someone to get wood
 
-    
 
-    bool characterDeath;
 
-    int characterCount;
-    int maxCharacters;
+    public float stateTimeout;//time before a state can be changed again
+    float currTimeout;
+    bool stateChanged;//if the state has been changed
 
-    bool askedForWood;//if a wood request has been given
-    bool woodOrdered;//if someone has been sent to get wood
 
-   
+
+    bool actionInProgress;
+
+
+
+    int characterCount = 0;
+    int maxCharacters;  
 
     public GameObject characterPrefab;
 
@@ -63,16 +60,22 @@ public class Director : MonoBehaviour {
     WorldState lastState;
 
 
+    bool woodOrdered = false;
+
+
 	// Use this for initialization
 	void Start () {
-        characterDeath = true;
+        actionInProgress = false;
         currSpawnInterval = 1;
-        canTalk = true;
-        actionTaken = false;
+        currTimeout = 0;
+        stateChanged = false;
+        
+
+        LoadCharacters();
 
         maxCharacters = CharacterPool.Count;
 
-        LoadCharacters();
+        currState = WorldState.GameStart;
 
     }
 	
@@ -83,14 +86,33 @@ public class Director : MonoBehaviour {
         CheckWood();
         CheckForest();
 
-        if (characterCount > 0)//if there are characters
-        {
 
-        }
-        else
+        if(characterCount < maxCharacters)
         {
             SpawnCharacter();
         }
+
+        if(actionInProgress == false)
+        {
+            CheckCharacterOrders();
+        }
+
+
+        
+        if(currTimeout <= 0)
+        {
+            CheckWorldState();
+
+            if(stateChanged == true)
+            {
+                currTimeout = stateTimeout;
+            }
+        }
+        else
+        {
+            currTimeout -= Time.deltaTime;
+        }
+        
 
         
     }
@@ -100,9 +122,17 @@ public class Director : MonoBehaviour {
         switch(currState)
         {
             case WorldState.NeedWood:
+
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
-                askedForWood = true;
+
+                woodOrdered = true;
+
+                UpdateWorldState(WorldState.EnterForest);
                 break;
+
+
+
+
 
         }
     }
@@ -112,27 +142,24 @@ public class Director : MonoBehaviour {
         lastState = currState;//assign the old state to the last state
 
         currState = newState;//update the world state
+
+        stateChanged = true;
+
+        currTimeout = stateTimeout;
     }
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
     {
         CharacterController toOrder = GetActiveCharacter();
-
-        if (activeCharacters.Count > 0)
-        {
-            toOrder.Speak(DialogueType.NeedWoodPrompt);
-            
-
-            actionTaken = true;
-        }
-
         
     }
 
     void OrderCharacter(CharacterController character, CharacterOrders order)
     {
         character.ReceiveOrder(order);
-        actionTaken = true;
+
+        actionInProgress = true;
+
     }
 
     void CheckForest()
@@ -155,7 +182,7 @@ public class Director : MonoBehaviour {
                     }
                     else//character dies
                     {
-                        characterDeath = true;
+                        UpdateWorldState(WorldState.ForestDeath);
                         forestCharacters.Remove(character);
                         characterCount--;
                         Debug.Log("CHARACTER DEATH");
@@ -184,9 +211,11 @@ public class Director : MonoBehaviour {
         forestCharacters.Remove(newChar.character);
         activeCharacters.Add(newChar);
 
+        newChar.character.carryWood = Random.Range(0, newChar.character.efficiency);//
+
         //after return actions
         newChar.MoveToPoint(woodPilePoint);
-        newChar.character.carryWood = Random.Range(0, newChar.character.efficiency);
+        
     }
 
     void CheckFire()
@@ -196,7 +225,7 @@ public class Director : MonoBehaviour {
 
     void CheckWood()
     {
-        if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
+        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false)
         {
             UpdateWorldState(WorldState.NeedWood);            
         }
@@ -230,15 +259,17 @@ public class Director : MonoBehaviour {
 
     }
 
-
-
     CharacterController SpawnCharacter()
     {
+
+
         characterCount++;
 
         GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, entryPoint.transform.position, entryPoint.transform.rotation) as GameObject;
 
         CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
+
+        
 
         newChar.character = CharacterPool[0];//assign characer to new character
 
@@ -256,21 +287,15 @@ public class Director : MonoBehaviour {
 
     void GoToStartPos(CharacterController character)
     {
-        bool foundMovePoint = false;
         Waypoint movePoint = entryPoint;
 
-        for (int i = 0; i < unlockedPoints || foundMovePoint == true; i++)
+        for (int i = 0; i < unlockedPoints; i++)
         {
-            if (foundMovePoint == false)
-            {
-                if (availablePoints[i].locked == false)
-                {
-                    character.MoveToPoint(availablePoints[i]);
-                    foundMovePoint = true;
-                    availablePoints[i].locked = true;
-                    Debug.Log("Found starting pos");
-                }
-            }
+            Debug.Log("Found starting pos");
+            character.MoveToPoint(availablePoints[i]);
+            
+
+
 
         }
     }
@@ -301,29 +326,38 @@ public class Director : MonoBehaviour {
         foreach (CharacterData character in masterCharacterPool)
         {
             CharacterPool.Add(new Character(character));
-            Debug.Log("Created character: " + CharacterPool.Count + character.characterName);
+            Debug.Log("Loaded character: " + CharacterPool.Count + character.characterName);
         }
     }
 
-    
 }
 
 public enum WorldState //usedto trigger events
 {
     LightUp,
     LightDrop,
-    DarknessPrompt,
+    
+    
+    FireEmbers,
+    FireSmall,
+    FireMed,
+    FireBig,
 
+    characterTalking,
+
+    
+    EnterForest,
     ForestDeath,
     ForestReturn,
 
     NeedWood,
     WoodGone,
-
+    WoodFull,
     WoodConsumed,
 
     CharacterArrive,
     CharacterLeave,
+    NoCharacters,
 
     GameStart,
     GameEnd,

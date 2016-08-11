@@ -37,15 +37,6 @@ public class CharacterData : ScriptableObject
     public List<string> missionFailPromptsText;
     public List<string> missionSuceedPromptsText;
 
-    
-
-
-
-
-
-
-
-
 }
 
 

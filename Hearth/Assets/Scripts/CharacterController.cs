@@ -88,6 +88,8 @@ public class CharacterController : MonoBehaviour {
 
                 break;
 
+                
+
             default:
                 Debug.Log("Invalid order");
                 break;

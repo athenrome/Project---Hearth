@@ -49,7 +49,7 @@ public class WoodPile : MonoBehaviour {
 
             for (int i = 0; i < woodCount; i++)//spawn new logs
             {
-                GameObject woodObj = GameObject.Instantiate(woodModel, woodPileSpawns[i].position, woodPileSpawns[i].rotation) as GameObject;
+                GameObject woodObj = GameObject.Instantiate(woodPrefab, woodPileSpawns[i].position, woodPileSpawns[i].rotation) as GameObject;
                 pileLogs.Add(woodObj);
             }
 

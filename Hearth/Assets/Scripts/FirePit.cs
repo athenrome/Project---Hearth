@@ -14,8 +14,9 @@ public class FirePit : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-       
-	}
+        fireSize = 1;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -38,7 +39,7 @@ public class FirePit : MonoBehaviour {
 
     public void RemoveWood()
     {
-        woodInFire.Remove(woodInFire[0]);
+        woodInFire.Remove(woodInFire[0]);//remove the oldest piece of wood in the fire
         centralFlame.intensity -= adjustmentAmount;
 
         Debug.Log("Wood Consumed");

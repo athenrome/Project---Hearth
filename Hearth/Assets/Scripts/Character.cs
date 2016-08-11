@@ -91,6 +91,7 @@ public class Character : MonoBehaviour {
         switch (_type)
         {
             case DialogueType.DarknessPrompt:
+
                 break;
 
             case DialogueType.DecreasedSanityPrompt:
