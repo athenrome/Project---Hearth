@@ -7,6 +7,8 @@ public class Flame : MonoBehaviour {
     public float maxLevel;
 
     public Light lightSource;
+
+    public ParticleSystem fireParticl3es;
     
     
 
