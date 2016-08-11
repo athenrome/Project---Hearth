@@ -88,6 +88,10 @@ public class CharacterController : MonoBehaviour {
 
                 break;
 
+            default:
+                Debug.Log("Invalid order");
+                break;
+
                 
         }
         
@@ -113,9 +117,7 @@ public class CharacterController : MonoBehaviour {
         {
             Debug.Log("Character entred forest");
 
-            Debug.Log(director.activeCharacters.Count);
             director.activeCharacters.Remove(this);
-            Debug.Log(director.activeCharacters.Count);
 
             director.forestCharacters.Add(this.character);
 
@@ -125,12 +127,11 @@ public class CharacterController : MonoBehaviour {
 
         if(NearLocation(director.woodPilePoint))
         {
-            if(director.woodOrdered == true)
+            if(character.carryWood > 0)
             {
                 Debug.Log("Place Wood");
                 director.woodPile.AddWood(character.carryWood);
-                director.woodOrdered = false;
-                
+                character.carryWood = 0;
             }
         }
     }

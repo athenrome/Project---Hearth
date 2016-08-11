@@ -5,28 +5,27 @@ public class Character : MonoBehaviour {
 
     public string charName;
 
-    public bool isCharacter;
+    public int efficiency;
 
-    List<DialogueStory> HopefulStorys;
-    List<DialogueStory> GhostStorys;
+    List<DialogueStory> HopefulStorys = new List<DialogueStory>();
+    List<DialogueStory> GhostStorys = new List<DialogueStory>();
 
-    List<Dialogue> NeedWoodPrompts;
-    List<Dialogue> WoodArrivesPrompts;
+    List<Dialogue> NeedWoodPrompts = new List<Dialogue>();
+    List<Dialogue> WoodArrivesPrompts = new List<Dialogue>();
 
-    List<Dialogue> LightDropPrompts;
-    List<Dialogue> LightBoostPrompts;
+    List<Dialogue> LightDropPrompts = new List<Dialogue>();
+    List<Dialogue> LightBoostPrompts = new List<Dialogue>();
 
-    List<Dialogue> darknessPrompts;    
+    List<Dialogue> darknessPrompts = new List<Dialogue>();
 
-    List<Dialogue> DecreasedSanityPrompts;
-    List<Dialogue> IncreasedSanityPrompts;
+    List<Dialogue> DecreasedSanityPrompts = new List<Dialogue>();
+    List<Dialogue> IncreasedSanityPrompts = new List<Dialogue>();
 
-    List<Dialogue> PositiveReactions;
-    List<Dialogue> NegativeReations;
+    List<Dialogue> PositiveReactions = new List<Dialogue>();
+    List<Dialogue> NegativeReations = new List<Dialogue>();
 
     public float forestTime;// how long a character has been in the forest
 
-    public int efficiency;
     public int hopeLevel;
     public int carryWood;//how much wood the character is currently carrying
 
@@ -112,7 +111,6 @@ public class Character : MonoBehaviour {
 
             case DialogueType.IncreasedSanityPrompt:
                 chosenDiag = GetOldestDialogue(IncreasedSanityPrompts);
-
                 break;
 
             case DialogueType.LightBoostPrompt:
@@ -125,7 +123,25 @@ public class Character : MonoBehaviour {
                 break;
 
             case DialogueType.NeedWoodPrompt:
-                chosenDiag = GetOldestDialogue(NeedWoodPrompts);
+
+                Debug.Log("a");
+
+                Dialogue toReturn = NeedWoodPrompts[0];
+                float oldestTime = 0;
+
+                foreach (Dialogue diag in NeedWoodPrompts)
+                {
+                    if (diag.deadTime > oldestTime)
+                    {
+                        oldestTime = diag.deadTime;
+                        toReturn = diag;
+
+                        toReturn.deadTime = 0;
+                    }
+                }
+
+                chosenDiag = toReturn;
+
                 break;
 
             case DialogueType.NegativeReation:
@@ -153,19 +169,23 @@ public class Character : MonoBehaviour {
 
     Dialogue GetOldestDialogue(List<Dialogue> source)
     {
+        //Debug.Log("1");
+
         Dialogue toReturn = source[0];
-        float oldestTime = 0;
+        //float oldestTime = 0;
 
-        foreach(Dialogue diag in source)
-        {
-            if(diag.deadTime > oldestTime)
-            {
-                oldestTime = diag.deadTime;
-                toReturn = diag;
+        //Debug.Log("2");
 
-                toReturn.deadTime = 0;
-            }
-        }
+        //foreach (Dialogue diag in source)
+        //{
+        //    if(diag.deadTime > oldestTime)
+        //    {
+        //        oldestTime = diag.deadTime;
+        //        toReturn = diag;
+
+        //        toReturn.deadTime = 0;
+        //    }
+        //}
 
         return toReturn;
     }
