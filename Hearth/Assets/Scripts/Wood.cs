@@ -23,19 +23,26 @@ public class Wood : MonoBehaviour {
     public float burnTime; //time it takes for a single piece of fuel to be consumed
     float currBurnTime;
 
-    
+    Rigidbody rigid;
+    RigidbodyConstraints rigidCons;
 
     // Use this for initialization
     void Start()
     {
-        locked = true;
+        rigid = GetComponent<Rigidbody>();
+        rigidCons = rigid.GetComponent<RigidbodyConstraints>();
+
+        selected = true;
         FirePit pit = FindObjectOfType<FirePit>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(selected == false)
+        {
+            rigidCons = RigidbodyConstraints.FreezeAll;           
+        }
     }
 
     public void BurnWood()
@@ -82,6 +89,8 @@ public class Wood : MonoBehaviour {
         camPos = Camera.main.WorldToScreenPoint(transform.position);
         posX = Input.mousePosition.x - camPos.x;
         posY = Input.mousePosition.y - camPos.y;//1 - camPos.y;
+
+        selected = true;
 
 
 
