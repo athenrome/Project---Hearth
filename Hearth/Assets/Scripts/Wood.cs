@@ -10,7 +10,7 @@ public class Wood : MonoBehaviour {
 
     public int woodID;
 
-
+    FirePit pit;
 
     public bool burning;
 
@@ -26,7 +26,7 @@ public class Wood : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        
+        FirePit pit = FindObjectOfType<FirePit>();
     }
 
     // Update is called once per frame
@@ -41,7 +41,9 @@ public class Wood : MonoBehaviour {
 
         if (currBurnTime <= 0)
         {
-            burning = false;
+            burning = false;            
+            pit.RemoveWood();
+            
         }
     }
 
@@ -50,14 +52,13 @@ public class Wood : MonoBehaviour {
     {
         if(col.gameObject.GetComponent<FirePit>() == true)//if the colliding object is the fire pit
         {
-            FirePit pit = col.gameObject.GetComponent<FirePit>();
-
-            //Debug.Log("Entered pit");
+            pit = col.gameObject.GetComponent<FirePit>();
 
             pit.AddWood(this);
 
             GameObject.Destroy(this.gameObject);
 
+            currBurnTime = burnTime;
             
         }
     }

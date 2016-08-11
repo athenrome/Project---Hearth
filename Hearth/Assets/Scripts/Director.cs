@@ -6,53 +6,58 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
-    public List<CharacterObj> CharacterObjPool;
+    public List<CharacterData> masterCharacterPool;
 
-    List<CharacterObj> CharacterPool;
+    List<Character> CharacterPool = new List<Character>();
 
     public List<CharacterController> activeCharacters = new List<CharacterController>();
     public List<Character> forestCharacters = new List<Character>();
 
-    CharacterController currActiveCharacter;
-
-    public bool canTalk;
+    bool canTalk;
 
     public float orderCooldown;//how long before a new action can be made
-    float currCooldown;
+    float currOrderCooldown = 0;
     public bool actionTaken;
 
-    public bool askedForWood;//if a wood request has been given
-    public bool woodOrdered;//if someone has been sent to get wood
+    public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
+    public int gatherWoodCount; //how much wood characters bring back from the forest
+    public int getWoodThreshold;//if wood is below this level send someone to get wood
 
-    public float deathChance;
+    
+
     bool characterDeath;
 
-    int characterCount = 0;
-    int maxCharacters = 9;
+    int characterCount;
+    int maxCharacters;
 
-    public int getWoodThreshold;//if wood is below this level send someone to get wood
+    bool askedForWood;//if a wood request has been given
+    bool woodOrdered;//if someone has been sent to get wood
+
+   
 
     public GameObject characterPrefab;
 
+    public List<Waypoint> availablePoints;//waypoints closest to the fire
     public Waypoint entryPoint;
     public Waypoint forestPoint;
     public Waypoint woodPilePoint;
 
-    public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
-    public int gatherWoodCount; //how much wood characters bring back from the forest
 
-
-    public int unlockedPoints;//avalable point indexes
-    public List<Waypoint> availablePoints;//waypoints closest to the fire
-
-
-
-    public float spawnInterval;
-    float currSpawnInterval;
+    [Range(0, 100)]
     public int spawnChance;//chance for a character to spawn after the spawn interval
 
-    //order restrictions
+    [Range(0, 100)]
+    public float deathChance;
 
+    public int unlockedPoints;//avalable point indexes
+    
+    public float spawnInterval;
+    float currSpawnInterval;
+
+    
+
+    [Range(0,100)]
+    public float moraleLevel;
 
 
 	// Use this for initialization
@@ -60,62 +65,54 @@ public class Director : MonoBehaviour {
         characterDeath = true;
         currSpawnInterval = 1;
         canTalk = true;
-        CharacterPool.Add(new Character());//TESTING 
+        actionTaken = false;
+
+        maxCharacters = CharacterPool.Count;
 
         LoadCharacters();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        //CheckFire();
-        //CheckWood();
+        CheckFire();
+        CheckWood();
         //CheckForest();
-        //CheckCharacters();
 
-        
-
-        //if(currCooldown <= 0)
-        //{
-        //    CheckCharacterOrders();
-
-        //    if(actionTaken == true)
-        //    {
-        //        currCooldown = orderCooldown;
-        //    }
-            
-        //}
-        //else
-        //{
-        //    currCooldown -= Time.deltaTime;
-        //}
-    }
-
-    void LoadCharacters()
-    {
-
-    }
-
-    void CheckCharacterOrders()//manages when and what is poken by ceratian characters
-    {
-        if(actionTaken = false && activeCharacters.Count > 0)
+        if (characterCount > 0)//if there are characters
         {
-            if (woodOrdered == true && askedForWood == true)
-            {
-                OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
-                actionTaken = true;
-            }
-            else if (askedForWood == true)
-            {
-                CharacterController toSpeak = GetActiveCharacter();
-                toSpeak.Speak(DialogueType.NeedWoodPrompt);
 
-                //actionTaken = true;
-                woodOrdered = true;
-            }
+        }
+        else
+        {
+            SpawnCharacter();
         }
 
         
+    }
+
+
+
+    void CheckCharacterOrders()//manages when and what is poken by ceratian characters
+    {
+        CharacterController toOrder = GetActiveCharacter();
+
+        if (activeCharacters.Count > 0)
+        {
+            toOrder.Speak(DialogueType.NeedWoodPrompt);
+            
+
+            actionTaken = true;
+        }
+
+        
+    }
+
+    public void OrderCharacter(CharacterController character, CharacterOrders order)
+    {
+        character.ReceiveOrder(order);
+        actionTaken = true;
     }
 
     void CheckForest()
@@ -181,13 +178,19 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount < getWoodThreshold && woodOrdered == false)
         {
-            //OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+            OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
             askedForWood = true;
         }
     }
 
     void CheckCharacters()
     {
+        foreach(CharacterController character in activeCharacters)//Update timesince last order
+        {
+            character.timeSinceLastAction += Time.deltaTime;
+        }
+
+
         currSpawnInterval -= Time.deltaTime;
 
         if (currSpawnInterval <= 0)
@@ -199,23 +202,6 @@ public class Director : MonoBehaviour {
                 if (characterCount < maxCharacters)
                 {
                     CharacterController spawnedChar = SpawnCharacter();
-
-                    bool foundMovePoint = false;
-                    Waypoint movePoint = entryPoint;
-
-                    for(int i = 0; i < unlockedPoints; i++)
-                    {
-                        if (foundMovePoint == false)
-                        {
-                            if (availablePoints[i].locked == false)
-                            {
-                                spawnedChar.MoveToPoint(availablePoints[i]);
-                                foundMovePoint = true;
-                                availablePoints[i].locked = true;
-                            }
-                        }
-                        
-                    }
                 }
 
             }
@@ -225,10 +211,7 @@ public class Director : MonoBehaviour {
 
     }
 
-    public void OrderCharacter(CharacterController character, CharacterOrders order)
-    {
-        character.ReceiveOrder(order);
-    }
+
 
     CharacterController SpawnCharacter()
     {
@@ -240,12 +223,37 @@ public class Director : MonoBehaviour {
 
         newChar.character = CharacterPool[0];//assign characer to new character
 
+        CharacterPool.Remove(newChar.character);//remove this character from circulation
+
         activeCharacters.Add(newChar);
 
-        Debug.Log("Spawned Character");
+        Debug.Log("Spawned Character: " + newChar.character.charName);
+
+        GoToStartPos(newChar);
 
         return newChar;
         
+    }
+
+    void GoToStartPos(CharacterController character)
+    {
+        bool foundMovePoint = false;
+        Waypoint movePoint = entryPoint;
+
+        for (int i = 0; i < unlockedPoints || foundMovePoint == true; i++)
+        {
+            if (foundMovePoint == false)
+            {
+                if (availablePoints[i].locked == false)
+                {
+                    character.MoveToPoint(availablePoints[i]);
+                    foundMovePoint = true;
+                    availablePoints[i].locked = true;
+                    Debug.Log("Found starting pos");
+                }
+            }
+
+        }
     }
 
     CharacterController GetActiveCharacter()
@@ -263,8 +271,45 @@ public class Director : MonoBehaviour {
         }
 
 
-        currActiveCharacter = foundCharacter;
 
-        return currActiveCharacter;
+
+        return foundCharacter;
     }
+
+    void LoadCharacters()
+    {
+
+        foreach (CharacterData character in masterCharacterPool)
+        {
+            CharacterPool.Add(new Character(character));
+            Debug.Log("Created character: " + CharacterPool.Count + character.characterName);
+        }
+    }
+
+    
+}
+
+public enum WorldEvents //usedto trigger events
+{
+    LightUp,
+    LightDrop,
+    DarknessPrompt,
+
+    ForestDeath,
+    ForestReturn,
+
+    WoodLow,
+
+    WoodConsumed,
+
+    CharacterArrive,
+    CharacterLeave,
+
+    GameStart,
+    GameEnd,
+
+    HopefulStory,
+    GhostStory,
+
+
 }

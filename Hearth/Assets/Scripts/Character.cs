@@ -5,24 +5,9 @@ public class Character : MonoBehaviour {
 
     public string charName;
 
+    CharacterData data;
+
     public int efficiency;
-
-    List<DialogueStory> HopefulStorys = new List<DialogueStory>();
-    List<DialogueStory> GhostStorys = new List<DialogueStory>();
-
-    List<Dialogue> NeedWoodPrompts = new List<Dialogue>();
-    List<Dialogue> WoodArrivesPrompts = new List<Dialogue>();
-
-    List<Dialogue> LightDropPrompts = new List<Dialogue>();
-    List<Dialogue> LightBoostPrompts = new List<Dialogue>();
-
-    List<Dialogue> darknessPrompts = new List<Dialogue>();
-
-    List<Dialogue> DecreasedSanityPrompts = new List<Dialogue>();
-    List<Dialogue> IncreasedSanityPrompts = new List<Dialogue>();
-
-    List<Dialogue> PositiveReactions = new List<Dialogue>();
-    List<Dialogue> NegativeReations = new List<Dialogue>();
 
     public float forestTime;// how long a character has been in the forest
 
@@ -31,17 +16,37 @@ public class Character : MonoBehaviour {
 
     public float deadTime;//time since this character has last spoken or perfomred an action
 
-    public Character()
-    {
+    public List<DialogueStory> HopefulStorys = new List<DialogueStory>();
+    public List<DialogueStory> GhostStorys = new List<DialogueStory>();
 
+    public List<Dialogue> needWoodPrompts = new List<Dialogue>();
+    public List<Dialogue> woodArrivesPrompts = new List<Dialogue>();
+
+    public List<Dialogue> lightDropPrompts = new List<Dialogue>();
+    public List<Dialogue> lightBoostPrompts = new List<Dialogue>();
+    public List<Dialogue> darknessPrompts = new List<Dialogue>();
+
+    public List<Dialogue> decreasedSanityPrompts = new List<Dialogue>();
+    public List<Dialogue> increasedSanityPrompts = new List<Dialogue>();
+
+    public List<Dialogue> positiveReactions = new List<Dialogue>();
+    public List<Dialogue> negativeReations = new List<Dialogue>();
+
+    public List<Dialogue> missionStartPrompts = new List<Dialogue>();
+    public List<Dialogue> missionEndPrompts = new List<Dialogue>();
+    public List<Dialogue> missionFailPrompts = new List<Dialogue>();
+    public List<Dialogue> missionSuceedPrompts = new List<Dialogue>();
+
+    public Character(CharacterData _data)
+    {
+        data = _data;
+        charName = data.characterName;
+
+        GetDialogueData();
     }
 
 	// Use this for initialization
 	void Start () {
-        NeedWoodPrompts.Add(new Dialogue("asdf1", DialogueType.NeedWoodPrompt));
-        NeedWoodPrompts.Add(new Dialogue("asdf2", DialogueType.NeedWoodPrompt));
-        NeedWoodPrompts.Add(new Dialogue("asdf3", DialogueType.NeedWoodPrompt));
-        NeedWoodPrompts.Add(new Dialogue("asdf4", DialogueType.NeedWoodPrompt));
 
         
 
@@ -54,15 +59,23 @@ public class Character : MonoBehaviour {
         foreach (DialogueStory story in HopefulStorys) { story.UpdateStory();}
         foreach (DialogueStory story in GhostStorys) { story.UpdateStory(); }
 
-        foreach (Dialogue diag in NeedWoodPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in WoodArrivesPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in LightDropPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in LightBoostPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in needWoodPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in woodArrivesPrompts) { diag.UpdateDialogue(); }
+
+        foreach (Dialogue diag in lightDropPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in lightBoostPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in darknessPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in DecreasedSanityPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in IncreasedSanityPrompts) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in PositiveReactions) { diag.UpdateDialogue(); }
-        foreach (Dialogue diag in NegativeReations) { diag.UpdateDialogue(); }
+
+        foreach (Dialogue diag in decreasedSanityPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in increasedSanityPrompts) { diag.UpdateDialogue(); }
+
+        foreach (Dialogue diag in positiveReactions) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in negativeReations) { diag.UpdateDialogue(); }
+
+        foreach (Dialogue diag in missionStartPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in missionEndPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in missionFailPrompts) { diag.UpdateDialogue(); }
+        foreach (Dialogue diag in missionSuceedPrompts) { diag.UpdateDialogue(); }
 
     }
 
@@ -100,60 +113,59 @@ public class Character : MonoBehaviour {
         Dialogue chosenDiag = new Dialogue("default", DialogueType.Dummy);
 
         switch(_type)
-        {
+        {        
+
+            case DialogueType.NeedWoodPrompt:
+                
+                chosenDiag = GetOldestDialogue(needWoodPrompts);
+                break;
+
+            case DialogueType.WoodArrivesPrompt:
+                chosenDiag = GetOldestDialogue(woodArrivesPrompts);
+                break;
+
+            case DialogueType.LightDropPrompt:
+                chosenDiag = GetOldestDialogue(lightDropPrompts);
+                break;
+
+            case DialogueType.LightBoostPrompt:
+                chosenDiag = GetOldestDialogue(lightBoostPrompts);
+                break;
+
             case DialogueType.DarknessPrompt:
                 chosenDiag = GetOldestDialogue(darknessPrompts);
                 break;
 
             case DialogueType.DecreasedSanityPrompt:
-                chosenDiag = GetOldestDialogue(DecreasedSanityPrompts);
+                chosenDiag = GetOldestDialogue(decreasedSanityPrompts);
                 break;
 
             case DialogueType.IncreasedSanityPrompt:
-                chosenDiag = GetOldestDialogue(IncreasedSanityPrompts);
-                break;
-
-            case DialogueType.LightBoostPrompt:
-                chosenDiag = GetOldestDialogue(LightBoostPrompts);
-
-                break;
-
-            case DialogueType.LightDropPrompt:
-                chosenDiag = GetOldestDialogue(LightDropPrompts);
-                break;
-
-            case DialogueType.NeedWoodPrompt:
-
-                Debug.Log("a");
-
-                Dialogue toReturn = NeedWoodPrompts[0];
-                float oldestTime = 0;
-
-                foreach (Dialogue diag in NeedWoodPrompts)
-                {
-                    if (diag.deadTime > oldestTime)
-                    {
-                        oldestTime = diag.deadTime;
-                        toReturn = diag;
-
-                        toReturn.deadTime = 0;
-                    }
-                }
-
-                chosenDiag = toReturn;
-
-                break;
-
-            case DialogueType.NegativeReation:
-                chosenDiag = GetOldestDialogue(NegativeReations);
+                chosenDiag = GetOldestDialogue(increasedSanityPrompts);
                 break;
 
             case DialogueType.PositiveReaction:
-                chosenDiag = GetOldestDialogue(PositiveReactions);
+                chosenDiag = GetOldestDialogue(positiveReactions);
                 break;
 
-            case DialogueType.WoodArrivesPrompt:
-                chosenDiag = GetOldestDialogue(WoodArrivesPrompts);
+            case DialogueType.NegativeReation:
+                chosenDiag = GetOldestDialogue(negativeReations);
+                break;
+
+            case DialogueType.MissionStart:
+                chosenDiag = GetOldestDialogue(missionStartPrompts);
+                break;
+
+            case DialogueType.MissionEnd:
+                chosenDiag = GetOldestDialogue(missionEndPrompts);
+                break;
+
+            case DialogueType.MissionFail:
+                chosenDiag = GetOldestDialogue(missionFailPrompts);
+                break;
+
+            case DialogueType.MissionSuceed:
+                chosenDiag = GetOldestDialogue(missionSuceedPrompts);
                 break;
 
             default:
@@ -169,25 +181,159 @@ public class Character : MonoBehaviour {
 
     Dialogue GetOldestDialogue(List<Dialogue> source)
     {
-        //Debug.Log("1");
-
         Dialogue toReturn = source[0];
-        //float oldestTime = 0;
+        float oldestTime = 0;
 
-        //Debug.Log("2");
+        foreach (Dialogue diag in source)
+        {
+            if (diag.deadTime > oldestTime)
+            {
+                oldestTime = diag.deadTime;
+                toReturn = diag;
 
-        //foreach (Dialogue diag in source)
-        //{
-        //    if(diag.deadTime > oldestTime)
-        //    {
-        //        oldestTime = diag.deadTime;
-        //        toReturn = diag;
-
-        //        toReturn.deadTime = 0;
-        //    }
-        //}
+                toReturn.deadTime = 0;
+            }
+        }
 
         return toReturn;
+    }
+
+    void GetDialogueData()
+    {
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.NeedWoodPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.WoodArrivesPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.LightDropPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.LightBoostPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.DarknessPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.DecreasedSanityPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.IncreasedSanityPrompt));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.PositiveReaction));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.NegativeReation));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionStart));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionEnd));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionFail));
+        }
+
+        foreach (string text in data.needWoodPromptsText)
+        {
+            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionSuceed));
+        }
+    }
+
+    void GetStoryData()
+    {
+        List<Dialogue> hope1Diag = new List<Dialogue>();
+        List<Dialogue> hope2Diag = new List<Dialogue>();
+        List<Dialogue> hope3Diag = new List<Dialogue>();
+
+        List<Dialogue> ghost1Diag = new List<Dialogue>();
+        List<Dialogue> ghost2Diag = new List<Dialogue>();
+        List<Dialogue> ghost3Diag = new List<Dialogue>();
+
+
+        //HOPEFUL
+        foreach (string text in data.HopefulStorys1Text)
+        {
+            hope1Diag.Add(new Dialogue(text, DialogueType.HopefulStory));
+        }
+
+        HopefulStorys.Add(new DialogueStory(hope1Diag, DialogueType.HopefulStory));
+
+
+
+        foreach (string text in data.HopefulStorys2Text)
+        {
+            hope2Diag.Add(new Dialogue(text, DialogueType.HopefulStory));
+        }
+
+        HopefulStorys.Add(new DialogueStory(hope2Diag, DialogueType.HopefulStory));
+
+
+
+        foreach (string text in data.HopefulStorys3Text)
+        {
+            hope3Diag.Add(new Dialogue(text, DialogueType.HopefulStory));
+        }
+
+        HopefulStorys.Add(new DialogueStory(hope3Diag, DialogueType.HopefulStory));
+
+
+
+
+
+
+
+        //GHOST
+        foreach (string text in data.GhostStory1Text)
+        {
+            ghost1Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+        }
+
+        GhostStorys.Add(new DialogueStory(ghost1Diag, DialogueType.GhostStory));
+
+
+
+        foreach (string text in data.GhostStory2Text)
+        {
+            hope2Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+        }
+
+        GhostStorys.Add(new DialogueStory(hope2Diag, DialogueType.GhostStory));
+
+
+
+        foreach (string text in data.GhostStory3Text)
+        {
+            hope3Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+        }
+
+        GhostStorys.Add(new DialogueStory(hope3Diag, DialogueType.GhostStory));
     }
 }
 

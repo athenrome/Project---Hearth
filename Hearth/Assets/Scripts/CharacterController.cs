@@ -16,7 +16,7 @@ public class CharacterController : MonoBehaviour {
     Waypoint waypointTarget;
 
 
-    public float moveSpeed = 1f;
+    public float moveSpeed;
     float startTime;
     float journeyLength;
     bool reachedDest;
@@ -24,7 +24,7 @@ public class CharacterController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //currAction = CharacterActions.Idle;
+        //currOrder = CharacterOrders.Idle;
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
 
@@ -100,7 +100,7 @@ public class CharacterController : MonoBehaviour {
     public void MoveToPoint(Waypoint _point)
     {
         waypointTarget = _point;
-
+        Debug.Log("Move to Point");
         currOrder = CharacterOrders.StartMove;
 
         
@@ -153,8 +153,7 @@ public class CharacterController : MonoBehaviour {
 
     public void Speak(DialogueType toSpeak)
     {
-        if(director.canTalk == true)
-        {
+
             currOrder = CharacterOrders.Speak;
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
@@ -167,19 +166,6 @@ public class CharacterController : MonoBehaviour {
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
                 diagWin.WriteDialogue(targetDialogue);
             }
-
-            director.canTalk = false;
-        }
-        else
-        {
-            Debug.Log("Talking blocked");
-        }
-
-
-
-
-
-
     }
 }
 

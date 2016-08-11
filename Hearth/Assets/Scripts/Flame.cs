@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 public class Flame : MonoBehaviour {
 
-    public float minLevel = 5;
-    public float maxLevel = 100;
+    public float minLevel;
+    public float maxLevel;
 
     public Light lightSource;
     
-    public float adjustmentRate; //rate at which flame will change each flame
+    
 
     [Range(0f, 100f)]
     public float intensity; //flame intesity target
 
-    float currIntensity; //value used to steadily scale flame intesnity
+    
 
     bool actionInProgress;
     FlameAction currAction;
@@ -27,16 +27,16 @@ public class Flame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        adjustmentRate = Time.deltaTime;
+        
 
-        if (currIntensity < intensity)
+        if (lightSource.range <= intensity)
         {
-            lightSource.range += adjustmentRate;
+            lightSource.range += Time.deltaTime;
         }
 
-        if (currIntensity > intensity)
+        if (lightSource.range >= intensity)
         {
-            lightSource.range -= adjustmentRate;
+            lightSource.range -= Time.deltaTime;
         }
 
 
