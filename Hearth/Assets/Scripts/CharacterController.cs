@@ -29,12 +29,13 @@ public class CharacterController : MonoBehaviour {
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
 
-        Speak(DialogueType.MissionStart);
+
 
     }
 	
 	// Update is called once per frame
 	void Update () {
+
 
         //if (moving == true)
         //{
@@ -90,8 +91,9 @@ public class CharacterController : MonoBehaviour {
         switch(_order)
         {
             case CharacterOrders.RequestWood:
-                Speak(DialogueType.NeedWoodPrompt);
-                Debug.Log("wood order");
+                
+                Speak(DialogueType.NeedWoodPrompt, true);
+                //Debug.Log("wood order recieved");
                 break;              
 
             default:
@@ -158,24 +160,36 @@ public class CharacterController : MonoBehaviour {
     //    return result;
     //}
 
-    public void Speak(DialogueType toSpeak)
+    public void Speak(DialogueType toSpeak, bool forceSpeak)
     {
-        if(director.canSpeak == true)//if none else is speaking
+
+        if (director.canSpeak == true || forceSpeak == true)//if none else is speaking
         {
+            Debug.Log("Start Speaking");
             director.canSpeak = false;
 
-            currOrder = CharacterOrders.Speak;
+            toSpeak = DialogueType.HopefulStory;//TESTING   
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
             {
                 DialogueStory targetStory = character.ChooseStory(toSpeak);
                 diagWin.WriteStory(targetStory);
+
+                currOrder = CharacterOrders.Speak;
             }
             else
             {
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
                 diagWin.WriteDialogue(targetDialogue);
+
+
+                currOrder = CharacterOrders.Speak;
+                
             }
+        }
+        else
+        {
+            Debug.Log("Speaking blocked");
         }
 
     }

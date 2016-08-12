@@ -39,6 +39,7 @@ public class Character : MonoBehaviour {
         charName = data.characterName;
 
         GetDialogueData();
+        GetStoryData();
     }
 
 	// Use this for initialization
@@ -51,8 +52,14 @@ public class Character : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        
+
+    }
+
+    public void UpdateCharacterDialogue()
+    {
         //UPDATE STORYS AND DIALOGUE
-        foreach (DialogueStory story in HopefulStorys) { story.UpdateStory();}
+        foreach (DialogueStory story in HopefulStorys) { story.UpdateStory(); }
         foreach (DialogueStory story in GhostStorys) { story.UpdateStory(); }
 
         foreach (Dialogue diag in needWoodPrompts) { diag.UpdateDialogue(); }
@@ -69,7 +76,6 @@ public class Character : MonoBehaviour {
         foreach (Dialogue diag in missionStartPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in missionFailPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in missionSuceedPrompts) { diag.UpdateDialogue(); }
-
     }
 
     
@@ -83,8 +89,12 @@ public class Character : MonoBehaviour {
 
         switch (_type)
         {
-            case DialogueType.DarknessPrompt:
+            case DialogueType.GhostStory:
+                chosenStory = GetOldestStory(GhostStorys);
+                break;
 
+            case DialogueType.HopefulStory:
+                chosenStory = GetOldestStory(HopefulStorys);
                 break;
 
 
@@ -101,14 +111,17 @@ public class Character : MonoBehaviour {
 
     public Dialogue ChooseDialogue(DialogueType _type)
     {
-        Dialogue chosenDiag;// = new Dialogue("default", DialogueType.Dummy);
+        Dialogue chosenDiag = new Dialogue("default", DialogueType.Dummy);
 
-        switch(_type)
-        {        
+
+
+        switch (_type)
+        {
 
             case DialogueType.NeedWoodPrompt:
-                
+                Debug.Log("12");
                 chosenDiag = GetOldestDialogue(needWoodPrompts);
+
                 break;
 
             case DialogueType.WoodArrivesPrompt:
@@ -164,6 +177,25 @@ public class Character : MonoBehaviour {
         float oldestTime = 0;
 
         foreach (Dialogue diag in source)
+        {
+            if (diag.deadTime > oldestTime)
+            {
+                oldestTime = diag.deadTime;
+                toReturn = diag;
+
+                toReturn.deadTime = 0;
+            }
+        }
+
+        return toReturn;
+    }
+
+    DialogueStory GetOldestStory(List<DialogueStory> source)
+    {
+        DialogueStory toReturn = source[0];
+        float oldestTime = 0;
+
+        foreach (DialogueStory diag in source)
         {
             if (diag.deadTime > oldestTime)
             {
@@ -285,7 +317,7 @@ public class Character : MonoBehaviour {
 
         foreach (string text in data.GhostStory2Text)
         {
-            hope2Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+            ghost2Diag.Add(new Dialogue(text, DialogueType.GhostStory));
         }
 
         GhostStorys.Add(new DialogueStory(hope2Diag, DialogueType.GhostStory));
@@ -294,7 +326,7 @@ public class Character : MonoBehaviour {
 
         foreach (string text in data.GhostStory3Text)
         {
-            hope3Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+            ghost3Diag.Add(new Dialogue(text, DialogueType.GhostStory));
         }
 
         GhostStorys.Add(new DialogueStory(hope3Diag, DialogueType.GhostStory));

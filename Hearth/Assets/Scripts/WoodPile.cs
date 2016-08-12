@@ -72,7 +72,7 @@ public class WoodPile : MonoBehaviour {
 
         woodToAdd = toAdd;
 
-        dir.woodOrdered = false;
+
     }
 
     void SpawnPileLog()

@@ -28,6 +28,7 @@ public class Director : MonoBehaviour {
 
 
     public bool actionInProgress;
+    public bool canChangeState;
     public bool canSpeak;
 
 
@@ -60,11 +61,11 @@ public class Director : MonoBehaviour {
     [Range(0,100)]
     public float moraleLevel;
 
-    WorldState currState;
+    public WorldState currState;
     WorldState lastState;
 
 
-    public bool woodOrdered = false;
+    //public bool woodOrdered = false;
 
 	// Use this for initialization
 	void Start () {
@@ -72,6 +73,7 @@ public class Director : MonoBehaviour {
         //currSpawnInterval = 1;
         currTimeout = 0;
         stateChanged = false;
+        canSpeak = false;
         
 
         LoadCharacters();
@@ -95,20 +97,9 @@ public class Director : MonoBehaviour {
             CheckCharacterOrders();
         }
 
-
-        
-        if(currTimeout <= 0)
+        if(stateChanged == false)
         {
             CheckWorldState();
-
-            if(stateChanged == true)
-            {
-                currTimeout = stateTimeout;
-            }
-        }
-        else
-        {
-            currTimeout -= Time.deltaTime;
         }
         
 
@@ -120,32 +111,67 @@ public class Director : MonoBehaviour {
         switch(currState)
         {
             case WorldState.NeedWood:
+                Debug.Log("Wood Requested");
 
-                OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
-
-                woodOrdered = true;
+                canSpeak = true;
+                UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
-                UpdateWorldState(WorldState.Idle);
+                
+                
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
+
+
                 break;
 
+            case WorldState.SpeakDialogue:
+                canSpeak = true;
+                break;
 
+            case WorldState.SpeakStory:
+                canSpeak = true;
+                break;
+
+            case WorldState.Idle:
+                break;
+
+            default:
+                UpdateWorldState(WorldState.Idle, true);
+                Debug.Log("invalid state idling");
+                break;
 
 
 
         }
     }
 
-    public void UpdateWorldState(WorldState newState)
+    public void UpdateWorldState(WorldState newState, bool isCritical)
     {
-        lastState = currState;//assign the old state to the last state
+        
 
-        currState = newState;//update the world state
+        if(canChangeState == true || isCritical == true)
+        {
+            lastState = currState;//assign the old state to the last state
 
-        stateChanged = true;
+            currState = newState;//update the world state
 
-        currTimeout = stateTimeout;
+            stateChanged = true;
+
+            currTimeout = stateTimeout;
+
+            Debug.Log("State Changed");
+        }
+        else
+        {
+            Debug.Log("Blocked state change");
+        }
+
+        if(isCritical == true)
+        {
+            stateChanged = false;
+        }
+        
     }
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
@@ -171,9 +197,10 @@ public class Director : MonoBehaviour {
 
     void CheckWood()
     {
-        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false && woodPile.woodToAdd == 0 && currState != WorldState.NeedWood)
+        if(woodPile.woodCount <= getWoodThreshold && woodPile.woodToAdd == 0 && currState != WorldState.NeedWood)
         {
-            UpdateWorldState(WorldState.NeedWood);            
+            UpdateWorldState(WorldState.NeedWood, true);
+            Debug.Log("wood ordered");
         }
     }
 
@@ -216,6 +243,8 @@ public class Director : MonoBehaviour {
             CharacterPool.Add(new Character(character));
             Debug.Log("Loaded character: " + character.characterName);
         }
+
+        Debug.Log("Loaded all cahracters");
     }
 
     public Character GetCharacter()
@@ -396,8 +425,8 @@ public enum WorldState //usedto trigger events
     GameStart,
     GameEnd,
 
-    HopefulStory,
-    GhostStory,
+    SpeakDialogue,
+    SpeakStory,
 
     Idle,
 
