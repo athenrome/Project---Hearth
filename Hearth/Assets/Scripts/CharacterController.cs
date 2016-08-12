@@ -95,7 +95,15 @@ public class CharacterController : MonoBehaviour {
                 
                 Speak(DialogueType.NeedWoodPrompt, true);
                 //Debug.Log("wood order recieved");
-                break;              
+                break;
+
+            case CharacterOrders.SpeakHope:
+                Speak(DialogueType.HopefulStory, true);
+                break;
+
+            case CharacterOrders.SpeakGhost:
+                Speak(DialogueType.GhostStory, true);
+                break;
 
             default:
                 Debug.Log("Invalid order");
@@ -175,8 +183,6 @@ public class CharacterController : MonoBehaviour {
             {
                 DialogueStory targetStory = character.ChooseStory(toSpeak);
                 diagWin.WriteStory(targetStory);
-
-                currOrder = CharacterOrders.Speak;
             }
             else
             {
@@ -184,7 +190,7 @@ public class CharacterController : MonoBehaviour {
                 diagWin.WriteDialogue(targetDialogue);
 
 
-                currOrder = CharacterOrders.Speak;
+                currOrder = CharacterOrders.SpeakDialogue;
                 
             }
         }
@@ -199,7 +205,12 @@ public class CharacterController : MonoBehaviour {
 public enum CharacterOrders
 {
     Idle,
-    Speak,
+
+    SpeakDialogue,
+    SpeakHope,
+    SpeakGhost,
+
+    
     //StartMove,
     //Move,
 
