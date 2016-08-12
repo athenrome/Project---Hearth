@@ -5,6 +5,7 @@ public class Character : MonoBehaviour {
 
     public string charName;
 
+
     CharacterData data;
 
     public int efficiency;

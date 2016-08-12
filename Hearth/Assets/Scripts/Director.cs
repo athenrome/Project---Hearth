@@ -6,6 +6,7 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
+    public List<GameObject> characterModels;
     public List<CharacterData> masterCharacterPool;
     public CharacterData survivorData;
 
@@ -328,6 +329,13 @@ public class Director : MonoBehaviour {
         return toReturn;
     }
 
+    GameObject getCharacterModel()
+    {
+        GameObject toReturn = characterModels[Random.Range(0,characterModels.Count)];
+        //characterModels.Remove(toReturn);
+        return toReturn;
+    }
+
     void SpawnCharacters()
     {
         for(int i = 0; characterCount < unlockedPoints; i++)
@@ -360,6 +368,11 @@ public class Director : MonoBehaviour {
             newChar.character = survivor;
 
         }
+
+        GameObject charModel = GameObject.Instantiate(getCharacterModel(), newChar.transform) as GameObject;
+
+        charModel.transform.parent = spawnedCharObj.transform;      
+        
 
         activeCharacters.Add(newChar);
         

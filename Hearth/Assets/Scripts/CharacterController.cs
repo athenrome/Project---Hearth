@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterController : MonoBehaviour {
 
     public DialogueWindow diagWin; // where character dialogue is presented
+    public GameObject model;
 
     Director director;
 
