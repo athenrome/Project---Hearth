@@ -29,10 +29,6 @@ public class CharacterController : MonoBehaviour {
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
 
-        character = director.GetCharacter();
-
-        director.activeCharacters.Add(this);
-
         Speak(DialogueType.MissionStart);
 
     }
@@ -86,7 +82,11 @@ public class CharacterController : MonoBehaviour {
     public void ReceiveOrder(CharacterOrders _order)
     {
         switch(_order)
-        {             
+        {
+            case CharacterOrders.RequestWood:
+                Speak(DialogueType.NeedWoodPrompt);
+
+                break;              
 
             default:
                 Debug.Log("Invalid order");
@@ -177,6 +177,7 @@ public enum CharacterOrders
     //StartMove,
     //Move,
 
+    RequestWood,
     InForest,
     GetWood,
     WoodToPile,    

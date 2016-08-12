@@ -67,11 +67,11 @@ public class Wood : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit(Collider col)
-    {
-        Debug.Log("Exited pit");
-    }
-    //END FIREPIT
+    //void OnTriggerExit(Collider col)
+    //{
+    //    Debug.Log("Exited pit");
+    //}
+    ////END FIREPIT
 
 
     //START WOOD DRAGGING

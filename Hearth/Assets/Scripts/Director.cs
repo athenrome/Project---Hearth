@@ -36,7 +36,7 @@ public class Director : MonoBehaviour {
 
     public GameObject characterPrefab;
 
-    public List<Waypoint> availablePoints;//waypoints around the the fire
+    public List<Waypoint> spawnPoints;//waypoints around the the fire
     public int unlockedPoints;
 
     //public List<Waypoint> forestPoints;
@@ -79,19 +79,15 @@ public class Director : MonoBehaviour {
 
         currState = WorldState.GameStart;
 
-        //SpawnCharacter();
+        SpawnCharacters();
 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-
-
         CheckFire();
         CheckWood();
-        //CheckForest();
-
 
         if(actionInProgress == false)
         {
@@ -124,11 +120,12 @@ public class Director : MonoBehaviour {
         {
             case WorldState.NeedWood:
 
-                OrderCharacter(GetActiveCharacter(), CharacterOrders.GetWood);
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
                 woodOrdered = true;
 
-                UpdateWorldState(WorldState.EnterForest);
+                woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
+
                 break;
 
 
@@ -215,7 +212,7 @@ public class Director : MonoBehaviour {
         foreach (CharacterData character in masterCharacterPool)
         {
             CharacterPool.Add(new Character(character));
-            Debug.Log("Loaded character: " + CharacterPool.Count + character.characterName);
+            Debug.Log("Loaded character: " + character.characterName);
         }
     }
 
@@ -234,49 +231,56 @@ public class Director : MonoBehaviour {
         return toReturn;
     }
 
-    //void SpawnCharacter()
-    //{
-    //    Waypoint spawnPoint = GetForestPoint();
+    void SpawnCharacters()
+    {
+        for(int i = 0; characterCount < unlockedPoints; i++)
+        {
+            if(spawnPoints[i].locked == false)
+            {
+                SpawnCharacter(GetFreePoint());
+            }
+        }
+    }
 
-    //    characterCount++;
+    void SpawnCharacter(Waypoint spawnPoint)
+    {     
 
-    //    GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
+        characterCount++;
 
-    //    CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
+        GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
 
-    //    if (CharacterPool.Count > 0)
-    //    {
-    //        newChar.character = CharacterPool[0];//assign characer to new character choose the oldest cahracter
+        CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
 
-    //        CharacterPool.Remove(newChar.character);//remove this character from circulation
+        if (CharacterPool.Count > 0)
+        {
+            newChar.character = CharacterPool[0];//assign characer to new character choose the oldest cahracter
 
-    //    }
-    //    else
-    //    {
-    //        newChar.character = survivor;
+            CharacterPool.Remove(newChar.character);//remove this character from circulation
 
-    //    }
+        }
+        else
+        {
+            newChar.character = survivor;
 
-    //    activeCharacters.Add(newChar);
+        }
+
+        activeCharacters.Add(newChar);
+        
+        Debug.Log("Spawned Character: " + newChar.character.charName);
+    }
+
+    public Waypoint GetFreePoint()
+    {
+        Waypoint foundPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];//choose a random point out of the forsest points
+
+        spawnPoints.Remove(foundPoint);//remove point from circulation
+
+        return foundPoint;
+    }
 
 
 
 
-
-    //    Debug.Log("Spawned Character: " + newChar.character.charName);
-
-    //    newChar.MoveToPoint(FindFreeFireSpot());
-
-
-
-    //}
-
-
-
-    //public Waypoint GetForestPoint()
-    //{
-    //    return forestPoints[Random.Range(0, forestPoints.Count)];//choose a random point out of the forsest points
-    //}
 
     //Waypoint FindFreeFireSpot()
     //{

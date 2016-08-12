@@ -79,19 +79,19 @@ public class WoodPile : MonoBehaviour {
     {
         GameObject woodObj = GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation) as GameObject;
         pileLogs.Add(woodObj);
+        woodCount++;
         woodToAdd--;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<Wood>() == true)
-        {
-            //pileLogs.Add(collision.gameObject);
-            //SetWoodPositions();
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.GetComponent<Wood>() == true)
+    //    {
+    //        woodCount++;
 
-            Debug.Log("added Log");
-        }
-    }
+    //        Debug.Log("added Log");
+    //    }
+    //}
 
     //public void OnTriggerEnter(Collider enterObj)
     //{
@@ -104,20 +104,20 @@ public class WoodPile : MonoBehaviour {
     //    }
     //}
 
-    public void OnTriggerExit(Collider exitObj)
-    {
-        if (exitObj.GetComponent<Wood>() == true)
-        {
-            pileLogs.Remove(exitObj.gameObject);
-            RemoveWood();
+    //public void OnTriggerExit(Collider exitObj)
+    //{
+    //    if (exitObj.GetComponent<Wood>() == true)
+    //    {
+    //        pileLogs.Remove(exitObj.gameObject);
+    //        RemoveWood();
 
-            Debug.Log("Removed Log");
-        }
-    }
+    //        Debug.Log("Removed Log");
+    //    }
+    //}
 
-    public void OnMouseDown()
-    {
-        RemoveWood();
+    //public void OnMouseDown()
+    //{
+    //    RemoveWood();
         
-    }
+    //}
 }
