@@ -81,14 +81,14 @@ public class CharacterController : MonoBehaviour {
     {
         switch(_order)
         {
-            case CharacterOrders.GetWood:
-                waypointTarget = director.GetForestPoint();
-                MoveToPoint(waypointTarget);
+            //case CharacterOrders.GetWood:
+            //    waypointTarget = director.GetForestPoint();
+            //    MoveToPoint(waypointTarget);
 
-                currOrder = CharacterOrders.GetWood;
-                Debug.Log("Get Wood");
+            //    currOrder = CharacterOrders.GetWood;
+            //    Debug.Log("Get Wood");
 
-                break;
+            //    break;
 
                 
 
@@ -112,33 +112,33 @@ public class CharacterController : MonoBehaviour {
 
     public void ArriveAtPoint()
     {
-        reachedDest = true;
+        //reachedDest = true;
 
-        if(NearLocation(waypointTarget) == true && currOrder == CharacterOrders.GetWood == true)
-        {
-            Debug.Log("Character entred forest");
+        //if(NearLocation(waypointTarget) == true && currOrder == CharacterOrders.GetWood == true)
+        //{
+        //    Debug.Log("Character entred forest");
 
-            director.activeCharacters.Remove(this);
+        //    director.activeCharacters.Remove(this);
 
-            director.forestCharacters.Add(this.character);
+        //    director.forestCharacters.Add(this.character);
 
-            GameObject.Destroy(this.gameObject);
+        //    GameObject.Destroy(this.gameObject);
 
-        }
+        //}
 
-        if(NearLocation(director.woodPilePoint) && character.carryWood > 0)
-        {
-            if(character.carryWood > 0)
-            {
-                Debug.Log("Place Wood");
-                director.woodPile.AddWood(character.carryWood);
-                character.carryWood = 0;
+        //if(NearLocation(director.woodPilePoint) && character.carryWood > 0)
+        //{
+        //    if(character.carryWood > 0)
+        //    {
+        //        Debug.Log("Place Wood");
+        //        director.woodPile.AddWood(character.carryWood);
+        //        character.carryWood = 0;
 
-                //return back to starting pos
+        //        //return back to starting pos
 
             
-            }
-        }
+        //    }
+        //}
     }
 
     bool NearLocation(Waypoint targetPoint)
