@@ -217,5 +217,24 @@ public enum CharacterOrders
     RequestWood,
     InForest,
     GetWood,
-    WoodToPile,    
+    WoodToPile,
+
+
+
+
+    NeedWoodPrompt,
+    WoodArrivesPrompt,
+    LightDropPrompt,
+    LightBoostPrompt,
+    DarknessPrompt,
+
+    PositiveReaction,
+    NegativeReation,
+
+    MissionStart,
+    MissionFail,
+    MissionSuceed,
+
+    HopefulStory,
+    GhostStory,
 }
