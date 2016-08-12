@@ -58,6 +58,11 @@ public class FirePit : MonoBehaviour {
             foreach (Wood fireWood in woodInFire)
             {
                 fireWood.BurnWood();
+
+                //if(fireWood.burnTime <= 0)
+                //{
+                //    RemoveWood();
+                //}
             }
         }
 
