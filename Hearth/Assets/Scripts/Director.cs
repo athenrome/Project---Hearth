@@ -118,24 +118,30 @@ public class Director : MonoBehaviour {
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
-                UpdateWorldState(WorldState.Speaking);
+                
+                UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 
                 break;
 
-            case WorldState.Speaking:
+            case WorldState.SpeakDialogue:
                 break;
 
-
+            default:
+                currState = WorldState.Idle;
+                Debug.Log("invalid state");
+                break;
 
 
 
         }
     }
 
-    public void UpdateWorldState(WorldState newState)
+    public void UpdateWorldState(WorldState newState, bool isCritical)
     {
-        if(canChangeState == true)
+        
+
+        if(canChangeState == true || isCritical == true)
         {
             lastState = currState;//assign the old state to the last state
 
