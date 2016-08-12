@@ -117,7 +117,7 @@ public class DialogueWindow : MonoBehaviour {
         currText = "";
         currLine = 0;
         currLetter = 0;
-        finishedLine = true;
+        finishedLine = false;
         finished = false;
         stopped = false;
 

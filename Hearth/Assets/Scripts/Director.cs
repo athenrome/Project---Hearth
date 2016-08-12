@@ -113,7 +113,7 @@ public class Director : MonoBehaviour {
             case WorldState.NeedWood:
                 Debug.Log("Wood Requested");
 
-
+                canSpeak = true;
                 UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile

@@ -29,7 +29,7 @@ public class CharacterController : MonoBehaviour {
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
 
-        Speak(DialogueType.MissionStart);
+
 
     }
 	
@@ -91,8 +91,8 @@ public class CharacterController : MonoBehaviour {
         {
             case CharacterOrders.RequestWood:
                 
-                Speak(DialogueType.NeedWoodPrompt);
-                Debug.Log("wood order recieved");
+                Speak(DialogueType.NeedWoodPrompt, true);
+                //Debug.Log("wood order recieved");
                 break;              
 
             default:
@@ -159,12 +159,12 @@ public class CharacterController : MonoBehaviour {
     //    return result;
     //}
 
-    public void Speak(DialogueType toSpeak)
+    public void Speak(DialogueType toSpeak, bool forceSpeak)
     {
 
 
 
-        if (director.canSpeak == true)//if none else is speaking
+        if (director.canSpeak == true || forceSpeak == true)//if none else is speaking
         {
             Debug.Log("Start Speaking");
             director.canSpeak = false;
@@ -180,7 +180,6 @@ public class CharacterController : MonoBehaviour {
             }
             else
             {
-                
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
                 diagWin.WriteDialogue(targetDialogue);
 
