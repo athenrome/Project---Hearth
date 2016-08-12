@@ -90,8 +90,9 @@ public class CharacterController : MonoBehaviour {
         switch(_order)
         {
             case CharacterOrders.RequestWood:
+                
                 Speak(DialogueType.NeedWoodPrompt);
-                Debug.Log("wood order");
+                Debug.Log("wood order recieved");
                 break;              
 
             default:
@@ -186,6 +187,10 @@ public class CharacterController : MonoBehaviour {
                 currOrder = CharacterOrders.Speak;
                 
             }
+        }
+        else
+        {
+            Debug.Log("Speaking blocked");
         }
 
     }

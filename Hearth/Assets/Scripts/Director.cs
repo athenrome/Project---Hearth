@@ -112,12 +112,14 @@ public class Director : MonoBehaviour {
         {
             case WorldState.NeedWood:
                 Debug.Log("Wood Requested");
-                            
+
+
+                UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
                 
-                UpdateWorldState(WorldState.SpeakDialogue, true);
+                
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
 
@@ -131,9 +133,12 @@ public class Director : MonoBehaviour {
                 canSpeak = true;
                 break;
 
+            case WorldState.Idle:
+                break;
+
             default:
                 UpdateWorldState(WorldState.Idle, true);
-                Debug.Log("invalid state");
+                Debug.Log("invalid state idling");
                 break;
 
 
