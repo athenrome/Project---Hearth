@@ -469,26 +469,26 @@ public enum WorldState //usedto trigger events
     BurnUp,
     BurnDown,
 
-    FireEmbers,
-    FireSmall,
-    FireMed,
-    FireBig,
+    //FireEmbers,
+    //FireSmall,
+    //FireMed,
+    //FireBig,
 
     characterTalking,
 
     
-    EnterForest,
-    ForestDeath,
-    ForestReturn,
+    //EnterForest,
+    //ForestDeath,
+    //ForestReturn,
 
     NeedWood,
     WoodGone,
     WoodFull,
     WoodConsumed,
 
-    CharacterArrive,
-    CharacterLeave,
-    NoCharacters,
+    //CharacterArrive,
+    //CharacterLeave,
+    //NoCharacters,
 
     GameStart,
     GameEnd,
