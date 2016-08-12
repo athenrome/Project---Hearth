@@ -28,6 +28,7 @@ public class Director : MonoBehaviour {
 
 
     public bool actionInProgress;
+    public bool canChangeState;
     public bool canSpeak;
 
 
@@ -72,6 +73,7 @@ public class Director : MonoBehaviour {
         //currSpawnInterval = 1;
         currTimeout = 0;
         stateChanged = false;
+        canSpeak = true;
         
 
         LoadCharacters();
@@ -120,7 +122,7 @@ public class Director : MonoBehaviour {
         switch(currState)
         {
             case WorldState.NeedWood:
-
+                Debug.Log("Wood Requested");
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
                 woodOrdered = true;
@@ -128,6 +130,8 @@ public class Director : MonoBehaviour {
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
                 UpdateWorldState(WorldState.Idle);
+
+                
                 break;
 
 
@@ -139,13 +143,21 @@ public class Director : MonoBehaviour {
 
     public void UpdateWorldState(WorldState newState)
     {
-        lastState = currState;//assign the old state to the last state
+        if(canChangeState == true)
+        {
+            lastState = currState;//assign the old state to the last state
 
-        currState = newState;//update the world state
+            currState = newState;//update the world state
 
-        stateChanged = true;
+            stateChanged = true;
 
-        currTimeout = stateTimeout;
+            currTimeout = stateTimeout;
+        }
+        else
+        {
+            Debug.Log("Blocked state change");
+        }
+        
     }
 
     void CheckCharacterOrders()//manages when and what is poken by ceratian characters
@@ -216,6 +228,8 @@ public class Director : MonoBehaviour {
             CharacterPool.Add(new Character(character));
             Debug.Log("Loaded character: " + character.characterName);
         }
+
+        Debug.Log("Loaded all cahracters");
     }
 
     public Character GetCharacter()
@@ -396,8 +410,7 @@ public enum WorldState //usedto trigger events
     GameStart,
     GameEnd,
 
-    HopefulStory,
-    GhostStory,
+    Speaking,
 
     Idle,
 

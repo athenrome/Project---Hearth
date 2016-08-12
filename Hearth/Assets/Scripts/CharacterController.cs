@@ -173,7 +173,10 @@ public class CharacterController : MonoBehaviour {
             }
             else
             {
+                
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
+
+
                 diagWin.WriteDialogue(targetDialogue);
             }
         }

@@ -83,8 +83,12 @@ public class Character : MonoBehaviour {
 
         switch (_type)
         {
-            case DialogueType.DarknessPrompt:
+            case DialogueType.GhostStory:
+                chosenStory = GetOldestStory(GhostStorys);
+                break;
 
+            case DialogueType.HopefulStory:
+                chosenStory = GetOldestStory(HopefulStorys);
                 break;
 
 
@@ -101,59 +105,62 @@ public class Character : MonoBehaviour {
 
     public Dialogue ChooseDialogue(DialogueType _type)
     {
-        Dialogue chosenDiag;// = new Dialogue("default", DialogueType.Dummy);
+        Dialogue chosenDiag = new Dialogue("default", DialogueType.Dummy);
 
-        switch(_type)
-        {        
 
-            case DialogueType.NeedWoodPrompt:
+
+        //switch (_type)
+        //{        
+
+        //    case DialogueType.NeedWoodPrompt:
+        //        Debug.Log("12");
+        //        chosenDiag = GetOldestDialogue(needWoodPrompts);
                 
-                chosenDiag = GetOldestDialogue(needWoodPrompts);
-                break;
+        //        break;
 
-            case DialogueType.WoodArrivesPrompt:
-                chosenDiag = GetOldestDialogue(woodArrivesPrompts);
-                break;
+        //    case DialogueType.WoodArrivesPrompt:
+        //        chosenDiag = GetOldestDialogue(woodArrivesPrompts);
+        //        break;
 
-            case DialogueType.LightDropPrompt:
-                chosenDiag = GetOldestDialogue(lightDropPrompts);
-                break;
+        //    case DialogueType.LightDropPrompt:
+        //        chosenDiag = GetOldestDialogue(lightDropPrompts);
+        //        break;
 
-            case DialogueType.LightBoostPrompt:
-                chosenDiag = GetOldestDialogue(lightBoostPrompts);
-                break;
+        //    case DialogueType.LightBoostPrompt:
+        //        chosenDiag = GetOldestDialogue(lightBoostPrompts);
+        //        break;
 
-            case DialogueType.DarknessPrompt:
-                chosenDiag = GetOldestDialogue(darknessPrompts);
-                break;
+        //    case DialogueType.DarknessPrompt:
+        //        chosenDiag = GetOldestDialogue(darknessPrompts);
+        //        break;
 
-            case DialogueType.PositiveReaction:
-                chosenDiag = GetOldestDialogue(positiveReactions);
-                break;
+        //    case DialogueType.PositiveReaction:
+        //        chosenDiag = GetOldestDialogue(positiveReactions);
+        //        break;
 
-            case DialogueType.NegativeReation:
-                chosenDiag = GetOldestDialogue(negativeReations);
-                break;
+        //    case DialogueType.NegativeReation:
+        //        chosenDiag = GetOldestDialogue(negativeReations);
+        //        break;
 
-            case DialogueType.MissionStart:
-                chosenDiag = GetOldestDialogue(missionStartPrompts);
-                break;
+        //    case DialogueType.MissionStart:
+        //        chosenDiag = GetOldestDialogue(missionStartPrompts);
+        //        break;
 
-            case DialogueType.MissionFail:
-                chosenDiag = GetOldestDialogue(missionFailPrompts);
-                break;
+        //    case DialogueType.MissionFail:
+        //        chosenDiag = GetOldestDialogue(missionFailPrompts);
+        //        break;
 
-            case DialogueType.MissionSuceed:
-                chosenDiag = GetOldestDialogue(missionSuceedPrompts);
-                break;
+        //    case DialogueType.MissionSuceed:
+        //        chosenDiag = GetOldestDialogue(missionSuceedPrompts);
+        //        break;
 
-            default:
-                chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
-                break;
-
+        //    default:
+        //        chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
+        //        break;
 
 
-        }
+
+        //}
 
         return chosenDiag;
     }
@@ -164,6 +171,25 @@ public class Character : MonoBehaviour {
         float oldestTime = 0;
 
         foreach (Dialogue diag in source)
+        {
+            if (diag.deadTime > oldestTime)
+            {
+                oldestTime = diag.deadTime;
+                toReturn = diag;
+
+                toReturn.deadTime = 0;
+            }
+        }
+
+        return toReturn;
+    }
+
+    DialogueStory GetOldestStory(List<DialogueStory> source)
+    {
+        DialogueStory toReturn = source[0];
+        float oldestTime = 0;
+
+        foreach (DialogueStory diag in source)
         {
             if (diag.deadTime > oldestTime)
             {
