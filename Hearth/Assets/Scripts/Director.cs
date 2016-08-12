@@ -61,11 +61,11 @@ public class Director : MonoBehaviour {
     [Range(0,100)]
     public float moraleLevel;
 
-    WorldState currState;
+    public WorldState currState;
     WorldState lastState;
 
 
-    public bool woodOrdered = false;
+    //public bool woodOrdered = false;
 
 	// Use this for initialization
 	void Start () {
@@ -73,7 +73,7 @@ public class Director : MonoBehaviour {
         //currSpawnInterval = 1;
         currTimeout = 0;
         stateChanged = false;
-        canSpeak = true;
+        canSpeak = false;
         
 
         LoadCharacters();
@@ -112,23 +112,27 @@ public class Director : MonoBehaviour {
         {
             case WorldState.NeedWood:
                 Debug.Log("Wood Requested");
-                OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
-
-                woodOrdered = true;
+                            
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
                 
                 UpdateWorldState(WorldState.SpeakDialogue, true);
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
-                
+
                 break;
 
             case WorldState.SpeakDialogue:
+                canSpeak = true;
+                break;
+
+            case WorldState.SpeakStory:
+                canSpeak = true;
                 break;
 
             default:
-                currState = WorldState.Idle;
+                UpdateWorldState(WorldState.Idle, true);
                 Debug.Log("invalid state");
                 break;
 
@@ -157,6 +161,11 @@ public class Director : MonoBehaviour {
         {
             Debug.Log("Blocked state change");
         }
+
+        if(isCritical == true)
+        {
+            stateChanged = false;
+        }
         
     }
 
@@ -183,9 +192,10 @@ public class Director : MonoBehaviour {
 
     void CheckWood()
     {
-        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false && woodPile.woodToAdd == 0 && currState != WorldState.NeedWood)
+        if(woodPile.woodCount <= getWoodThreshold && woodPile.woodToAdd == 0 && currState != WorldState.NeedWood)
         {
-            UpdateWorldState(WorldState.NeedWood);            
+            UpdateWorldState(WorldState.NeedWood, true);
+            Debug.Log("wood ordered");
         }
     }
 

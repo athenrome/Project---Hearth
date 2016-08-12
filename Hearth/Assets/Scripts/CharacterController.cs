@@ -160,27 +160,31 @@ public class CharacterController : MonoBehaviour {
 
     public void Speak(DialogueType toSpeak)
     {
-        Debug.Log("Start Speaking");
+
 
 
         if (director.canSpeak == true)//if none else is speaking
         {
+            Debug.Log("Start Speaking");
             director.canSpeak = false;
 
-            currOrder = CharacterOrders.Speak;
+            
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
             {
                 DialogueStory targetStory = character.ChooseStory(toSpeak);
                 diagWin.WriteStory(targetStory);
+
+                currOrder = CharacterOrders.Speak;
             }
             else
             {
                 
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
-
-
                 diagWin.WriteDialogue(targetDialogue);
+
+                currOrder = CharacterOrders.Speak;
+                
             }
         }
 
