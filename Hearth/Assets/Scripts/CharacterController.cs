@@ -160,7 +160,10 @@ public class CharacterController : MonoBehaviour {
 
     public void Speak(DialogueType toSpeak)
     {
-        if(director.canSpeak == true)//if none else is speaking
+        Debug.Log("Start Speaking");
+
+
+        if (director.canSpeak == true)//if none else is speaking
         {
             director.canSpeak = false;
 

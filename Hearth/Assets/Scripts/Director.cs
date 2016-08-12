@@ -97,20 +97,9 @@ public class Director : MonoBehaviour {
             CheckCharacterOrders();
         }
 
-
-        
-        if(currTimeout <= 0)
+        if(stateChanged == false)
         {
             CheckWorldState();
-
-            if(stateChanged == true)
-            {
-                currTimeout = stateTimeout;
-            }
-        }
-        else
-        {
-            currTimeout -= Time.deltaTime;
         }
         
 
@@ -155,6 +144,8 @@ public class Director : MonoBehaviour {
             stateChanged = true;
 
             currTimeout = stateTimeout;
+
+            Debug.Log("State Changed");
         }
         else
         {

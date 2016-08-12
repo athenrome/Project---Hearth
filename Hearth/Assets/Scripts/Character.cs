@@ -311,7 +311,7 @@ public class Character : MonoBehaviour {
 
         foreach (string text in data.GhostStory2Text)
         {
-            hope2Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+            ghost2Diag.Add(new Dialogue(text, DialogueType.GhostStory));
         }
 
         GhostStorys.Add(new DialogueStory(hope2Diag, DialogueType.GhostStory));
@@ -320,7 +320,7 @@ public class Character : MonoBehaviour {
 
         foreach (string text in data.GhostStory3Text)
         {
-            hope3Diag.Add(new Dialogue(text, DialogueType.GhostStory));
+            ghost3Diag.Add(new Dialogue(text, DialogueType.GhostStory));
         }
 
         GhostStorys.Add(new DialogueStory(hope3Diag, DialogueType.GhostStory));
