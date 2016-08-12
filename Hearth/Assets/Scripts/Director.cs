@@ -60,6 +60,7 @@ public class Director : MonoBehaviour {
 
     public float storyCooldown;//time since a story was told
     float currStoryCool;
+    bool storyLock; //if stories can be used
 
     [Range(0,100)]
     public float moraleLevel;
@@ -77,6 +78,7 @@ public class Director : MonoBehaviour {
         currTimeout = 0;
         stateChanged = false;
         canSpeak = false;
+        storyLock = false;
 
         currStoryCool = storyCooldown;
 
@@ -108,13 +110,18 @@ public class Director : MonoBehaviour {
         
         if(currStoryCool <= 0)
         {
+            storyLock = false;
+
             if(canChangeState == true)
             {
                 canSpeak = true;
                 UpdateWorldState(WorldState.SpeakStory, true);
                 Debug.Log("Story Time");
                 canChangeState = false;
+
             }
+
+            currStoryCool = storyCooldown;
             
         }
         else
@@ -132,7 +139,6 @@ public class Director : MonoBehaviour {
             case WorldState.NeedWood:
                 Debug.Log("Wood Requested");
 
-                canSpeak = true;
                 UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
@@ -150,34 +156,49 @@ public class Director : MonoBehaviour {
 
             case WorldState.SpeakStory:
 
-                int storyRoll = Random.Range(0, 100);
-
-                if(storyRoll >= storyChance)
+                if(storyLock == false)
                 {
+                    int storyRoll = Random.Range(0, 100);
 
-                    
-
-                    if (moraleLevel >= 50)
+                    if (storyRoll >= storyChance)
                     {
-                        OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakHope);//hope story
-                        Debug.Log("Hope story");
+
+                        if (moraleLevel >= 50)
+                        {
+                            OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakHope);//hope story
+                            Debug.Log("Hope story");
+                            storyLock = true;
+                        }
+                        else
+                        {
+                            OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakGhost);//ghost story
+                            Debug.Log("ghost story");
+                            storyLock = true;
+                        }
+
                     }
                     else
                     {
-                        OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakGhost);//ghost story
-                        Debug.Log("ghost story");
+                        Debug.Log("Failed story roll");
+                        storyLock = true;
                     }
-                }
-                else
-                {
-                    Debug.Log("Failed story roll");
-                }
+                }                
 
                 
                 break;
 
             case WorldState.Idle:
                 canChangeState = true;
+                break;
+
+            case WorldState.BurnUp:
+                UpdateWorldState(WorldState.SpeakDialogue, true);
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.LightBoostPrompt);
+                break;
+
+            case WorldState.BurnDown:
+                UpdateWorldState(WorldState.SpeakDialogue, true);
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.LightDropPrompt);
                 break;
 
             default:
@@ -227,6 +248,7 @@ public class Director : MonoBehaviour {
     void OrderCharacter(CharacterController character, CharacterOrders order)
     {
         character.ReceiveOrder(order);
+        character.timeSinceLastAction = 0;//reset timer
 
         actionInProgress = true;
 
@@ -444,7 +466,9 @@ public enum WorldState //usedto trigger events
     LightUp,
     LightDrop,
     
-    
+    BurnUp,
+    BurnDown,
+
     FireEmbers,
     FireSmall,
     FireMed,
