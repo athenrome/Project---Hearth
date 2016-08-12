@@ -163,6 +163,144 @@ public class Director : MonoBehaviour {
 
     }
 
+    
+
+    void CheckFire()
+    {
+        unlockedPoints = firePit.fireSize;
+    }
+
+    void CheckWood()
+    {
+        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false)
+        {
+            UpdateWorldState(WorldState.NeedWood);            
+        }
+    }
+
+    void CheckCharacters()
+    {
+        foreach(CharacterController character in activeCharacters)//Update timesince last order
+        {
+            character.timeSinceLastAction += Time.deltaTime;
+        }
+
+    }
+
+    CharacterController GetActiveCharacter()
+    {
+        CharacterController foundCharacter = activeCharacters[0];
+        float score = 0;
+
+        foreach (CharacterController character in activeCharacters)
+        {
+            if (character.timeSinceLastAction > score)
+            {
+                foundCharacter = character;
+                score = character.timeSinceLastAction;
+            }
+        }
+
+
+
+
+        return foundCharacter;
+    }
+
+    void LoadCharacters()
+    {
+
+        survivor = new Character(survivorData);
+
+        foreach (CharacterData character in masterCharacterPool)
+        {
+            CharacterPool.Add(new Character(character));
+            Debug.Log("Loaded character: " + CharacterPool.Count + character.characterName);
+        }
+    }
+
+    public Character GetCharacter()
+    {
+        Character toReturn = survivor;
+
+        if(CharacterPool.Count > 0)
+        {
+            int index = Random.Range(0, CharacterPool.Count);
+
+            toReturn = CharacterPool[index];
+            CharacterPool.Remove(toReturn);
+        }
+
+        return toReturn;
+    }
+
+    //void SpawnCharacter()
+    //{
+    //    Waypoint spawnPoint = GetForestPoint();
+
+    //    characterCount++;
+
+    //    GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
+
+    //    CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
+
+    //    if (CharacterPool.Count > 0)
+    //    {
+    //        newChar.character = CharacterPool[0];//assign characer to new character choose the oldest cahracter
+
+    //        CharacterPool.Remove(newChar.character);//remove this character from circulation
+
+    //    }
+    //    else
+    //    {
+    //        newChar.character = survivor;
+
+    //    }
+
+    //    activeCharacters.Add(newChar);
+
+
+
+
+
+    //    Debug.Log("Spawned Character: " + newChar.character.charName);
+
+    //    newChar.MoveToPoint(FindFreeFireSpot());
+
+
+
+    //}
+
+
+
+    //public Waypoint GetForestPoint()
+    //{
+    //    return forestPoints[Random.Range(0, forestPoints.Count)];//choose a random point out of the forsest points
+    //}
+
+    //Waypoint FindFreeFireSpot()
+    //{
+    //    Waypoint freeSpot = availablePoints[0];
+
+    //    bool foundPoint = false;
+
+    //    for(int i = 0; i < unlockedPoints || foundPoint == false; i++)
+    //    {
+    //        if(availablePoints[i].locked == false)
+    //        {
+    //            freeSpot = availablePoints[i];
+    //            foundPoint = true;
+
+    //            Debug.Log("Found Point");
+    //        }
+
+
+    //    }
+
+
+    //    return freeSpot;
+    //}
+
     //void CheckForest()
     //{
     //    if(forestCharacters.Count > 0)
@@ -189,7 +327,7 @@ public class Director : MonoBehaviour {
     //                    Debug.Log("CHARACTER DEATH");
     //                }
 
-                    
+
     //            }
     //        }
 
@@ -209,7 +347,7 @@ public class Director : MonoBehaviour {
 
 
 
-        
+
 
     //    forestCharacters.Remove(newChar.character);
     //    activeCharacters.Add(newChar);
@@ -218,145 +356,7 @@ public class Director : MonoBehaviour {
 
     //    //after return actions
     //    newChar.MoveToPoint(woodPilePoint);
-        
-    //}
 
-    void CheckFire()
-    {
-        unlockedPoints = firePit.fireSize;
-    }
-
-    void CheckWood()
-    {
-        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false)
-        {
-            UpdateWorldState(WorldState.NeedWood);            
-        }
-    }
-
-    void CheckCharacters()
-    {
-        foreach(CharacterController character in activeCharacters)//Update timesince last order
-        {
-            character.timeSinceLastAction += Time.deltaTime;
-        }
-
-
-        //currSpawnInterval -= Time.deltaTime;
-
-        //if (currSpawnInterval <= 0)
-        //{
-        //    int spawnChooser = Random.Range(0, 100);
-
-        //    if (spawnChooser >= spawnChance)
-        //    {
-        //        if (characterCount < maxCharacters)
-        //        {
-        //            SpawnCharacter();
-        //        }
-
-        //    }
-
-        //    currSpawnInterval = spawnInterval;
-        //}       
-
-    }
-
-    //void SpawnCharacter()
-    //{
-    //    Waypoint spawnPoint = GetForestPoint();
-
-    //    characterCount++;
-
-    //    GameObject spawnedCharObj = GameObject.Instantiate(characterPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
-
-    //    CharacterController newChar = spawnedCharObj.GetComponent<CharacterController>();
-
-    //    if (CharacterPool.Count > 0)
-    //    {
-    //        newChar.character = CharacterPool[0];//assign characer to new character choose the oldest cahracter
-
-    //        CharacterPool.Remove(newChar.character);//remove this character from circulation
-
-    //    }
-    //    else
-    //    {
-    //        newChar.character = survivor;
-            
-    //    }
-
-    //    activeCharacters.Add(newChar);
-
-
-
-
-
-    //    Debug.Log("Spawned Character: " + newChar.character.charName);
-
-    //    newChar.MoveToPoint(FindFreeFireSpot());
-
-
-        
-    //}
-
-    CharacterController GetActiveCharacter()
-    {
-        CharacterController foundCharacter = activeCharacters[0];
-        float score = 0;
-
-        foreach(CharacterController character in activeCharacters)
-        {
-            if(character.timeSinceLastAction > score)
-            {
-                foundCharacter = character;
-                score = character.timeSinceLastAction;
-            }
-        }
-
-
-
-
-        return foundCharacter;
-    }
-
-    void LoadCharacters()
-    {
-
-        survivor = new Character(survivorData);
-
-        foreach (CharacterData character in masterCharacterPool)
-        {
-            CharacterPool.Add(new Character(character));
-            Debug.Log("Loaded character: " + CharacterPool.Count + character.characterName);
-        }
-    }
-
-    //public Waypoint GetForestPoint()
-    //{
-    //    return forestPoints[Random.Range(0, forestPoints.Count)];//choose a random point out of the forsest points
-    //}
-
-    //Waypoint FindFreeFireSpot()
-    //{
-    //    Waypoint freeSpot = availablePoints[0];
-
-    //    bool foundPoint = false;
-
-    //    for(int i = 0; i < unlockedPoints || foundPoint == false; i++)
-    //    {
-    //        if(availablePoints[i].locked == false)
-    //        {
-    //            freeSpot = availablePoints[i];
-    //            foundPoint = true;
-                
-    //            Debug.Log("Found Point");
-    //        }
-
-            
-    //    }
-
-
-    //    return freeSpot;
     //}
 }
 
