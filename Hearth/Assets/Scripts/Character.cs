@@ -101,7 +101,7 @@ public class Character : MonoBehaviour {
 
     public Dialogue ChooseDialogue(DialogueType _type)
     {
-        Dialogue chosenDiag = new Dialogue("default", DialogueType.Dummy);
+        Dialogue chosenDiag;// = new Dialogue("default", DialogueType.Dummy);
 
         switch(_type)
         {        
