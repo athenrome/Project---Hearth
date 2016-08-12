@@ -26,7 +26,7 @@ public class Waypoint : MonoBehaviour {
 public enum PointType
 {
     FirepitSlot,
-    EntryPoint,
+    SpawnPoint,
     ForestPoint,
     WoodPile,
 }

@@ -29,68 +29,64 @@ public class CharacterController : MonoBehaviour {
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
 
+        Speak(DialogueType.MissionStart);
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (moving == true)
-        {
+        //if (moving == true)
+        //{
             
-            float distCovered = (Time.time - startTime) * moveSpeed;
-            float fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
-        }
+        //    float distCovered = (Time.time - startTime) * moveSpeed;
+        //    float fracJourney = distCovered / journeyLength;
+        //    transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
+        //}
 
-        if (moving == true && NearLocation(waypointTarget) == true)//have i reached the target
-        {
+        //if (moving == true && NearLocation(waypointTarget) == true)//have i reached the target
+        //{
 
-            reachedDest = true;
+        //    reachedDest = true;
 
-            waypointTarget.locked = true;
-            currOrder = CharacterOrders.Idle;
-            ArriveAtPoint();
-        }
+        //    waypointTarget.locked = true;
+        //    currOrder = CharacterOrders.Idle;
+        //    ArriveAtPoint();
+        //}
 
 
 
        
 
-        if(currOrder == CharacterOrders.Idle)
-        {
-            timeSinceLastAction += Time.deltaTime;
-        }
+        //if(currOrder == CharacterOrders.Idle)
+        //{
+        //    timeSinceLastAction += Time.deltaTime;
+        //}
 
 
     }
 
-    void StartMove()
-    {
-        Debug.Log("Starting Movment");
+    //void StartMove()
+    //{
+    //    Debug.Log("Starting Movment");
 
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(this.transform.position, waypointTarget.transform.position);
+    //    startTime = Time.time;
+    //    journeyLength = Vector3.Distance(this.transform.position, waypointTarget.transform.position);
 
 
-        moving = true;
-        reachedDest = false;
-        waypointTarget.locked = true;
-    }
+    //    moving = true;
+    //    reachedDest = false;
+    //    waypointTarget.locked = true;
+    //}
 
     public void ReceiveOrder(CharacterOrders _order)
     {
         switch(_order)
         {
-            //case CharacterOrders.GetWood:
-            //    waypointTarget = director.GetForestPoint();
-            //    MoveToPoint(waypointTarget);
+            case CharacterOrders.RequestWood:
+                Speak(DialogueType.NeedWoodPrompt);
 
-            //    currOrder = CharacterOrders.GetWood;
-            //    Debug.Log("Get Wood");
-
-            //    break;
-
-                
+                break;              
 
             default:
                 Debug.Log("Invalid order");
@@ -101,17 +97,17 @@ public class CharacterController : MonoBehaviour {
         
     }
 
-    public void MoveToPoint(Waypoint _point)
-    {
-        waypointTarget = _point;
-        Debug.Log("Move to Point");
-        StartMove();
+    //public void MoveToPoint(Waypoint _point)
+    //{
+    //    waypointTarget = _point;
+    //    Debug.Log("Move to Point");
+    //    StartMove();
 
         
-    }
+    //}
 
-    public void ArriveAtPoint()
-    {
+    //public void ArriveAtPoint()
+    //{
         //reachedDest = true;
 
         //if(NearLocation(waypointTarget) == true && currOrder == CharacterOrders.GetWood == true)
@@ -139,22 +135,22 @@ public class CharacterController : MonoBehaviour {
             
         //    }
         //}
-    }
+    //}
 
-    bool NearLocation(Waypoint targetPoint)
-    {
-        bool result = false;
+    //bool NearLocation(Waypoint targetPoint)
+    //{
+    //    bool result = false;
 
-        float acceptableDrift = 0.5f;//error distance
+    //    float acceptableDrift = 0.5f;//error distance
 
-        if(Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift || Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift)
-        {
-            //Debug.Log("At Point");
-            result = true;
-        }
+    //    if(Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift || Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift)
+    //    {
+    //        //Debug.Log("At Point");
+    //        result = true;
+    //    }
 
-        return result;
-    }
+    //    return result;
+    //}
 
     public void Speak(DialogueType toSpeak)
     {
@@ -181,6 +177,7 @@ public enum CharacterOrders
     //StartMove,
     //Move,
 
+    RequestWood,
     InForest,
     GetWood,
     WoodToPile,    
