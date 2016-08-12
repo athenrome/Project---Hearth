@@ -111,7 +111,7 @@ public class Director : MonoBehaviour {
             if(canChangeState == true)
             {
                 canSpeak = true;
-                UpdateWorldState(WorldState.SpeakStory, false);
+                UpdateWorldState(WorldState.SpeakStory, true);
                 Debug.Log("Story Time");
                 canChangeState = false;
             }
