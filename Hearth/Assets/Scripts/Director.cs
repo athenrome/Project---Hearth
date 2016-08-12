@@ -404,7 +404,8 @@ public enum WorldState //usedto trigger events
     GameStart,
     GameEnd,
 
-    Speaking,
+    SpeakDialogue,
+    SpeakStory,
 
     Idle,
 
