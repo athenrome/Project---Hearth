@@ -169,7 +169,7 @@ public class CharacterController : MonoBehaviour {
             Debug.Log("Start Speaking");
             director.canSpeak = false;
 
-            toSpeak = DialogueType.HopefulStory;//TESTING   
+           
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
             {

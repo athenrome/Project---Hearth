@@ -119,7 +119,6 @@ public class Character : MonoBehaviour {
         {
 
             case DialogueType.NeedWoodPrompt:
-                Debug.Log("12");
                 chosenDiag = GetOldestDialogue(needWoodPrompts);
 
                 break;
@@ -222,55 +221,55 @@ public class Character : MonoBehaviour {
         foreach (string text in data.woodArrivesPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.WoodArrivesPrompt);
-            needWoodPrompts.Add(newDialogue);
+            woodArrivesPrompts.Add(newDialogue);
         }
 
         foreach (string text in data.lightDropPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.LightDropPrompt);
-            needWoodPrompts.Add(newDialogue);
+            lightDropPrompts.Add(newDialogue);
         }
 
         foreach (string text in data.lightBoostPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.LightBoostPrompt);
-            needWoodPrompts.Add(newDialogue);
+            lightBoostPrompts.Add(newDialogue);
         }
 
         foreach (string text in data.darknessPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.DarknessPrompt);
-            needWoodPrompts.Add(newDialogue);
+            darknessPrompts.Add(newDialogue);
         }
 
         foreach (string text in data.positiveReactionsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.PositiveReaction);
-            needWoodPrompts.Add(newDialogue);
+            positiveReactions.Add(newDialogue);
         }
 
         foreach (string text in data.negativeReationsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.NegativeReation);
-            needWoodPrompts.Add(newDialogue);
+            negativeReations.Add(newDialogue);
         }
 
         foreach (string text in data.missionStartPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.MissionStart);
-            needWoodPrompts.Add(newDialogue);
+            missionStartPrompts.Add(newDialogue);
         }
 
         foreach (string text in data.missionFailPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.MissionFail);
-            needWoodPrompts.Add(newDialogue);
+            missionFailPrompts.Add(newDialogue);
         }
 
         foreach (string text in data.missionSuceedPromptsText)
         {
             Dialogue newDialogue = new Dialogue(text, DialogueType.MissionSuceed);
-            needWoodPrompts.Add(newDialogue);
+            missionSuceedPrompts.Add(newDialogue);
         }
 
 
