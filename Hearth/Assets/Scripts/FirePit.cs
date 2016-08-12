@@ -53,10 +53,14 @@ public class FirePit : MonoBehaviour {
 
     void UpdateFire()
     {
-        foreach (Wood fireWood in woodInFire)
+        if(woodInFire.Count > 0)
         {
-            fireWood.BurnWood();
+            foreach (Wood fireWood in woodInFire)
+            {
+                fireWood.BurnWood();
+            }
         }
+
     }
 
     void UpdateFog()

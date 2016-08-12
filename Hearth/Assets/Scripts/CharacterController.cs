@@ -63,6 +63,12 @@ public class CharacterController : MonoBehaviour {
         //    timeSinceLastAction += Time.deltaTime;
         //}
 
+        if(diagWin.finished == true)
+        {
+            director.canSpeak = true;
+            diagWin.finished = false;
+        }
+
 
     }
 
@@ -85,7 +91,7 @@ public class CharacterController : MonoBehaviour {
         {
             case CharacterOrders.RequestWood:
                 Speak(DialogueType.NeedWoodPrompt);
-
+                Debug.Log("wood order");
                 break;              
 
             default:
@@ -154,6 +160,9 @@ public class CharacterController : MonoBehaviour {
 
     public void Speak(DialogueType toSpeak)
     {
+        if(director.canSpeak == true)//if none else is speaking
+        {
+            director.canSpeak = false;
 
             currOrder = CharacterOrders.Speak;
 
@@ -167,6 +176,8 @@ public class CharacterController : MonoBehaviour {
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
                 diagWin.WriteDialogue(targetDialogue);
             }
+        }
+
     }
 }
 

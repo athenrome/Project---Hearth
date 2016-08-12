@@ -20,19 +20,20 @@ public class DialogueWindow : MonoBehaviour {
 
     bool canWrite;
 
-    bool finished;
+    public bool finished;
     
 
     // Use this for initialization
     void Start () {
-
+        finished = false;
+        canWrite = false;
         diagText.text = "";//clear the text
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-        if(finished == false)
+        if(finished == false && toWrite.Count > 0)
         {
             if (canWrite == true)
             {
@@ -49,6 +50,7 @@ public class DialogueWindow : MonoBehaviour {
                     }
                 }
             }
+
 
             if (canWrite == false)
             {
@@ -82,6 +84,8 @@ public class DialogueWindow : MonoBehaviour {
                         canWrite = false;
                         finished = true;
                         toWrite[currDialogueLoc].deadTime = 0;
+
+                        
 
                     }
                 }

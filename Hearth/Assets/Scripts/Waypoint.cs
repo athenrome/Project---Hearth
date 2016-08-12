@@ -13,6 +13,7 @@ public class Waypoint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        locked = false;
         pos = this.transform.position;
 
     }

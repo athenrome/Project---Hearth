@@ -22,7 +22,7 @@ public class WoodPile : MonoBehaviour {
 
     
 
-    int woodToAdd;
+    public int woodToAdd;
     bool pileChanged = false;
 
 	// Use this for initialization
@@ -36,9 +36,9 @@ public class WoodPile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(woodToAdd > 0)
+        if (woodToAdd > 0)
         {
-            if(currTimeout <= 0)
+            if (currTimeout <= 0)
             {
                 SpawnPileLog();
                 currTimeout = woodSpawnTimeout;
@@ -50,7 +50,7 @@ public class WoodPile : MonoBehaviour {
         }
 
 
-	}
+    }
 
     public void RemoveWood()
     {

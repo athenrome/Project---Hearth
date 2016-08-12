@@ -27,7 +27,8 @@ public class Director : MonoBehaviour {
 
 
 
-    bool actionInProgress;
+    public bool actionInProgress;
+    public bool canSpeak;
 
 
 
@@ -126,6 +127,7 @@ public class Director : MonoBehaviour {
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
+                UpdateWorldState(WorldState.Idle);
                 break;
 
 
@@ -169,7 +171,7 @@ public class Director : MonoBehaviour {
 
     void CheckWood()
     {
-        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false)
+        if(woodPile.woodCount <= getWoodThreshold && woodOrdered == false && woodPile.woodToAdd == 0 && currState != WorldState.NeedWood)
         {
             UpdateWorldState(WorldState.NeedWood);            
         }
@@ -397,7 +399,7 @@ public enum WorldState //usedto trigger events
     HopefulStory,
     GhostStory,
 
-    Nothing,
+    Idle,
 
 
 }
