@@ -36,6 +36,7 @@ public class CharacterController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
         //if (moving == true)
         //{
             
@@ -162,14 +163,12 @@ public class CharacterController : MonoBehaviour {
     public void Speak(DialogueType toSpeak, bool forceSpeak)
     {
 
-
-
         if (director.canSpeak == true || forceSpeak == true)//if none else is speaking
         {
             Debug.Log("Start Speaking");
             director.canSpeak = false;
 
-            
+            toSpeak = DialogueType.HopefulStory;//TESTING   
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
             {
@@ -182,6 +181,7 @@ public class CharacterController : MonoBehaviour {
             {
                 Dialogue targetDialogue = character.ChooseDialogue(toSpeak);
                 diagWin.WriteDialogue(targetDialogue);
+
 
                 currOrder = CharacterOrders.Speak;
                 

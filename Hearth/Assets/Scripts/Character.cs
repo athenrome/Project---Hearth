@@ -39,6 +39,7 @@ public class Character : MonoBehaviour {
         charName = data.characterName;
 
         GetDialogueData();
+        GetStoryData();
     }
 
 	// Use this for initialization
@@ -51,8 +52,14 @@ public class Character : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        
+
+    }
+
+    public void UpdateCharacterDialogue()
+    {
         //UPDATE STORYS AND DIALOGUE
-        foreach (DialogueStory story in HopefulStorys) { story.UpdateStory();}
+        foreach (DialogueStory story in HopefulStorys) { story.UpdateStory(); }
         foreach (DialogueStory story in GhostStorys) { story.UpdateStory(); }
 
         foreach (Dialogue diag in needWoodPrompts) { diag.UpdateDialogue(); }
@@ -69,7 +76,6 @@ public class Character : MonoBehaviour {
         foreach (Dialogue diag in missionStartPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in missionFailPrompts) { diag.UpdateDialogue(); }
         foreach (Dialogue diag in missionSuceedPrompts) { diag.UpdateDialogue(); }
-
     }
 
     
@@ -109,58 +115,58 @@ public class Character : MonoBehaviour {
 
 
 
-        //switch (_type)
-        //{        
+        switch (_type)
+        {
 
-        //    case DialogueType.NeedWoodPrompt:
-        //        Debug.Log("12");
-        //        chosenDiag = GetOldestDialogue(needWoodPrompts);
-                
-        //        break;
+            case DialogueType.NeedWoodPrompt:
+                Debug.Log("12");
+                chosenDiag = GetOldestDialogue(needWoodPrompts);
 
-        //    case DialogueType.WoodArrivesPrompt:
-        //        chosenDiag = GetOldestDialogue(woodArrivesPrompts);
-        //        break;
+                break;
 
-        //    case DialogueType.LightDropPrompt:
-        //        chosenDiag = GetOldestDialogue(lightDropPrompts);
-        //        break;
+            case DialogueType.WoodArrivesPrompt:
+                chosenDiag = GetOldestDialogue(woodArrivesPrompts);
+                break;
 
-        //    case DialogueType.LightBoostPrompt:
-        //        chosenDiag = GetOldestDialogue(lightBoostPrompts);
-        //        break;
+            case DialogueType.LightDropPrompt:
+                chosenDiag = GetOldestDialogue(lightDropPrompts);
+                break;
 
-        //    case DialogueType.DarknessPrompt:
-        //        chosenDiag = GetOldestDialogue(darknessPrompts);
-        //        break;
+            case DialogueType.LightBoostPrompt:
+                chosenDiag = GetOldestDialogue(lightBoostPrompts);
+                break;
 
-        //    case DialogueType.PositiveReaction:
-        //        chosenDiag = GetOldestDialogue(positiveReactions);
-        //        break;
+            case DialogueType.DarknessPrompt:
+                chosenDiag = GetOldestDialogue(darknessPrompts);
+                break;
 
-        //    case DialogueType.NegativeReation:
-        //        chosenDiag = GetOldestDialogue(negativeReations);
-        //        break;
+            case DialogueType.PositiveReaction:
+                chosenDiag = GetOldestDialogue(positiveReactions);
+                break;
 
-        //    case DialogueType.MissionStart:
-        //        chosenDiag = GetOldestDialogue(missionStartPrompts);
-        //        break;
+            case DialogueType.NegativeReation:
+                chosenDiag = GetOldestDialogue(negativeReations);
+                break;
 
-        //    case DialogueType.MissionFail:
-        //        chosenDiag = GetOldestDialogue(missionFailPrompts);
-        //        break;
+            case DialogueType.MissionStart:
+                chosenDiag = GetOldestDialogue(missionStartPrompts);
+                break;
 
-        //    case DialogueType.MissionSuceed:
-        //        chosenDiag = GetOldestDialogue(missionSuceedPrompts);
-        //        break;
+            case DialogueType.MissionFail:
+                chosenDiag = GetOldestDialogue(missionFailPrompts);
+                break;
 
-        //    default:
-        //        chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
-        //        break;
+            case DialogueType.MissionSuceed:
+                chosenDiag = GetOldestDialogue(missionSuceedPrompts);
+                break;
+
+            default:
+                chosenDiag = new Dialogue("im a dummy value", DialogueType.Dummy);
+                break;
 
 
 
-        //}
+        }
 
         return chosenDiag;
     }
