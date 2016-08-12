@@ -129,9 +129,12 @@ public class Director : MonoBehaviour {
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
-                UpdateWorldState(WorldState.Idle);
+                UpdateWorldState(WorldState.Speaking);
 
                 
+                break;
+
+            case WorldState.Speaking:
                 break;
 
 
