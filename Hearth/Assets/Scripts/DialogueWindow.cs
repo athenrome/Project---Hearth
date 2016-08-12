@@ -59,6 +59,9 @@ public class DialogueWindow : MonoBehaviour {
                     currLine++;
                     if (currLine <= toWrite.Count)//is there another line
                     {
+                        diagText.text = "";//clear text
+                        currText = "";
+
                         finishedLine = false;//keep writing
                     }
                     else//nothing more to write
