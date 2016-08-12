@@ -25,6 +25,8 @@ public class CharacterController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        timeSinceLastAction = Random.Range(0, 100);//mix up who goes first to prevent the same person from always talking first
+
         //currOrder = CharacterOrders.Idle;
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
@@ -36,10 +38,11 @@ public class CharacterController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        timeSinceLastAction += Time.deltaTime;//increase character idle time
 
         //if (moving == true)
         //{
-            
+
         //    float distCovered = (Time.time - startTime) * moveSpeed;
         //    float fracJourney = distCovered / journeyLength;
         //    transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
@@ -57,14 +60,12 @@ public class CharacterController : MonoBehaviour {
 
 
 
-       
 
-        //if(currOrder == CharacterOrders.Idle)
-        //{
-        //    timeSinceLastAction += Time.deltaTime;
-        //}
 
-        if(diagWin.finished == true)
+
+
+
+        if (diagWin.finished == true)
         {
             director.canSpeak = true;
             diagWin.finished = false;

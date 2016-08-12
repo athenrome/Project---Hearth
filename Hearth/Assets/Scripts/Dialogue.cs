@@ -16,7 +16,7 @@ public class Dialogue : MonoBehaviour {
         type = _type;
 
         length = text.Length;
-        deadTime = Random.Range(0,3);
+        deadTime = Random.Range(0, 100); //randomise to miss up speak order
     }
 
     public void UpdateDialogue()
