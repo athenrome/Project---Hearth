@@ -9,30 +9,20 @@ public class Tree : MonoBehaviour {
     public float scaleMod;
 
     // Use this for initialization
-    void Start ()
+    [ContextMenu("DoIt")]
+    void RotateAndScale ()
     {
         scaleMod = Random.Range(0.5f, 1.0f);
-        scaleX += scaleMod;
-        scaleY += scaleMod;
-        scaleZ += scaleMod;
-        ScaleTree();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	    
-	}
-
-    public void ScaleTree ()
-    {
-        transform.localScale=new Vector3(scaleX, scaleY, scaleZ);
+        var lsx = scaleX + scaleMod;
+        var lsy = scaleY + scaleMod;
+        var lsz = scaleZ + scaleMod;
+        transform.localScale = new Vector3(lsx, lsy, lsz);
         transform.eulerAngles = new Vector3(-90.0f, Random.Range(0.0f, 360.0f), 0.0f);
-        //Bounds b = transform.GetComponent<Collider>().GetComponent<Bounds>();
-        //float offset = b.min.z*scale;
-        //Vector3 pos = transform.position;
-        //pos.y = offset;
-        //ransform.position = pos;
+        //ScaleTree();
 
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this.gameObject);
+#endif
     }
+
 }
