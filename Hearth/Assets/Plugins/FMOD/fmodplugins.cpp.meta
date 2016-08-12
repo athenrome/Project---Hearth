@@ -8,8 +8,12 @@ PluginImporter:
   executionOrder: {}
   isPreloaded: 0
   platformData:
-    Any:
+    Android:
       enabled: 0
+      settings:
+        CPU: AnyCPU
+    Any:
+      enabled: 1
       settings: {}
     Editor:
       enabled: 0
