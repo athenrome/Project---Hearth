@@ -15,6 +15,7 @@ public class CharacterController : MonoBehaviour {
 
     Waypoint waypointTarget;
 
+    bool moving = false;
 
     public float moveSpeed;
     float startTime;
@@ -32,22 +33,8 @@ public class CharacterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       
 
-        if (currOrder == CharacterOrders.StartMove)
-        {
-            Debug.Log("Starting Movment");
-
-            startTime = Time.time;
-            journeyLength = Vector3.Distance(this.transform.position, waypointTarget.transform.position);
-
-
-            currOrder = CharacterOrders.Move;
-            reachedDest = false;
-            waypointTarget.locked = true;
-        }
-
-        if (currOrder == CharacterOrders.Move)
+        if (moving == true)
         {
             
             float distCovered = (Time.time - startTime) * moveSpeed;
@@ -55,7 +42,7 @@ public class CharacterController : MonoBehaviour {
             transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
         }
 
-        if (currOrder == CharacterOrders.Move && NearLocation(waypointTarget) == true)//have i reached the target
+        if (moving == true && NearLocation(waypointTarget) == true)//have i reached the target
         {
 
             reachedDest = true;
@@ -77,16 +64,33 @@ public class CharacterController : MonoBehaviour {
 
     }
 
+    void StartMove()
+    {
+        Debug.Log("Starting Movment");
+
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(this.transform.position, waypointTarget.transform.position);
+
+
+        moving = true;
+        reachedDest = false;
+        waypointTarget.locked = true;
+    }
+
     public void ReceiveOrder(CharacterOrders _order)
     {
         switch(_order)
         {
             case CharacterOrders.GetWood:
-                waypointTarget = director.forestPoint;
-                currOrder = CharacterOrders.StartMove;
+                waypointTarget = director.GetForestPoint();
+                MoveToPoint(waypointTarget);
+
+                currOrder = CharacterOrders.GetWood;
                 Debug.Log("Get Wood");
 
                 break;
+
+                
 
             default:
                 Debug.Log("Invalid order");
@@ -101,19 +105,16 @@ public class CharacterController : MonoBehaviour {
     {
         waypointTarget = _point;
         Debug.Log("Move to Point");
-        currOrder = CharacterOrders.StartMove;
+        StartMove();
 
         
     }
 
     public void ArriveAtPoint()
     {
-        //Testing     Speak(DialogueType.GhostStory);
         reachedDest = true;
 
-
-
-        if(NearLocation(director.forestPoint) == true)
+        if(NearLocation(waypointTarget) == true && currOrder == CharacterOrders.GetWood == true)
         {
             Debug.Log("Character entred forest");
 
@@ -125,13 +126,17 @@ public class CharacterController : MonoBehaviour {
 
         }
 
-        if(NearLocation(director.woodPilePoint))
+        if(NearLocation(director.woodPilePoint) && character.carryWood > 0)
         {
             if(character.carryWood > 0)
             {
                 Debug.Log("Place Wood");
                 director.woodPile.AddWood(character.carryWood);
                 character.carryWood = 0;
+
+                //return back to starting pos
+
+            
             }
         }
     }
@@ -144,7 +149,7 @@ public class CharacterController : MonoBehaviour {
 
         if(Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift || Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift)
         {
-            Debug.Log("At Point");
+            //Debug.Log("At Point");
             result = true;
         }
 
@@ -173,8 +178,8 @@ public enum CharacterOrders
 {
     Idle,
     Speak,
-    StartMove,
-    Move,
+    //StartMove,
+    //Move,
 
     InForest,
     GetWood,

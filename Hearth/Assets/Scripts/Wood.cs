@@ -12,6 +12,8 @@ public class Wood : MonoBehaviour {
 
     FirePit pit;
 
+    bool locked;
+
     public bool burning;
 
     bool inFirepit;
@@ -21,11 +23,13 @@ public class Wood : MonoBehaviour {
     public float burnTime; //time it takes for a single piece of fuel to be consumed
     float currBurnTime;
 
-    
 
     // Use this for initialization
     void Start()
     {
+
+
+        selected = false;
         FirePit pit = FindObjectOfType<FirePit>();
     }
 
@@ -65,12 +69,9 @@ public class Wood : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        //Debug.Log("Exited pit");
+        Debug.Log("Exited pit");
     }
     //END FIREPIT
-
-
-
 
 
     //START WOOD DRAGGING
@@ -79,6 +80,8 @@ public class Wood : MonoBehaviour {
         camPos = Camera.main.WorldToScreenPoint(transform.position);
         posX = Input.mousePosition.x - camPos.x;
         posY = Input.mousePosition.y - camPos.y;//1 - camPos.y;
+        Debug.Log("Picked up wood");
+        selected = true;
 
 
 

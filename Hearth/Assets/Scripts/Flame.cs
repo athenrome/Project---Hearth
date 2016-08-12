@@ -7,9 +7,9 @@ public class Flame : MonoBehaviour {
     public float maxLevel;
 
     public Light lightSource;
-    
-    
 
+    public ParticleSystem fireParticles;
+    
     [Range(0f, 100f)]
     public float intensity; //flame intesity target
 
