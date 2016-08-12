@@ -32,6 +32,8 @@ public class Director : MonoBehaviour {
     public bool canSpeak;
 
 
+    [Range(0, 100)]
+    public float storyChance;
 
     int characterCount = 0;
     int maxCharacters;  
@@ -52,11 +54,12 @@ public class Director : MonoBehaviour {
     //public float deathChance;
 
     //public int unlockedPoints;//avalable point indexes
-    
+
     //public float spawnInterval;
     //float currSpawnInterval;
 
-    
+    public float storyCooldown;//time since a story was told
+    float currStoryCool;
 
     [Range(0,100)]
     public float moraleLevel;
@@ -74,7 +77,8 @@ public class Director : MonoBehaviour {
         currTimeout = 0;
         stateChanged = false;
         canSpeak = false;
-        
+
+        currStoryCool = storyCooldown;
 
         LoadCharacters();
 
@@ -102,6 +106,21 @@ public class Director : MonoBehaviour {
             CheckWorldState();
         }
         
+        if(currStoryCool <= 0)
+        {
+            if(canChangeState == true)
+            {
+                canSpeak = true;
+                UpdateWorldState(WorldState.SpeakStory, true);
+                Debug.Log("Story Time");
+                canChangeState = false;
+            }
+            
+        }
+        else
+        {
+            currStoryCool -= Time.deltaTime;
+        }
 
         
     }
@@ -118,7 +137,7 @@ public class Director : MonoBehaviour {
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
-                
+                canSpeak = false;
                 
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
@@ -130,10 +149,35 @@ public class Director : MonoBehaviour {
                 break;
 
             case WorldState.SpeakStory:
-                canSpeak = true;
+
+                int storyRoll = Random.Range(0, 100);
+
+                if(storyRoll >= storyChance)
+                {
+
+                    
+
+                    if (moraleLevel >= 50)
+                    {
+                        OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakHope);//hope story
+                        Debug.Log("Hope story");
+                    }
+                    else
+                    {
+                        OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakGhost);//ghost story
+                        Debug.Log("ghost story");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Failed story roll");
+                }
+
+                
                 break;
 
             case WorldState.Idle:
+                canChangeState = true;
                 break;
 
             default:
