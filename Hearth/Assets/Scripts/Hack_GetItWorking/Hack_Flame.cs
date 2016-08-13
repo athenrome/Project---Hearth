@@ -48,7 +48,7 @@ public class Hack_Flame : MonoBehaviour {
     */
     void IntensityModifier()
     {
-        intensity -= (Time.deltaTime / 2);
+        intensity = (Time.deltaTime / 2);
 
         if (lightSource.intensity < intensity)
         {

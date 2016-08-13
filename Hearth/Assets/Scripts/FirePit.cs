@@ -4,11 +4,7 @@ using System.Collections.Generic;
 public class FirePit : MonoBehaviour {
 
     public Flame centralFlame;
-<<<<<<< HEAD
 
-    //public Flame centralFlame;
-=======
->>>>>>> 05d2ecd3f8db77f4f77d4930db7b7e306bed1ce0
     public List<Wood> woodInFire;
 
     public int fireSize;

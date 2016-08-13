@@ -9,19 +9,17 @@ public class LightFlicker : MonoBehaviour {
     //private float prevFlickerAmount;
     //public float flickerPercentage = 0.1f;
     public float targetIntensity = 1;
-<<<<<<< HEAD:Hearth/Assets/Scripts/Hack_GetItWorking/LightFlicker.cs
+
     public Flame flame;
-=======
->>>>>>> 05d2ecd3f8db77f4f77d4930db7b7e306bed1ce0:Hearth/Assets/Scripts/LightFlicker.cs
+
 
 
 	// Use this for initialization
 	void Start ()
     {
-<<<<<<< HEAD:Hearth/Assets/Scripts/Hack_GetItWorking/LightFlicker.cs
+
         flame = FindObjectOfType<Flame>();
-=======
->>>>>>> 05d2ecd3f8db77f4f77d4930db7b7e306bed1ce0:Hearth/Assets/Scripts/LightFlicker.cs
+
         myLight = GetComponent<Light>();
 	}
 	
