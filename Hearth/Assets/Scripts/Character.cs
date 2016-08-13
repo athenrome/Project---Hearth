@@ -40,6 +40,8 @@ public class Character : MonoBehaviour {
 
         GetDialogueData();
         GetStoryData();
+
+        Debug.Log("Created character: " + charName);
     }
 
 	// Use this for initialization

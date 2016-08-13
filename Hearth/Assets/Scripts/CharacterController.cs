@@ -5,6 +5,8 @@ public class CharacterController : MonoBehaviour {
 
     public DialogueWindow diagWin; // where character dialogue is presented
 
+    public CharacterData characterData;
+
     Director director;
 
     public Character character;
@@ -199,6 +201,11 @@ public class CharacterController : MonoBehaviour {
             Debug.Log("Speaking blocked");
         }
 
+    }
+
+    void LoadCharacterData()
+    {
+        character = new Character(characterData);
     }
 }
 
