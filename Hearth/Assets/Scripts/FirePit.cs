@@ -66,7 +66,6 @@ public class FirePit : MonoBehaviour {
                 //}
             }
         }
-
     }
 
     void UpdateFog()
