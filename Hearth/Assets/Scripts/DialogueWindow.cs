@@ -5,6 +5,9 @@ public class DialogueWindow : MonoBehaviour {
 
     public TextMesh diagText;
 
+    public GameObject textBox;
+ 
+
     List<Dialogue> toWrite = new List<Dialogue>();//the diaglogue to be written to screen
 
     string currText;
@@ -24,6 +27,9 @@ public class DialogueWindow : MonoBehaviour {
 
     public bool finished;
     bool stopped;
+
+    public float letterWidth;
+    public float letterHeight;
     
 
     // Use this for initialization
@@ -32,6 +38,8 @@ public class DialogueWindow : MonoBehaviour {
         finishedLine = false;
         stopped = false;
         diagText.text = "";//clear the text
+
+        textBox.SetActive(false);
         
 	}
 
@@ -83,22 +91,29 @@ public class DialogueWindow : MonoBehaviour {
 
         if(finished == true && stopped == false)//finish
         {
-            currText = "";
-            
-            diagText.text = currText;
-            
-            currLine = 0;
-            currLetter = 0;
-            stopped = true;
-            finished = true;
-
-            Debug.Log("Finish Writing");
+            FinishWriting();
         }
 
 
 
         
 	}
+
+    public void FinishWriting()
+    {
+        textBox.SetActive(false);
+
+        currText = "";
+
+        diagText.text = currText;
+
+        currLine = 0;
+        currLetter = 0;
+        stopped = true;
+        finished = true;
+
+        Debug.Log("Finish Writing");
+    }
 
     public void WriteStory(DialogueStory _toWrite)
     {
@@ -140,6 +155,8 @@ public class DialogueWindow : MonoBehaviour {
 
         diagText.text = currText;
 
+        UpdateTextbox();
+
         currLetter++;
 
         if(currLetter >= toWrite[currLine].length)
@@ -147,5 +164,20 @@ public class DialogueWindow : MonoBehaviour {
             finishedLine = true;
             currLifetime = lifeTime;
         }
+    }
+
+    void UpdateTextbox()
+    {
+        textBox.SetActive(true);
+
+        float boxX = 0;
+        float boxY = letterHeight;        
+
+        for(int i = 0; i < currLetter; i++)
+        {
+            boxX += letterWidth;
+        }
+
+        textBox.transform.localScale = new Vector3(boxX, boxY, 1);
     }
 }

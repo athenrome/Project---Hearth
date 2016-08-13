@@ -15,15 +15,6 @@ public class CharacterController : MonoBehaviour {
     CharacterOrders lastOrder;
     public float timeSinceLastAction;
 
-    Waypoint waypointTarget;
-
-    bool moving = false;
-
-    public float moveSpeed;
-    float startTime;
-    float journeyLength;
-    bool reachedDest;
-
 
     // Use this for initialization
     void Start () {
@@ -73,9 +64,7 @@ public class CharacterController : MonoBehaviour {
 
 
     }
-
-  
-
+    
     public void ReceiveOrder(CharacterOrders _order)
     {
         switch(_order)
