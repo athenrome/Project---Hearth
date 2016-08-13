@@ -97,4 +97,9 @@ public class Hack_Flame : MonoBehaviour {
 
     }
 
+    void fireSoundControl()
+    {
+
+    }
+
 }
