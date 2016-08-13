@@ -48,7 +48,7 @@ public class Hack_Flame : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
+        //Debug.Log(intensity);
         IntensityModifier();
         fireSoundControl();
 
@@ -104,7 +104,7 @@ public class Hack_Flame : MonoBehaviour {
             fire3.setValue(0);
             fire4.setValue(0);
 
-            Debug.Log("Fire 2 active");
+            //Debug.Log("Fire 2 active");
         }
 
         if (intensity > 3 && intensity < 5)
@@ -113,7 +113,7 @@ public class Hack_Flame : MonoBehaviour {
             fire3.setValue(1);
             fire4.setValue(0);
 
-            Debug.Log("Fire 3 active");
+            //Debug.Log("Fire 3 active");
         }
 
         if (intensity > 5)
@@ -122,7 +122,7 @@ public class Hack_Flame : MonoBehaviour {
             fire3.setValue(1);
             fire4.setValue(1);
 
-            Debug.Log("Fire is at max");
+            //Debug.Log("Fire is at max");
         }
 
         if (intensity > 100 /* Set this once we know the final requirements to finish the game. */)
