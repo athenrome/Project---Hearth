@@ -19,6 +19,13 @@ public class Hack_Flame : MonoBehaviour {
     public float maxBurnTime = 5;
     bool logActive = false;
 
+    [FMODUnity.EventRef]
+    public string fireSound = "event:/Fire/Fire";
+    FMOD.Studio.EventInstance fireStartEvent;
+    FMOD.Studio.ParameterInstance fire2;
+    FMOD.Studio.ParameterInstance fire3;
+    FMOD.Studio.ParameterInstance fire4;
+    FMOD.Studio.ParameterInstance Embers;
 
     //bool actionInProgress;
     //FlameAction currAction;
