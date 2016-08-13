@@ -6,7 +6,10 @@ public class AudioExample : MonoBehaviour {
     [FMODUnity.EventRef]
     public string atmoSound = "event:/Atmos/Atmos";
     public string textTypeSound = "event:/Player/Speech_Bubble";
-    FMOD.Studio.EventInstance TalkStartEvent;
+    public string fireSound = "event:/Fire/Fire";
+    FMOD.Studio.EventInstance fireBurnSound;
+    FMOD.Studio.ParameterInstance fireSizeSound;
+    FMOD.Studio.EventInstance talkStartEvent;
 
 
 
@@ -14,7 +17,8 @@ public class AudioExample : MonoBehaviour {
 	void Start ()
     {
         FMODUnity.RuntimeManager.PlayOneShot(atmoSound);
-        TalkStartEvent = FMODUnity.RuntimeManager.CreateInstance(textTypeSound);
+        fireBurnSound = FMODUnity.RuntimeManager.CreateInstance(fireSound);
+        talkStartEvent = FMODUnity.RuntimeManager.CreateInstance(textTypeSound);
 
     }
 	
