@@ -36,7 +36,7 @@ public class Hack_Flame : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        StokeFire();
+
         IntensityModifier();
         //RangeModifier();
     }
@@ -90,18 +90,11 @@ public class Hack_Flame : MonoBehaviour {
                                                             //Debug.Log("clamped");
     }
 
-    void StokeFire()
+    public void StokeFire()
     {
-        if (Input.GetKeyDown("space"))
-        {
-                                                            Debug.Log("add log");
-
             logActive = true;
             logBurnTime = maxBurnTime;
 
-                                                            Debug.Log("log added, time till burn = ");
-            
-        }
     }
 
 }

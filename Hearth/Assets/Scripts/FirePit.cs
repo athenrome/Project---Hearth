@@ -3,14 +3,11 @@ using System.Collections.Generic;
 
 public class FirePit : MonoBehaviour {
 
-    public Flame centralFlame;
+    public Hack_Flame centralFlame;
 
-    public List<Wood> woodInFire;
+    //public List<Wood> woodInFire;
 
-    public int fireSize;
-
-    public float adjustmentAmount;//how much the fire increases per unit of wood
-    public float fogadjustmentAmount;//how much the fog decreases per unit of wood added to the fire
+    //public int fireSize;
 
     Director dir;
 
@@ -18,14 +15,14 @@ public class FirePit : MonoBehaviour {
     void Start ()
     {
         dir = FindObjectOfType<Director>();
-        fireSize = 1;
+        //fireSize = 1;
 
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        fireSize = Mathf.RoundToInt(centralFlame.intensity);
+        //fireSize = Mathf.RoundToInt(centralFlame.intensity);
 
         UpdateFire();
         
@@ -33,39 +30,28 @@ public class FirePit : MonoBehaviour {
 
     public void AddWood(Wood toAdd)
     {
-        woodInFire.Add(toAdd);
-        centralFlame.intensity += adjustmentAmount;
 
         Debug.Log("Fuel Fire");
         dir.woodPile.woodCount--;
 
-        fireSize++;
+        centralFlame.StokeFire();
+
+        //fireSize++;
         
     }
 
     public void RemoveWood()
     {
-        woodInFire.Remove(woodInFire[0]);//remove the oldest piece of wood in the fire
-        centralFlame.intensity -= adjustmentAmount;
+        //woodInFire.Remove(woodInFire[0]);//remove the oldest piece of wood in the fire
+        //centralFlame.intensity -= adjustmentAmount;
 
         Debug.Log("Wood Consumed");
-        fireSize--;       
+        //fireSize--;       
     }
 
     void UpdateFire()
     {
-        if(woodInFire.Count > 0)
-        {
-            foreach (Wood fireWood in woodInFire)
-            {
-                fireWood.BurnWood();
-
-                //if(fireWood.burnTime <= 0)
-                //{
-                //    RemoveWood();
-                //}
-            }
-        }
+        
     }
 
     void UpdateFog()
