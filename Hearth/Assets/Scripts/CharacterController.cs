@@ -56,11 +56,11 @@ public class CharacterController : MonoBehaviour {
 
 
 
-        if (diagWin.finished == true)
-        {
-            director.canSpeak = true;
-            diagWin.finished = false;
-        }
+        //if (diagWin.finished == true)
+        //{
+        //    director.canSpeak = true;
+        //    diagWin.finished = false;
+        //}
 
 
     }

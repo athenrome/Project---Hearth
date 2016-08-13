@@ -65,24 +65,24 @@ public class Director : MonoBehaviour {
         {
             CheckWorldState();
         }
-        
-        //if(currStoryCool <= 0)
+
+        //if (currStoryCool <= 0)
         //{
-        //    if(canChangeState == true)
+        //    if (canChangeState == true)
         //    {
         //        canSpeak = true;
         //        UpdateWorldState(WorldState.SpeakStory, true);
         //        Debug.Log("Story Time");
         //        canChangeState = false;
         //    }
-            
+
         //}
         //else
         //{
         //    currStoryCool -= Time.deltaTime;
         //}
 
-        
+
     }
 
     void CheckWorldState()
@@ -92,12 +92,10 @@ public class Director : MonoBehaviour {
             case WorldState.NeedWood:
                 Debug.Log("Wood Requested");
 
-                canSpeak = true;
                 UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
-                canSpeak = false;
                 
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
@@ -201,7 +199,7 @@ public class Director : MonoBehaviour {
 
     void CheckWood()
     {
-        if(woodPile.woodCount <= getWoodThreshold && woodPile.woodToAdd == 0 && currState != WorldState.NeedWood)
+        if(woodPile.woodCount <= getWoodThreshold && woodPile.woodToAdd == 0 && currState == WorldState.Idle)
         {
             UpdateWorldState(WorldState.NeedWood, true);
             Debug.Log("wood ordered");
