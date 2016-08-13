@@ -9,9 +9,7 @@ public class Director : MonoBehaviour {
     public List<CharacterController> activeCharacters;// = new List<CharacterController>();
 
     public int getWoodThreshold;//if wood is below this level send someone to get wood
-
-
-
+    
     public float stateTimeout;//time before a state can be changed again
     float currTimeout;
     bool stateChanged;//if the state has been changed
@@ -68,21 +66,21 @@ public class Director : MonoBehaviour {
             CheckWorldState();
         }
         
-        if(currStoryCool <= 0)
-        {
-            if(canChangeState == true)
-            {
-                canSpeak = true;
-                UpdateWorldState(WorldState.SpeakStory, true);
-                Debug.Log("Story Time");
-                canChangeState = false;
-            }
+        //if(currStoryCool <= 0)
+        //{
+        //    if(canChangeState == true)
+        //    {
+        //        canSpeak = true;
+        //        UpdateWorldState(WorldState.SpeakStory, true);
+        //        Debug.Log("Story Time");
+        //        canChangeState = false;
+        //    }
             
-        }
-        else
-        {
-            currStoryCool -= Time.deltaTime;
-        }
+        //}
+        //else
+        //{
+        //    currStoryCool -= Time.deltaTime;
+        //}
 
         
     }

@@ -27,14 +27,12 @@ public class CharacterController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        timeSinceLastAction = Random.Range(0, 100);//mix up who goes first to prevent the same person from always talking first
 
-        //currOrder = CharacterOrders.Idle;
-        //Speak(DialogueType.NeedWoodPrompt);//TESTING
+        timeSinceLastAction = Random.Range(0, 100);//mix up who goes first to prevent the same person from always talking first
         director = FindObjectOfType<Director>();
 
 
-        LoadCharacterData();
+        character = new Character(characterData);
     }
 	
 	// Update is called once per frame
@@ -76,18 +74,7 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    //void StartMove()
-    //{
-    //    Debug.Log("Starting Movment");
-
-    //    startTime = Time.time;
-    //    journeyLength = Vector3.Distance(this.transform.position, waypointTarget.transform.position);
-
-
-    //    moving = true;
-    //    reachedDest = false;
-    //    waypointTarget.locked = true;
-    //}
+  
 
     public void ReceiveOrder(CharacterOrders _order)
     {
@@ -116,60 +103,7 @@ public class CharacterController : MonoBehaviour {
         
     }
 
-    //public void MoveToPoint(Waypoint _point)
-    //{
-    //    waypointTarget = _point;
-    //    Debug.Log("Move to Point");
-    //    StartMove();
-
-        
-    //}
-
-    //public void ArriveAtPoint()
-    //{
-        //reachedDest = true;
-
-        //if(NearLocation(waypointTarget) == true && currOrder == CharacterOrders.GetWood == true)
-        //{
-        //    Debug.Log("Character entred forest");
-
-        //    director.activeCharacters.Remove(this);
-
-        //    director.forestCharacters.Add(this.character);
-
-        //    GameObject.Destroy(this.gameObject);
-
-        //}
-
-        //if(NearLocation(director.woodPilePoint) && character.carryWood > 0)
-        //{
-        //    if(character.carryWood > 0)
-        //    {
-        //        Debug.Log("Place Wood");
-        //        director.woodPile.AddWood(character.carryWood);
-        //        character.carryWood = 0;
-
-        //        //return back to starting pos
-
-            
-        //    }
-        //}
-    //}
-
-    //bool NearLocation(Waypoint targetPoint)
-    //{
-    //    bool result = false;
-
-    //    float acceptableDrift = 0.5f;//error distance
-
-    //    if(Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift || Vector3.Distance(this.transform.position, targetPoint.transform.position) <= acceptableDrift)
-    //    {
-    //        //Debug.Log("At Point");
-    //        result = true;
-    //    }
-
-    //    return result;
-    //}
+    
 
     public void Speak(DialogueType toSpeak, bool forceSpeak)
     {
@@ -203,10 +137,7 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-    void LoadCharacterData()
-    {
-        character = new Character(characterData);
-    }
+
 }
 
 public enum CharacterOrders
