@@ -50,19 +50,6 @@ public class CharacterController : MonoBehaviour {
         //}
 
 
-
-
-
-
-
-
-        //if (diagWin.finished == true)
-        //{
-        //    director.canSpeak = true;
-        //    diagWin.finished = false;
-        //}
-
-
     }
     
     public void ReceiveOrder(CharacterOrders _order)

@@ -33,7 +33,7 @@ public class FirePit : MonoBehaviour {
 
         Debug.Log("Fuel Fire");
         dir.woodPile.woodCount--;
-
+        //dir.UpdateWorldState(WorldState.LightUp, false);
         centralFlame.StokeFire();
 
         //fireSize++;
@@ -45,7 +45,7 @@ public class FirePit : MonoBehaviour {
         //woodInFire.Remove(woodInFire[0]);//remove the oldest piece of wood in the fire
         //centralFlame.intensity -= adjustmentAmount;
 
-        Debug.Log("Wood Consumed");
+        //Debug.Log("Wood Consumed");
         //fireSize--;       
     }
 

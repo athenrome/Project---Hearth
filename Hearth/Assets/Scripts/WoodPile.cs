@@ -13,7 +13,7 @@ public class WoodPile : MonoBehaviour {
 
     public Transform woodSpawn;
 
-    List<GameObject> pileLogs = new List<GameObject>();
+    //List<GameObject> pileLogs = new List<GameObject>();
 
     public Director dir;
 
@@ -78,7 +78,7 @@ public class WoodPile : MonoBehaviour {
     void SpawnPileLog()
     {
         GameObject woodObj = GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation) as GameObject;
-        pileLogs.Add(woodObj);
+        //pileLogs.Add(woodObj);
         woodCount++;
         woodToAdd--;
     }
