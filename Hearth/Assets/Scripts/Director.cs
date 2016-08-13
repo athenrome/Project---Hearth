@@ -6,17 +6,8 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
-    //public List<CharacterData> masterCharacterPool;
-    //public CharacterData survivorData;
-
-    Character survivor;
-
-    List<Character> CharacterPool = new List<Character>();
-
     public List<CharacterController> activeCharacters = new List<CharacterController>();
-    public List<Character> forestCharacters = new List<Character>();
 
-    //public float forestReturnTime;//how logn a character spends in a forest before they reurn with wood
     public int getWoodThreshold;//if wood is below this level send someone to get wood
 
 
@@ -34,14 +25,6 @@ public class Director : MonoBehaviour {
 
     [Range(0, 100)]
     public float storyChance;
-
-    int characterCount = 0;
-    int maxCharacters;  
-
-    public GameObject characterPrefab;
-
-    public List<Waypoint> spawnPoints;//waypoints around the the fire
-    public int unlockedPoints;
 
     public float storyCooldown;//time since a story was told
     float currStoryCool;
@@ -215,7 +198,7 @@ public class Director : MonoBehaviour {
 
     void CheckFire()
     {
-        unlockedPoints = firePit.fireSize;
+        
     }
 
     void CheckWood()
@@ -256,14 +239,6 @@ public class Director : MonoBehaviour {
         return foundCharacter;
     }
 
-    public Waypoint GetFreePoint()
-    {
-        Waypoint foundPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];//choose a random point out of the forsest points
-
-        spawnPoints.Remove(foundPoint);//remove point from circulation
-
-        return foundPoint;
-    }
 }
 
 public enum WorldState //usedto trigger events
