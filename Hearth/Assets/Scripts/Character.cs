@@ -5,6 +5,7 @@ public class Character : MonoBehaviour {
 
     public string charName;
 
+
     CharacterData data;
 
     public int efficiency;
@@ -119,7 +120,6 @@ public class Character : MonoBehaviour {
         {
 
             case DialogueType.NeedWoodPrompt:
-                Debug.Log("12");
                 chosenDiag = GetOldestDialogue(needWoodPrompts);
 
                 break;
@@ -209,57 +209,71 @@ public class Character : MonoBehaviour {
         return toReturn;
     }
 
+
+
     void GetDialogueData()
     {
         foreach (string text in data.needWoodPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.NeedWoodPrompt));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.NeedWoodPrompt);
+            needWoodPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.woodArrivesPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.WoodArrivesPrompt));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.WoodArrivesPrompt);
+            woodArrivesPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.lightDropPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.LightDropPrompt));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.LightDropPrompt);
+            lightDropPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.lightBoostPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.LightBoostPrompt));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.LightBoostPrompt);
+            lightBoostPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.darknessPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.DarknessPrompt));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.DarknessPrompt);
+            darknessPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.positiveReactionsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.PositiveReaction));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.PositiveReaction);
+            positiveReactions.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.negativeReationsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.NegativeReation));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.NegativeReation);
+            negativeReations.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.missionStartPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionStart));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.MissionStart);
+            missionStartPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.missionFailPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionFail));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.MissionFail);
+            missionFailPrompts.Add(newDialogue);
         }
 
-        foreach (string text in data.needWoodPromptsText)
+        foreach (string text in data.missionSuceedPromptsText)
         {
-            needWoodPrompts.Add(new Dialogue(text, DialogueType.MissionSuceed));
+            Dialogue newDialogue = new Dialogue(text, DialogueType.MissionSuceed);
+            missionSuceedPrompts.Add(newDialogue);
         }
+
+
     }
 
     void GetStoryData()

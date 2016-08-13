@@ -93,6 +93,8 @@ public class DialogueWindow : MonoBehaviour {
             finished = true;
 
             Debug.Log("Finish Writing");
+
+            
         }
 
 

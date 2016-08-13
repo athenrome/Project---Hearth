@@ -6,6 +6,7 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
+    public List<GameObject> characterModels;
     public List<CharacterData> masterCharacterPool;
     public CharacterData survivorData;
 
@@ -32,6 +33,8 @@ public class Director : MonoBehaviour {
     public bool canSpeak;
 
 
+    [Range(0, 100)]
+    public float storyChance;
 
     int characterCount = 0;
     int maxCharacters;  
@@ -52,11 +55,13 @@ public class Director : MonoBehaviour {
     //public float deathChance;
 
     //public int unlockedPoints;//avalable point indexes
-    
+
     //public float spawnInterval;
     //float currSpawnInterval;
 
-    
+    public float storyCooldown;//time since a story was told
+    float currStoryCool;
+    bool storyLock; //if stories can be used
 
     [Range(0,100)]
     public float moraleLevel;
@@ -74,7 +79,9 @@ public class Director : MonoBehaviour {
         currTimeout = 0;
         stateChanged = false;
         canSpeak = false;
-        
+        storyLock = false;
+
+        currStoryCool = storyCooldown;
 
         LoadCharacters();
 
@@ -102,6 +109,26 @@ public class Director : MonoBehaviour {
             CheckWorldState();
         }
         
+        if(currStoryCool <= 0)
+        {
+            storyLock = false;
+
+            if(canChangeState == true)
+            {
+                canSpeak = true;
+                UpdateWorldState(WorldState.SpeakStory, true);
+                Debug.Log("Story Time");
+                canChangeState = false;
+
+            }
+
+            currStoryCool = storyCooldown;
+            
+        }
+        else
+        {
+            currStoryCool -= Time.deltaTime;
+        }
 
         
     }
@@ -113,12 +140,11 @@ public class Director : MonoBehaviour {
             case WorldState.NeedWood:
                 Debug.Log("Wood Requested");
 
-                canSpeak = true;
                 UpdateWorldState(WorldState.SpeakDialogue, true);
 
                 woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
 
-                
+                canSpeak = false;
                 
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
@@ -130,10 +156,50 @@ public class Director : MonoBehaviour {
                 break;
 
             case WorldState.SpeakStory:
-                canSpeak = true;
+
+                if(storyLock == false)
+                {
+                    int storyRoll = Random.Range(0, 100);
+
+                    if (storyRoll >= storyChance)
+                    {
+
+                        if (moraleLevel >= 50)
+                        {
+                            OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakHope);//hope story
+                            Debug.Log("Hope story");
+                            storyLock = true;
+                        }
+                        else
+                        {
+                            OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakGhost);//ghost story
+                            Debug.Log("ghost story");
+                            storyLock = true;
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.Log("Failed story roll");
+                        storyLock = true;
+                    }
+                }                
+
+                
                 break;
 
             case WorldState.Idle:
+                canChangeState = true;
+                break;
+
+            case WorldState.BurnUp:
+                UpdateWorldState(WorldState.SpeakDialogue, true);
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.LightBoostPrompt);
+                break;
+
+            case WorldState.BurnDown:
+                UpdateWorldState(WorldState.SpeakDialogue, true);
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.LightDropPrompt);
                 break;
 
             default:
@@ -183,6 +249,7 @@ public class Director : MonoBehaviour {
     void OrderCharacter(CharacterController character, CharacterOrders order)
     {
         character.ReceiveOrder(order);
+        character.timeSinceLastAction = 0;//reset timer
 
         actionInProgress = true;
 
@@ -262,6 +329,13 @@ public class Director : MonoBehaviour {
         return toReturn;
     }
 
+    GameObject getCharacterModel()
+    {
+        GameObject toReturn = characterModels[Random.Range(0,characterModels.Count)];
+        //characterModels.Remove(toReturn);
+        return toReturn;
+    }
+
     void SpawnCharacters()
     {
         for(int i = 0; characterCount < unlockedPoints; i++)
@@ -294,6 +368,11 @@ public class Director : MonoBehaviour {
             newChar.character = survivor;
 
         }
+
+        GameObject charModel = GameObject.Instantiate(getCharacterModel(), newChar.transform) as GameObject;
+
+        charModel.transform.parent = spawnedCharObj.transform;      
+        
 
         activeCharacters.Add(newChar);
         
@@ -400,27 +479,29 @@ public enum WorldState //usedto trigger events
     LightUp,
     LightDrop,
     
-    
-    FireEmbers,
-    FireSmall,
-    FireMed,
-    FireBig,
+    BurnUp,
+    BurnDown,
+
+    //FireEmbers,
+    //FireSmall,
+    //FireMed,
+    //FireBig,
 
     characterTalking,
 
     
-    EnterForest,
-    ForestDeath,
-    ForestReturn,
+    //EnterForest,
+    //ForestDeath,
+    //ForestReturn,
 
     NeedWood,
     WoodGone,
     WoodFull,
     WoodConsumed,
 
-    CharacterArrive,
-    CharacterLeave,
-    NoCharacters,
+    //CharacterArrive,
+    //CharacterLeave,
+    //NoCharacters,
 
     GameStart,
     GameEnd,

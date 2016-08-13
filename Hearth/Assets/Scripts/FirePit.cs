@@ -11,12 +11,12 @@ public class FirePit : MonoBehaviour {
     public float adjustmentAmount;//how much the fire increases per unit of wood
     public float fogadjustmentAmount;//how much the fog decreases per unit of wood added to the fire
 
-    Director dir;
+    Director director;
 
     // Use this for initialization
     void Start ()
     {
-        dir = FindObjectOfType<Director>();
+        director = FindObjectOfType<Director>();
         fireSize = 1;
 
     }
@@ -36,9 +36,12 @@ public class FirePit : MonoBehaviour {
         centralFlame.intensity += adjustmentAmount;
 
         Debug.Log("Fuel Fire");
-        dir.woodPile.woodCount--;
+        director.woodPile.woodCount--;
+        director.UpdateWorldState(WorldState.BurnUp, false);
 
         fireSize++;
+
+        
         
     }
 
@@ -48,6 +51,7 @@ public class FirePit : MonoBehaviour {
         centralFlame.intensity -= adjustmentAmount;
 
         Debug.Log("Wood Consumed");
+        director.UpdateWorldState(WorldState.BurnDown, false);
         fireSize--;       
     }
 

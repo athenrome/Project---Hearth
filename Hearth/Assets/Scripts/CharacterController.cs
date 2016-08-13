@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterController : MonoBehaviour {
 
     public DialogueWindow diagWin; // where character dialogue is presented
+    public GameObject model;
 
     Director director;
 
@@ -25,6 +26,8 @@ public class CharacterController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        timeSinceLastAction = Random.Range(0, 100);//mix up who goes first to prevent the same person from always talking first
+
         //currOrder = CharacterOrders.Idle;
         //Speak(DialogueType.NeedWoodPrompt);//TESTING
         director = FindObjectOfType<Director>();
@@ -36,10 +39,11 @@ public class CharacterController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        timeSinceLastAction += Time.deltaTime;//increase character idle time
 
         //if (moving == true)
         //{
-            
+
         //    float distCovered = (Time.time - startTime) * moveSpeed;
         //    float fracJourney = distCovered / journeyLength;
         //    transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
@@ -57,14 +61,12 @@ public class CharacterController : MonoBehaviour {
 
 
 
-       
 
-        //if(currOrder == CharacterOrders.Idle)
-        //{
-        //    timeSinceLastAction += Time.deltaTime;
-        //}
 
-        if(diagWin.finished == true)
+
+
+
+        if (diagWin.finished == true)
         {
             director.canSpeak = true;
             diagWin.finished = false;
@@ -94,7 +96,15 @@ public class CharacterController : MonoBehaviour {
                 
                 Speak(DialogueType.NeedWoodPrompt, true);
                 //Debug.Log("wood order recieved");
-                break;              
+                break;
+
+            case CharacterOrders.SpeakHope:
+                Speak(DialogueType.HopefulStory, true);
+                break;
+
+            case CharacterOrders.SpeakGhost:
+                Speak(DialogueType.GhostStory, true);
+                break;
 
             default:
                 Debug.Log("Invalid order");
@@ -168,14 +178,12 @@ public class CharacterController : MonoBehaviour {
             Debug.Log("Start Speaking");
             director.canSpeak = false;
 
-            toSpeak = DialogueType.HopefulStory;//TESTING   
+           
 
             if (toSpeak == DialogueType.HopefulStory || toSpeak == DialogueType.GhostStory)
             {
                 DialogueStory targetStory = character.ChooseStory(toSpeak);
                 diagWin.WriteStory(targetStory);
-
-                currOrder = CharacterOrders.Speak;
             }
             else
             {
@@ -183,7 +191,7 @@ public class CharacterController : MonoBehaviour {
                 diagWin.WriteDialogue(targetDialogue);
 
 
-                currOrder = CharacterOrders.Speak;
+                currOrder = CharacterOrders.SpeakDialogue;
                 
             }
         }
@@ -198,12 +206,36 @@ public class CharacterController : MonoBehaviour {
 public enum CharacterOrders
 {
     Idle,
-    Speak,
+
+    SpeakDialogue,
+    SpeakHope,
+    SpeakGhost,
+
+    
     //StartMove,
     //Move,
 
     RequestWood,
     InForest,
     GetWood,
-    WoodToPile,    
+    WoodToPile,
+
+
+
+
+    NeedWoodPrompt,
+    WoodArrivesPrompt,
+    LightDropPrompt,
+    LightBoostPrompt,
+    DarknessPrompt,
+
+    PositiveReaction,
+    NegativeReation,
+
+    MissionStart,
+    MissionFail,
+    MissionSuceed,
+
+    HopefulStory,
+    GhostStory,
 }
