@@ -4,7 +4,6 @@ using System.Collections;
 public class CharacterController : MonoBehaviour {
 
     public DialogueWindow diagWin; // where character dialogue is presented
-    public GameObject model;
 
     Director director;
 
@@ -218,24 +217,5 @@ public enum CharacterOrders
     RequestWood,
     InForest,
     GetWood,
-    WoodToPile,
-
-
-
-
-    NeedWoodPrompt,
-    WoodArrivesPrompt,
-    LightDropPrompt,
-    LightBoostPrompt,
-    DarknessPrompt,
-
-    PositiveReaction,
-    NegativeReation,
-
-    MissionStart,
-    MissionFail,
-    MissionSuceed,
-
-    HopefulStory,
-    GhostStory,
+    WoodToPile,    
 }

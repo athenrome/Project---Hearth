@@ -4,8 +4,11 @@ using System.Collections.Generic;
 public class FirePit : MonoBehaviour {
 
     public Flame centralFlame;
+<<<<<<< HEAD
 
     //public Flame centralFlame;
+=======
+>>>>>>> 05d2ecd3f8db77f4f77d4930db7b7e306bed1ce0
     public List<Wood> woodInFire;
 
     public int fireSize;
@@ -13,12 +16,12 @@ public class FirePit : MonoBehaviour {
     public float adjustmentAmount;//how much the fire increases per unit of wood
     public float fogadjustmentAmount;//how much the fog decreases per unit of wood added to the fire
 
-    Director director;
+    Director dir;
 
     // Use this for initialization
     void Start ()
     {
-        director = FindObjectOfType<Director>();
+        dir = FindObjectOfType<Director>();
         fireSize = 1;
 
     }
@@ -38,12 +41,9 @@ public class FirePit : MonoBehaviour {
         centralFlame.intensity += adjustmentAmount;
 
         Debug.Log("Fuel Fire");
-        director.woodPile.woodCount--;
-        director.UpdateWorldState(WorldState.BurnUp, false);
+        dir.woodPile.woodCount--;
 
         fireSize++;
-
-        
         
     }
 
@@ -53,7 +53,6 @@ public class FirePit : MonoBehaviour {
         centralFlame.intensity -= adjustmentAmount;
 
         Debug.Log("Wood Consumed");
-        director.UpdateWorldState(WorldState.BurnDown, false);
         fireSize--;       
     }
 

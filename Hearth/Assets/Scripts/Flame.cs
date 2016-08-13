@@ -19,21 +19,16 @@ public class Flame : MonoBehaviour {
     FlameAction currAction;
 
 	// Use this for initialization
-	void Start ()
-    {
-        //lightSource.range = minLevel;
+	void Start () {
+        lightSource.range = minLevel;
 	
 	}
 	
 	// Update is called once per frame
-	void Update ()
-    {
-        IntensityModifier();
-        //RangeModifier();
-    }
+	void Update () {
 
-    void RangeModifier()
-    {
+        
+
         if (lightSource.range <= intensity)
         {
             lightSource.range += Time.deltaTime;
@@ -43,20 +38,11 @@ public class Flame : MonoBehaviour {
         {
             lightSource.range -= Time.deltaTime;
         }
+
+
     }
 
-    void IntensityModifier()
-    {
-        if (lightSource.intensity < intensity)
-        {
-            lightSource.intensity += Time.deltaTime;
-        }
 
-        if (lightSource.intensity > intensity)
-        {
-            lightSource.intensity -= Time.deltaTime;
-        }
-    }
 
 }
 
