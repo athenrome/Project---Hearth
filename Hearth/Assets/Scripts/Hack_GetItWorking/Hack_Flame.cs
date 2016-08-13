@@ -15,7 +15,7 @@ public class Hack_Flame : MonoBehaviour {
 
     
 
-    bool actionInProgress;
+    //bool actionInProgress;
     FlameAction currAction;
 
 	// Use this for initialization
@@ -48,6 +48,8 @@ public class Hack_Flame : MonoBehaviour {
     */
     void IntensityModifier()
     {
+        intensity -= (Time.deltaTime / 2);
+
         if (lightSource.intensity < intensity)
         {
             lightSource.intensity += Time.deltaTime;

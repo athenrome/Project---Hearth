@@ -9,13 +9,13 @@ public class LightFlicker : MonoBehaviour {
     //private float prevFlickerAmount;
     //public float flickerPercentage = 0.1f;
     public float targetIntensity = 1;
-    public Hack_Flame flame;
+    public Flame flame;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        flame = FindObjectOfType<Hack_Flame>();
+        flame = FindObjectOfType<Flame>();
         myLight = GetComponent<Light>();
 	}
 	
