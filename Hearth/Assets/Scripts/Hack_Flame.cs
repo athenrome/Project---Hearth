@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Flame : MonoBehaviour {
+public class Hack_Flame : MonoBehaviour {
 
     public float minLevel;
     public float maxLevel;
@@ -11,7 +11,7 @@ public class Flame : MonoBehaviour {
     public ParticleSystem fireParticles;
     
     [Range(0f, 100f)]
-    public float intensity; //flame intesity target
+    public float intensity; //flame intensity target
 
     
 
@@ -32,7 +32,8 @@ public class Flame : MonoBehaviour {
         //RangeModifier();
     }
 
-    void RangeModifier()
+   /*
+   void RangeModifier()
     {
         if (lightSource.range <= intensity)
         {
@@ -44,7 +45,7 @@ public class Flame : MonoBehaviour {
             lightSource.range -= Time.deltaTime;
         }
     }
-
+    */
     void IntensityModifier()
     {
         if (lightSource.intensity < intensity)
@@ -59,14 +60,3 @@ public class Flame : MonoBehaviour {
     }
 
 }
-
-public enum FlameAction
-{
-    BurnUp,
-    BurnDown,
-    Flicker,
-    StartBurn,
-    EndBurn,
-
-}
-

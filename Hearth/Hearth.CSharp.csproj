@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Director.cs" />
     <Compile Include="Assets\Scripts\FirePit.cs" />
     <Compile Include="Assets\Scripts\Flame.cs" />
+    <Compile Include="Assets\Scripts\Hack_Flame.cs" />
     <Compile Include="Assets\Scripts\LightFlicker.cs" />
     <Compile Include="Assets\Scripts\Tree.cs" />
     <Compile Include="Assets\Scripts\Waypoint.cs" />
