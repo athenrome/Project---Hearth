@@ -99,7 +99,7 @@ public class Wood : MonoBehaviour {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(currPos);
 
 
-        transform.position = new Vector3(worldPos.x, worldPos.y, 0);
+        transform.position = new Vector3(worldPos.x, worldPos.y, 5.9f);
 
     }
     //END WOOD DRAGGING
