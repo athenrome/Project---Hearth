@@ -107,7 +107,7 @@ public class Director : MonoBehaviour {
 
                 int storyRoll = Random.Range(0, 100);
 
-                if(storyRoll >= storyChance)
+                if(storyRoll <= storyChance)
                 {
 
                     
