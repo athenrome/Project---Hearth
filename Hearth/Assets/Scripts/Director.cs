@@ -45,7 +45,7 @@ public class Director : MonoBehaviour {
 
 
 
-        currState = WorldState.GameStart;
+        currState = WorldState.Idle;
 
 
     }
@@ -71,7 +71,7 @@ public class Director : MonoBehaviour {
         //    if (canChangeState == true)
         //    {
         //        canSpeak = true;
-        //        UpdateWorldState(WorldState.SpeakStory, true);
+        //        UpdateWorldState(WorldState.SpeakStory, false);
         //        Debug.Log("Story Time");
         //        canChangeState = false;
         //    }

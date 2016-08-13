@@ -30,7 +30,7 @@ public class WoodPile : MonoBehaviour {
 
         woodCount = 0;
 
-        AddWood(6);
+        AddWood(5);
     }
 	
 	// Update is called once per frame
@@ -78,7 +78,7 @@ public class WoodPile : MonoBehaviour {
     void SpawnPileLog()
     {
         GameObject woodObj = GameObject.Instantiate(woodPrefab, woodSpawn.position, woodSpawn.rotation) as GameObject;
-        //pileLogs.Add(woodObj);
+        Debug.Log("Spawned Log");
         woodCount++;
         woodToAdd--;
     }
