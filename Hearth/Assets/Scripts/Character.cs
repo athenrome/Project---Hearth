@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Character : MonoBehaviour {
 
-    public string charName;
+    
 
     CharacterData data;
 
@@ -36,12 +36,12 @@ public class Character : MonoBehaviour {
     public Character(CharacterData _data)
     {
         data = _data;
-        charName = data.characterName;
+        
 
         GetDialogueData();
         GetStoryData();
 
-        Debug.Log("Created character: " + charName);
+        Debug.Log("Created character: " + data.characterName);
     }
 
 	// Use this for initialization

@@ -94,7 +94,7 @@ public class Director : MonoBehaviour {
 
                 UpdateWorldState(WorldState.SpeakDialogue, true);
 
-                woodPile.AddWood(woodPile.maxWood - woodPile.woodCount);//fill the woood pile
+                woodPile.AddWood(woodPile.maxWood);//fill the woood pile
 
                 
                 OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
