@@ -25,7 +25,7 @@ public class Hack_Flame : MonoBehaviour {
     FMOD.Studio.ParameterInstance fire2;
     FMOD.Studio.ParameterInstance fire3;
     FMOD.Studio.ParameterInstance fire4;
-    FMOD.Studio.ParameterInstance Embers;
+    FMOD.Studio.ParameterInstance embers;
 
     //bool actionInProgress;
     //FlameAction currAction;
@@ -33,7 +33,12 @@ public class Hack_Flame : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //lightSource.range = minLevel;
+        fireStartEvent = FMODUnity.RuntimeManager.CreateInstance(fireSound);
+        fireStartEvent.getParameter("Fire 2", out fire2);
+        fireStartEvent.getParameter("Fire 3", out fire3);
+        fireStartEvent.getParameter("Fire 4", out fire4);
+        fireStartEvent.getParameter("Embers", out embers); // actually is the torches being lit sound with an 18 second fadeout.
+        fireStartEvent.start();
 
         //testing intensity
         intensity = 8;
@@ -45,23 +50,10 @@ public class Hack_Flame : MonoBehaviour {
     {
 
         IntensityModifier();
-        //RangeModifier();
+        fireSoundControl();
+
     }
 
-   /*
-   void RangeModifier()
-    {
-        if (lightSource.range <= intensity)
-        {
-            lightSource.range += Time.deltaTime;
-        }
-
-        if (lightSource.range >= intensity)
-        {
-            lightSource.range -= Time.deltaTime;
-        }
-    }
-    */
     void IntensityModifier()
     {
         if (logActive == false)
@@ -106,7 +98,37 @@ public class Hack_Flame : MonoBehaviour {
 
     void fireSoundControl()
     {
+        if(intensity > 1 && intensity < 3)
+        {
+            fire2.setValue(1);
+            fire3.setValue(0);
+            fire4.setValue(0);
 
+            Debug.Log("Fire 2 active");
+        }
+
+        if (intensity > 3 && intensity < 5)
+        {
+            fire2.setValue(1);
+            fire3.setValue(1);
+            fire4.setValue(0);
+
+            Debug.Log("Fire 3 active");
+        }
+
+        if (intensity > 5)
+        {
+            fire2.setValue(1);
+            fire3.setValue(1);
+            fire4.setValue(1);
+
+            Debug.Log("Fire is at max");
+        }
+
+        if (intensity > 100 /* Set this once we know the final requirements to finish the game. */)
+        {
+            //probably wont get used until we can make people walk away. #Embers
+        }
     }
 
 }
