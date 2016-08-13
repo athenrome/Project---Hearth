@@ -31,23 +31,6 @@ public class CharacterController : MonoBehaviour {
 
         timeSinceLastAction += Time.deltaTime;//increase character idle time
 
-        //if (moving == true)
-        //{
-
-        //    float distCovered = (Time.time - startTime) * moveSpeed;
-        //    float fracJourney = distCovered / journeyLength;
-        //    transform.position = Vector3.Lerp(this.transform.position, waypointTarget.transform.position, fracJourney);
-        //}
-
-        //if (moving == true && NearLocation(waypointTarget) == true)//have i reached the target
-        //{
-
-        //    reachedDest = true;
-
-        //    waypointTarget.locked = true;
-        //    currOrder = CharacterOrders.Idle;
-        //    ArriveAtPoint();
-        //}
 
 
     }

@@ -7,6 +7,7 @@ public class Director : MonoBehaviour {
     public WoodPile woodPile;
 
     public List<CharacterController> activeCharacters;// = new List<CharacterController>();
+    int validCharacters;
 
     public int getWoodThreshold;//if wood is below this level send someone to get wood
     
@@ -20,6 +21,7 @@ public class Director : MonoBehaviour {
     public bool canChangeState;
     public bool canSpeak;
 
+    
 
     [Range(0, 100)]
     public float storyChance;
@@ -35,6 +37,7 @@ public class Director : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        validCharacters = 0;
         actionInProgress = false;
         //currSpawnInterval = 1;
         currTimeout = 0;
@@ -66,6 +69,16 @@ public class Director : MonoBehaviour {
             CheckWorldState();
         }
 
+
+
+        if(currStoryCool <= 0)
+        {
+            UpdateWorldState(WorldState.SpeakStory, true);
+        }
+        else
+        {
+            currStoryCool -= Time.deltaTime;
+        }
 
     }
 
@@ -113,12 +126,20 @@ public class Director : MonoBehaviour {
                 else
                 {
                     Debug.Log("Failed story roll");
+                    
                 }
 
+                UpdateWorldState(WorldState.Idle, true);
+                currStoryCool = storyCooldown;
                 
                 break;
 
+            case WorldState.EndSpeaking:
+                UpdateWorldState(WorldState.Idle, true);
+                break;
+
             case WorldState.Idle:
+                canSpeak = true;
                 canChangeState = true;
                 break;
 
@@ -256,6 +277,7 @@ public enum WorldState //usedto trigger events
 
     SpeakDialogue,
     SpeakStory,
+    EndSpeaking,
 
     Idle,
 
