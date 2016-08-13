@@ -6,7 +6,7 @@ public class Director : MonoBehaviour {
     public FirePit firePit;
     public WoodPile woodPile;
 
-    public List<CharacterController> activeCharacters = new List<CharacterController>();
+    public List<CharacterController> activeCharacters;// = new List<CharacterController>();
 
     public int getWoodThreshold;//if wood is below this level send someone to get wood
 

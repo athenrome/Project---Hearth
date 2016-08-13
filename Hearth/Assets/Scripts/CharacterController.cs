@@ -34,7 +34,7 @@ public class CharacterController : MonoBehaviour {
         director = FindObjectOfType<Director>();
 
 
-
+        LoadCharacterData();
     }
 	
 	// Update is called once per frame
