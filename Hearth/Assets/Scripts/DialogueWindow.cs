@@ -65,8 +65,11 @@ public class DialogueWindow : MonoBehaviour {
                 if(currLifetime <= 0)//pause for a while with text on scene
                 {
                     currLine++;
+                    Debug.Log(currLine + " " + toWrite.Count);
+
                     if (currLine < toWrite.Count)//is there another line
                     {//reset for next line
+
                         diagText.text = "";//clear text
                         currText = "";
                         currLetter = 0;
@@ -76,6 +79,8 @@ public class DialogueWindow : MonoBehaviour {
                     else//nothing more to write
                     {
                         finished = true;
+                        finishedLine = true;
+                        
 
                     }
                 }
@@ -111,7 +116,7 @@ public class DialogueWindow : MonoBehaviour {
         currLetter = 0;
         stopped = true;
         finished = true;
-
+        toWrite = new List<Dialogue>();//clear the list
         Debug.Log("Finish Writing");
     }
 
