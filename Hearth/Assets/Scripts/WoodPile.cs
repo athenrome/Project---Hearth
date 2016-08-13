@@ -30,7 +30,7 @@ public class WoodPile : MonoBehaviour {
 
         woodCount = 0;
 
-        AddWood(5);
+        
     }
 	
 	// Update is called once per frame
@@ -65,10 +65,10 @@ public class WoodPile : MonoBehaviour {
 
     public void AddWood(int toAdd)
     {
-        if(woodCount + toAdd >= maxWood)
-        {
-            toAdd = maxWood - woodCount;
-        }
+        toAdd = maxWood - woodCount;
+
+
+
 
         woodToAdd = toAdd;
 
