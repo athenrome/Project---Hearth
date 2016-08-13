@@ -228,9 +228,12 @@ public class Director : MonoBehaviour {
             {
                 foundCharacter = character;
                 score = character.timeSinceLastAction;
+                
             }
         }
 
+        foundCharacter.timeSinceLastAction = 0;
+        
 
 
 

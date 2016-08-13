@@ -203,9 +203,11 @@ public class Character : MonoBehaviour {
                 oldestTime = diag.deadTime;
                 toReturn = diag;
 
-                toReturn.deadTime = 0;
+                diag.deadTime = 0;
             }
         }
+
+        toReturn.deadTime = 0;
 
         return toReturn;
     }
