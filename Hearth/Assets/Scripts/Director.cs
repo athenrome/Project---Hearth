@@ -100,7 +100,12 @@ public class Director : MonoBehaviour {
                 break;
 
             case WorldState.SpeakDialogue:
+                UpdateWorldState(WorldState.Idle, true);
                 canSpeak = true;
+                break;
+
+            case WorldState.EndSpeaking:
+                UpdateWorldState(WorldState.Idle, true);
                 break;
 
             case WorldState.SpeakStory:
@@ -134,9 +139,7 @@ public class Director : MonoBehaviour {
                 
                 break;
 
-            case WorldState.EndSpeaking:
-                UpdateWorldState(WorldState.Idle, true);
-                break;
+            
 
             case WorldState.Idle:
                 canSpeak = true;

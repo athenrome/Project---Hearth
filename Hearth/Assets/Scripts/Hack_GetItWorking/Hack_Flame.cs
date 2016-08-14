@@ -41,7 +41,8 @@ public class Hack_Flame : MonoBehaviour {
         fireStartEvent.start();
 
         //testing intensity
-        intensity = 8;
+        intensity = minLevel;
+        StokeFire();
 	
 	}
 	
