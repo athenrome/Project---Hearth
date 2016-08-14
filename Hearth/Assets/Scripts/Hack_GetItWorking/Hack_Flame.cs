@@ -19,6 +19,7 @@ public class Hack_Flame : MonoBehaviour {
     public float maxBurnTime = 5;
     bool logActive = false;
 
+
     [FMODUnity.EventRef]
     public string fireSound = "event:/Fire/Fire";
     FMOD.Studio.EventInstance fireStartEvent;
@@ -75,7 +76,7 @@ public class Hack_Flame : MonoBehaviour {
 
         }
 
-        if (lightSource.intensity <= intensity)
+        if (lightSource.intensity <= intensity || lightSource.intensity < minLevel)
         {
             lightSource.intensity += Time.deltaTime;
         }
@@ -87,6 +88,12 @@ public class Hack_Flame : MonoBehaviour {
 
         //clamp intensity so it doesnt go way out of range.
         Mathf.Clamp(intensity, minLevel, maxLevel);
+
+        if(intensity < minLevel)
+        {
+            intensity = minLevel;
+        }
+
                                                             //Debug.Log("clamped");
     }
 
