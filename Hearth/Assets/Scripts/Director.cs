@@ -70,7 +70,7 @@ public class Director : MonoBehaviour {
 
             if (currStoryCool <= 0 && actionInProgress == false)
             {
-                UpdateWorldState(WorldState.SpeakStory, false);
+                UpdateWorldState(WorldState.SpeakStory, true);
             }
             else
             {
