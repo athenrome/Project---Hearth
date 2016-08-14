@@ -33,7 +33,10 @@ public class CharacterController : MonoBehaviour {
 
         timeSinceLastAction += Time.deltaTime;//increase character idle time
 
-
+        if(diagWin.finished == true)
+        {
+            director.actionInProgress = false;
+        }
 
     }
     
@@ -54,6 +57,16 @@ public class CharacterController : MonoBehaviour {
             case CharacterOrders.SpeakGhost:
                 Speak(DialogueType.GhostStory, true);
                 break;
+
+            case CharacterOrders.SpeakLightUp:
+                Speak(DialogueType.LightBoostPrompt, true);
+                break;
+
+            case CharacterOrders.SpeakLightDrop:
+                Speak(DialogueType.LightDropPrompt, true);
+                break;
+
+
 
             default:
                 Debug.Log("Invalid order");
@@ -112,6 +125,9 @@ public enum CharacterOrders
     
     //StartMove,
     //Move,
+
+    SpeakLightUp,
+    SpeakLightDrop,
 
     RequestWood,
     InForest,

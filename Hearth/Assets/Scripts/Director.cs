@@ -59,26 +59,34 @@ public class Director : MonoBehaviour {
         CheckFire();
         CheckWood();
 
+        
         if(actionInProgress == false)
         {
-            CheckCharacterOrders();
-        }
-
-        if(stateChanged == false)
-        {
-            CheckWorldState();
-        }
+            if (stateChanged == false)
+            {
+                CheckWorldState();
+            }
 
 
+            if (currStoryCool <= 0 && actionInProgress == false)
+            {
+                UpdateWorldState(WorldState.SpeakStory, false);
+            }
+            else
+            {
+                currStoryCool -= Time.deltaTime;
+            }
+        }
 
-        if(currStoryCool <= 0)
-        {
-            UpdateWorldState(WorldState.SpeakStory, true);
-        }
-        else
-        {
-            currStoryCool -= Time.deltaTime;
-        }
+        
+
+
+
+
+
+
+
+
 
     }
 
@@ -141,7 +149,15 @@ public class Director : MonoBehaviour {
                 
                 break;
 
-            
+            case WorldState.LightUp:
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakLightUp);
+                UpdateWorldState(WorldState.Idle, true);
+                break;
+
+            case WorldState.LightDrop:
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakLightDrop);
+                UpdateWorldState(WorldState.Idle, true);
+                break;
 
             case WorldState.Idle:
                 canSpeak = true;
@@ -188,11 +204,7 @@ public class Director : MonoBehaviour {
         
     }
 
-    void CheckCharacterOrders()//manages when and what is poken by ceratian characters
-    {
-        CharacterController toOrder = GetActiveCharacter();
-        
-    }
+
 
     void OrderCharacter(CharacterController character, CharacterOrders order)
     {
