@@ -112,7 +112,9 @@ public class Director : MonoBehaviour {
 
                 int storyRoll = Random.Range(0, 100);
 
-                if(storyRoll <= storyChance)
+                moraleLevel = Random.Range(0, 100);
+
+                if (storyRoll <= storyChance)
                 {
 
                     
