@@ -86,7 +86,7 @@ public class Hack_Flame : MonoBehaviour {
         }
 
         //clamp intensity so it doesnt go way out of range.
-        Mathf.Clamp(intensity, 0.0f, 8.0f);
+        Mathf.Clamp(intensity, minLevel, maxLevel);
                                                             //Debug.Log("clamped");
     }
 
