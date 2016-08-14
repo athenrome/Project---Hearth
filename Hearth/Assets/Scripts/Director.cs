@@ -171,6 +171,8 @@ public class Director : MonoBehaviour {
             currTimeout = stateTimeout;
 
             Debug.Log("State Changed");
+
+            canChangeState = false;
         }
         else
         {
@@ -202,7 +204,25 @@ public class Director : MonoBehaviour {
 
     void CheckFire()
     {
+        validCharacters = Mathf.RoundToInt(firePit.centralFlame.intensity);
+
+        if(canChangeState == true)
+        {
+            if (firePit.centralFlame.intensity >= 7)
+            {
+                UpdateWorldState(WorldState.LightUp, false);
+            }
+
+            if (firePit.centralFlame.intensity <= 2)
+            {
+                UpdateWorldState(WorldState.LightDrop, false);
+            }
+
+        }
+
         
+
+
     }
 
     void CheckWood()
@@ -281,6 +301,8 @@ public enum WorldState //usedto trigger events
     SpeakDialogue,
     SpeakStory,
     EndSpeaking,
+
+
 
     Idle,
 
