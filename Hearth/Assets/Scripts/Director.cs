@@ -7,7 +7,7 @@ public class Director : MonoBehaviour {
     public WoodPile woodPile;
 
     public List<CharacterController> activeCharacters;// = new List<CharacterController>();
-    int validCharacters;
+    int unlockedCharacterIndex;//all characters below this value are locked
 
     public int getWoodThreshold;//if wood is below this level send someone to get wood
     
@@ -37,7 +37,7 @@ public class Director : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        validCharacters = 0;
+        unlockedCharacterIndex = 0;
         actionInProgress = false;
         //currSpawnInterval = 1;
         currTimeout = 0;
@@ -206,7 +206,7 @@ public class Director : MonoBehaviour {
 
     void CheckFire()
     {
-        validCharacters = Mathf.RoundToInt(firePit.centralFlame.intensity);
+        unlockedCharacterIndex = Mathf.RoundToInt(firePit.centralFlame.intensity);
 
         if(canChangeState == true)
         {
@@ -250,8 +250,9 @@ public class Director : MonoBehaviour {
         CharacterController foundCharacter = activeCharacters[0];
         float score = 0;
 
-        foreach (CharacterController character in activeCharacters)
+        for(int i = 0; i < unlockedCharacterIndex; i++)// (CharacterController character in activeCharacters)
         {
+            CharacterController character = activeCharacters[i];
             if (character.timeSinceLastAction > score)
             {
                 foundCharacter = character;

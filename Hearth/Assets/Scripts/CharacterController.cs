@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CharacterController : MonoBehaviour {
 
+   
+
     public DialogueWindow diagWin; // where character dialogue is presented
 
     public CharacterData characterData;
