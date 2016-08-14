@@ -38,6 +38,7 @@ public class DialogueStory
         storyText = _storyDiag;
         type = _type;
         deadTime = Random.Range(0, 100); //randomise to miss up speak order
+        available = false;
     }
 
     public void UpdateStory()
