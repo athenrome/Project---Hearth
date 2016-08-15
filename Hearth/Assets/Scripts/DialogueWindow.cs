@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class DialogueWindow : MonoBehaviour {
 
-    public TextMesh diagText;
-
-    public GameObject textBox;
- 
+    public TextMesh floatingText;
+    public Text dialogueText;
 
     List<Dialogue> toWrite = new List<Dialogue>();//the diaglogue to be written to screen
 
     string currText;
 
-    
+
+    string currDots = "";
+    float dotLife;
 
     public float lifeTime;//how long the text will stay active after it has finished writing
     float currLifetime = 0;
@@ -28,23 +29,25 @@ public class DialogueWindow : MonoBehaviour {
     public bool finished;
     bool stopped;
 
+    bool fadeDirection;//true in false out
+
     public float letterWidth;
     public float letterHeight;
+
+    
     
 
     // Use this for initialization
     void Start () {
-        finished = false;
-        finishedLine = false;
-        stopped = false;
-        diagText.text = "";//clear the text
+        StartWriting();
 
-        textBox.SetActive(false);
-        
-	}
+
+    }
 
 	// Update is called once per frame
 	void Update () {
+
+        
 
         if(finished == false && toWrite.Count > 0)
         {
@@ -70,7 +73,7 @@ public class DialogueWindow : MonoBehaviour {
                     if (currLine < toWrite.Count)//is there another line
                     {//reset for next line
 
-                        diagText.text = "";//clear text
+                        dialogueText.text = "";//clear text
                         currText = "";
                         currLetter = 0;
 
@@ -104,13 +107,44 @@ public class DialogueWindow : MonoBehaviour {
         
 	}
 
+    void WriteTalkingDots()
+    {
+        if(currDots.Length < 3)
+        {
+            currDots = currDots + ".";
+            floatingText.text = currDots;
+        }
+        else
+        {
+            dotLife -= Time.deltaTime;
+
+            if(dotLife <= 0)
+            {
+                currDots = "";
+                floatingText.text = currDots;
+            }
+        }      
+    }
+
+    public void StartWriting()
+    {
+        finished = false;
+        finishedLine = false;
+        stopped = false;
+        dialogueText.text = "";//clear the text
+        floatingText.text = "";
+
+        
+
+    }
+
     public void FinishWriting()
     {
-        textBox.SetActive(false);
 
         currText = "";
 
-        diagText.text = currText;
+        dialogueText.text = "";//clear the text
+        floatingText.text = "";
 
         currLine = 0;
         currLetter = 0;
@@ -124,7 +158,7 @@ public class DialogueWindow : MonoBehaviour {
     public void WriteStory(DialogueStory _toWrite)
     {
         toWrite = _toWrite.storyText;
-        diagText.text = "";
+        dialogueText.text = "";
         currText = "";
         currLine = 0;
         currLetter = 0;
@@ -140,7 +174,7 @@ public class DialogueWindow : MonoBehaviour {
         
 
         toWrite.Add(_toWrite);
-        diagText.text = "";
+        dialogueText.text = "";
         currText = "";
         currLine = 0;
         currLetter = 0;
@@ -155,13 +189,13 @@ public class DialogueWindow : MonoBehaviour {
 
     void WriteLetter()
     {
+        WriteTalkingDots();
+
         char nextchar = toWrite[currLine].text[currLetter];
 
         currText = currText + nextchar;
 
-        diagText.text = currText;
-
-        UpdateTextbox();
+        dialogueText.text = currText;
 
         currLetter++;
 
@@ -172,18 +206,4 @@ public class DialogueWindow : MonoBehaviour {
         }
     }
 
-    void UpdateTextbox()
-    {
-        textBox.SetActive(true);
-
-        float boxX = 0;
-        float boxY = letterHeight;        
-
-        for(int i = 0; i < currLetter; i++)
-        {
-            boxX += letterWidth;
-        }
-
-        textBox.transform.localScale = new Vector3(boxX, boxY, 1);
-    }
 }
