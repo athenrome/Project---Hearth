@@ -31,11 +31,17 @@ public class Hack_Flame : MonoBehaviour {
     FMOD.Studio.ParameterInstance fire4;
     FMOD.Studio.ParameterInstance embers;
 
+    Director director;
+
     //bool actionInProgress;
     //FlameAction currAction;
 
     void Awake()
     {
+        
+
+        director = FindObjectOfType<Director>();
+
         if (inst != null)
             DestroyImmediate(gameObject);
         else
@@ -54,16 +60,26 @@ public class Hack_Flame : MonoBehaviour {
 
         //testing intensity
         intensity = minLevel;
-        StokeFire();
+        //StokeFire();
 	
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        //Debug.Log(intensity);
-        IntensityModifier();
-        fireSoundControl();
+        if(director.fireBurning == true)
+        {
+            //Debug.Log(intensity);
+            IntensityModifier();
+            fireSoundControl();
+        }
+
+        if (intensity <= 0)
+        {
+            director.fireBurning = false;
+            director.firePit.fireParticles.SetActive(false);
+        }
+
 
     }
 
