@@ -16,7 +16,7 @@ public class Director : MonoBehaviour {
     bool stateChanged;//if the state has been changed
 
 
-
+    public bool fireBurning;
     public bool actionInProgress;
     public bool canChangeState;
     public bool canSpeak;
@@ -50,44 +50,39 @@ public class Director : MonoBehaviour {
 
         currState = WorldState.Idle;
 
+        fireBurning = false;
+
 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        CheckFire();
-        CheckWood();
-
-        
-        if(actionInProgress == false)
+        if(fireBurning == true)
         {
-            if (stateChanged == false)
-            {
-                CheckWorldState();
-            }
+            CheckFire();
+            CheckWood();
 
 
-            if (currStoryCool <= 0 && actionInProgress == false)
+            if (actionInProgress == false)
             {
-                UpdateWorldState(WorldState.SpeakStory, true);
-            }
-            else
-            {
-                currStoryCool -= Time.deltaTime;
+                if (stateChanged == false)
+                {
+                    CheckWorldState();
+                }
+
+
+                if (currStoryCool <= 0 && actionInProgress == false)
+                {
+                    UpdateWorldState(WorldState.SpeakStory, true);
+                }
+                else
+                {
+                    currStoryCool -= Time.deltaTime;
+                }
             }
         }
-
         
-
-
-
-
-
-
-
-
-
     }
 
     void CheckWorldState()
@@ -116,37 +111,20 @@ public class Director : MonoBehaviour {
                 UpdateWorldState(WorldState.Idle, true);
                 break;
 
-            case WorldState.SpeakStory:
-
-                int storyRoll = Random.Range(0, 100);
-
-                moraleLevel = Random.Range(0, 100);
-
-                if (storyRoll <= storyChance)
-                {
-
-                    
-
-                    if (moraleLevel >= 50)
-                    {
-                        OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakHope);//hope story
-                        Debug.Log("Hope story");
-                    }
-                    else
-                    {
-                        OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakGhost);//ghost story
-                        Debug.Log("ghost story");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Failed story roll");
-                    
-                }
+            case WorldState.SpeakHopeStory:
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakHope);//hope story
+                Debug.Log("Hope story");
 
                 UpdateWorldState(WorldState.Idle, true);
                 currStoryCool = storyCooldown;
-                
+                break;
+
+            case WorldState.SpeakGhostStory:
+                OrderCharacter(GetActiveCharacter(), CharacterOrders.SpeakGhost);//ghost story
+                Debug.Log("ghost story");
+
+                UpdateWorldState(WorldState.Idle, true);
+                currStoryCool = storyCooldown;
                 break;
 
             case WorldState.LightUp:
@@ -315,6 +293,10 @@ public enum WorldState //usedto trigger events
 
     SpeakDialogue,
     SpeakStory,
+
+    SpeakHopeStory,
+    SpeakGhostStory,
+
     EndSpeaking,
 
 
