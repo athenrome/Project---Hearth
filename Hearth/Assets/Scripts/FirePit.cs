@@ -5,6 +5,8 @@ public class FirePit : MonoBehaviour {
 
     public Hack_Flame centralFlame;
 
+    public GameObject fireParticles;
+
     public GameObject yellowFlame1;
     public GameObject yellowFlame2;
 
@@ -15,17 +17,17 @@ public class FirePit : MonoBehaviour {
 
     bool shiftAlternate = true;
 
+    Director director;
+
 
     //public List<Wood> woodInFire;
 
     //public int fireSize;
 
-    Director dir;
-
     // Use this for initialization
     void Start ()
     {
-        dir = FindObjectOfType<Director>();
+        director = FindObjectOfType<Director>();
         //fireSize = 1;
 
     }
@@ -33,6 +35,7 @@ public class FirePit : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
  
 	}
 
@@ -40,7 +43,7 @@ public class FirePit : MonoBehaviour {
     {
 
         Debug.Log("Fuel Fire");
-        dir.woodPile.woodCount--;
+        director.woodPile.woodCount--;
         //dir.UpdateWorldState(WorldState.LightUp, false);
         centralFlame.StokeFire();
 
@@ -60,6 +63,18 @@ public class FirePit : MonoBehaviour {
     void UpdateFire()
     {
         
+    }
+
+    void OnMouseDown()
+    {
+        if(director.fireBurning == false)
+        {
+            centralFlame.StokeFire();
+            director.fireBurning = true;
+
+            fireParticles.SetActive(true);
+        }
+
     }
 
     void UpdateFog()
