@@ -13,10 +13,13 @@ public class LightFlicker : MonoBehaviour {
     //the value used to offset one flames brightness from another. this should be set to 0 on one, and # on the other flame in the inspector.
     public float offset;
 
+    //used to move the light around light it is flickering
+    public Vector3 oscillateScale;
+    public Vector3 oscillateOffset;
 
     //restore this after fixing the hack... should use flame instead of hack flame
     //public Flame flame;
-    
+
     //Hacking>>>>>>>>>>>>>>>>
     public Hack_Flame flame;
 
@@ -37,6 +40,8 @@ public class LightFlicker : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        moveFlame();
+
         targetIntensity = flame.intensity - offset;
 
         counter += Time.deltaTime;
@@ -52,5 +57,11 @@ public class LightFlicker : MonoBehaviour {
 
 	}
 
+    void moveFlame()
+    {
+        transform.localPosition = new Vector3((Mathf.PerlinNoise(Time.realtimeSinceStartup * oscillateScale.x, 10) - 0.5f) * oscillateOffset.x,
+        (Mathf.PerlinNoise(Time.realtimeSinceStartup * oscillateScale.y, 20) - 0.5f) * oscillateOffset.y,
+        (Mathf.PerlinNoise(Time.realtimeSinceStartup * oscillateScale.z, 30) - 0.5f) * oscillateOffset.z);
+    }
 
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Hack_Flame : MonoBehaviour {
 
+    public static Hack_Flame inst;
+
     public float minLevel;
     public float maxLevel;
     public float FogminLevel = 0.01f;
@@ -11,7 +13,8 @@ public class Hack_Flame : MonoBehaviour {
     public Light lightSource;
 
     public ParticleSystem fireParticles;
-    
+
+    public static readonly float MaxIntensity = 8;
     [Range(0f, 8f)]
     public float intensity; //flame intensity target
 
@@ -30,6 +33,14 @@ public class Hack_Flame : MonoBehaviour {
 
     //bool actionInProgress;
     //FlameAction currAction;
+
+    void Awake()
+    {
+        if (inst != null)
+            DestroyImmediate(gameObject);
+        else
+            inst = this;
+    }
 
     // Use this for initialization
     void Start ()
@@ -139,4 +150,5 @@ public class Hack_Flame : MonoBehaviour {
         }
     }
 
+    
 }
