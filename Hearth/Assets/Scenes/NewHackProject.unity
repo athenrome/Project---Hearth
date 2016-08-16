@@ -3431,7 +3431,7 @@ GameObject:
   - 4: {fileID: 193812759}
   - 114: {fileID: 711823833}
   - 65: {fileID: 193812758}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WoodPile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3797,7 +3797,7 @@ GameObject:
   - 33: {fileID: 260877046}
   - 65: {fileID: 260877045}
   - 23: {fileID: 260877044}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3886,7 +3886,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 311243087}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WoodSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4322,7 +4322,7 @@ GameObject:
   - 33: {fileID: 366236737}
   - 65: {fileID: 366236736}
   - 23: {fileID: 366236735}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9711,7 +9711,7 @@ GameObject:
   - 33: {fileID: 1043011984}
   - 65: {fileID: 1043011983}
   - 23: {fileID: 1043011982}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15424,7 +15424,7 @@ GameObject:
   - 33: {fileID: 1795693460}
   - 65: {fileID: 1795693459}
   - 23: {fileID: 1795693458}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15823,7 +15823,7 @@ GameObject:
   - 33: {fileID: 1856511979}
   - 65: {fileID: 1856511978}
   - 23: {fileID: 1856511977}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
