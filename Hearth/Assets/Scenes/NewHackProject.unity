@@ -863,6 +863,7 @@ MonoBehaviour:
   storyCooldown: 25
   moraleLevel: 50
   currState: 0
+  customCursor: {fileID: 2800000, guid: 750276236b2c62c44a8aecbb6faf3100, type: 3}
 --- !u!4 &119552530
 Transform:
   m_ObjectHideFlags: 0
@@ -7217,6 +7218,7 @@ MonoBehaviour:
   storyCooldown: 0
   moraleLevel: 0
   currState: 0
+  customCursor: {fileID: 0}
 --- !u!4 &621030329 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010350261936, guid: 34143f85b00154547b01e948e7ce180a,

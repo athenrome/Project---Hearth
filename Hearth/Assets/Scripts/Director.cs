@@ -37,6 +37,8 @@ public class Director : MonoBehaviour {
 
     public static Director inst;
 
+    public Texture2D customCursor;
+
     void Awake()
     {
         inst = this;
@@ -61,6 +63,7 @@ public class Director : MonoBehaviour {
 
         fireBurning = false;
 
+        SetCustomCursor();
 
     }
 	
@@ -269,6 +272,13 @@ public class Director : MonoBehaviour {
 
 
         return foundCharacter;
+    }
+
+    void SetCustomCursor()//set custom mouse cursor
+    {
+        CursorMode cursorMode = CursorMode.Auto;
+        Vector2 hotSpot = Vector2.zero;
+        Cursor.SetCursor(customCursor, hotSpot, cursorMode);
     }
 
 }
