@@ -90,9 +90,14 @@ public class Director : MonoBehaviour {
                 //    UpdateWorldState(WorldState.SpeakStory, true);
                 //}
                 //else
-                //{
-                //    currStoryCool -= Time.deltaTime;
-                //}
+                if(currStoryCool > 0)
+                {
+                    currStoryCool -= Time.deltaTime;
+                }
+                else
+                {
+                    currStoryCool = storyCooldown;
+                }
             }
         }
         
