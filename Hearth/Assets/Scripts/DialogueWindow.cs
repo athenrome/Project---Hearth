@@ -38,14 +38,17 @@ public class DialogueWindow : MonoBehaviour
     public float letterHeight;
 
 
-
+    bool fadeStatus;
+    bool fading;
+    float fadeLevel;
 
 
     // Use this for initialization
     void Start()
     {
-        dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, 0);//clear text
-        TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, 100);//clear panel
+        fadeLevel = 0;
+        dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear text
+        TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear panel
 
 
         StartWriting();
@@ -59,9 +62,12 @@ public class DialogueWindow : MonoBehaviour
 
         WriteText();
 
+        if(fading == true)
+        {
+            Fading();
+        }
 
-
-
+        
 
 
     }
@@ -149,8 +155,6 @@ public class DialogueWindow : MonoBehaviour
         dialogueText.text = "";//clear the text
         floatingText.text = "";
 
-
-
     }
 
     public void FinishWriting()
@@ -168,6 +172,8 @@ public class DialogueWindow : MonoBehaviour
         toWrite = new List<Dialogue>();//clear the list
         Debug.Log("Finish Writing");
 
+
+        StartFadingOut();
     }
 
     public void WriteStory(DialogueStory _toWrite)
@@ -180,6 +186,8 @@ public class DialogueWindow : MonoBehaviour
         finishedLine = true;
         finished = false;
         stopped = false;
+
+        StartFadingIn();
 
         currInterval = letterInterval;
     }
@@ -197,10 +205,55 @@ public class DialogueWindow : MonoBehaviour
         finished = false;
         stopped = false;
 
+        StartFadingIn();
+
         currInterval = letterInterval;
 
     }
 
+    void StartFadingIn()
+    {
+        fadeStatus = true;
+        fading = true;
+
+        fadeLevel = 0;
+        dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear text
+        TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear panel
+    }
+
+    void StartFadingOut()
+    {
+        fadeStatus = false;
+        fading = true;
+
+    }
+
+    void Fading()
+    {
+        if (fadeStatus == true && fading == true)//fade in
+        {
+            fadeLevel += Time.deltaTime / 2;
+
+            dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);
+            TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);
+        }
+        else if (fadeStatus == false && fading == true)//fade out
+        {
+            fadeLevel -= Time.deltaTime / 2;
+
+            dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);
+            TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);
+        }
+
+        if(fadeStatus == true && fadeLevel >= 1)
+        {
+            fading = false;
+        }
+        else if (fadeStatus == true && fadeLevel <= 0)
+        {
+            fading = false;
+        }
+    }
 
     void WriteLetter()
     {
