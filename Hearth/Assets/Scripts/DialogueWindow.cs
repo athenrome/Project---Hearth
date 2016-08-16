@@ -262,6 +262,9 @@ public class DialogueWindow : MonoBehaviour
     {
         WriteTalkingDots();
 
+        if (currLine < 0)
+            currLine = 0;
+
         char nextchar = toWrite[currLine].text[currLetter];
 
         currText = currText + nextchar;

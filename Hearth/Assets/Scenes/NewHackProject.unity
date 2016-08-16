@@ -777,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -4024,7 +4024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -8359,7 +8359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -13949,7 +13949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -14134,7 +14134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -14958,7 +14958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -15710,8 +15710,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visCon: {fileID: 1833186553}
   charCon: {fileID: 1977234801}
-  timer: 2
+  Hopetimer: 10
   hasFiredHope: 0
+  enableGenericDialog: 0
+  genericMin: 1
+  genericMax: 2
+  curGenericTimer: 0
+  genCounter: 0
 --- !u!114 &1833186553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15723,7 +15728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -16087,7 +16092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -16816,7 +16821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
