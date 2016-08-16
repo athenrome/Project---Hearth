@@ -46,12 +46,13 @@ public class DialogueWindow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        finished = true;
         fadeLevel = 0;
         dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear text
         TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear panel
 
 
-        StartWriting();
+        //FinishWriting();
 
 
     }
@@ -93,6 +94,8 @@ public class DialogueWindow : MonoBehaviour
 
     void WriteText()
     {
+        var prevfinished = finished;
+
         if (finished == false && toWrite.Count > 0)
         {
             if (finishedLine == false)
@@ -141,7 +144,7 @@ public class DialogueWindow : MonoBehaviour
         }
 
 
-        if (finished == true && stopped == false)//finish
+        if (finished == true && prevfinished != finished && stopped == false)//finish
         {
             FinishWriting();
         }

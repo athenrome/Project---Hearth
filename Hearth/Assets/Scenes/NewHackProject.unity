@@ -971,6 +971,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -3454,7 +3458,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 193812757}
   m_LocalRotation: {x: -0.0007408259, y: 0.21674548, z: -0.0033366797, w: 0.97622216}
-  m_LocalPosition: {x: -4.05, y: -0.03, z: 4.95}
+  m_LocalPosition: {x: -3.36, y: -0.04, z: 4.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 24.867, z: -0.38000003}
   m_Children:
@@ -4200,6 +4204,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -9242,6 +9250,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -9377,6 +9389,10 @@ Prefab:
     - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
       propertyPath: m_Name
       value: Char1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
@@ -10330,7 +10346,7 @@ Prefab:
       objectReference: {fileID: 14810995}
     - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
@@ -12058,6 +12074,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -15973,6 +15993,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -16352,6 +16376,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -16522,6 +16550,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0
@@ -16654,6 +16686,10 @@ Prefab:
       propertyPath: TextboxPanel
       value: 
       objectReference: {fileID: 14810995}
+    - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
   m_IsPrefabParent: 0

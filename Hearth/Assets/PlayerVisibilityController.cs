@@ -7,6 +7,7 @@ public class PlayerVisibilityController : MonoBehaviour
     private Renderer[] myRenderers;
     public float desiredVisibility = 1;
     private float curVis;
+    //light scale converts from world space to light intensity. 
     static float distanceFromLightScale = 0.5f, percentFromLightToAppear = 1, percentFromLightToDis = 0.8f;
 
     public float timeTillAppear, timeTillDisappear;
