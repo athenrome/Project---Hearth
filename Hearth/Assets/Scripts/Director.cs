@@ -45,9 +45,11 @@ public class Director : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         unlockedCharacterIndex = 0;
-        actionInProgress = false;
+        
         //currSpawnInterval = 1;
         currTimeout = 0;
+
+        actionInProgress = false;
         stateChanged = false;
         canSpeak = false;
 
@@ -230,6 +232,8 @@ public class Director : MonoBehaviour {
         if(woodPile.woodCount <= getWoodThreshold && woodPile.woodToAdd == 0)
         {
             UpdateWorldState(WorldState.NeedWood, true);
+            stateChanged = false;
+            actionInProgress = false;
             Debug.Log("wood ordered");
         }
     }
