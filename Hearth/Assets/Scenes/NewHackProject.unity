@@ -766,6 +766,26 @@ MeshFilter:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: dc0e7f8dc45f0da4db1269fefd4e1221, type: 3}
   m_PrefabInternal: {fileID: 1468598581}
+--- !u!114 &106274853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 106274852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617025be9cefe94589b4e9f9f560f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visCon: {fileID: 106274855}
+  charCon: {fileID: 1359802239}
+  Hopetimer: 0
+  hasFiredHope: 0
+  enableGenericDialog: 0
+  genericMin: 0
+  genericMax: 0
+  curGenericTimer: 0
+  genCounter: 0
 --- !u!114 &106274855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8350,6 +8370,26 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 100050, guid: e8c59c4cd88bea94c822bedff9fd0c01, type: 3}
   m_PrefabInternal: {fileID: 168322069}
+--- !u!114 &851803858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851803857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617025be9cefe94589b4e9f9f560f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visCon: {fileID: 851803859}
+  charCon: {fileID: 960693590}
+  Hopetimer: 0
+  hasFiredHope: 0
+  enableGenericDialog: 0
+  genericMin: 0
+  genericMax: 0
+  curGenericTimer: 0
+  genCounter: 0
 --- !u!114 &851803859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8905,6 +8945,26 @@ MonoBehaviour:
   toggleActiveOnDisappear:
   - {fileID: 929297188}
   - {fileID: 2017445334}
+--- !u!114 &929297191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 929297188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617025be9cefe94589b4e9f9f560f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visCon: {fileID: 929297190}
+  charCon: {fileID: 128324272}
+  Hopetimer: 0
+  hasFiredHope: 0
+  enableGenericDialog: 0
+  genericMin: 0
+  genericMax: 0
+  curGenericTimer: 0
+  genCounter: 0
 --- !u!1001 &952867249
 Prefab:
   m_ObjectHideFlags: 0
@@ -10348,7 +10408,7 @@ Prefab:
       objectReference: {fileID: 14810995}
     - target: {fileID: 1000011875008980, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34143f85b00154547b01e948e7ce180a, type: 2}
@@ -11357,8 +11417,8 @@ MonoBehaviour:
   rate: 7
   targetIntensity: 2
   offset: 0
-  oscillateScale: {x: 0, y: 0, z: 0}
-  oscillateOffset: {x: 0, y: 0, z: 0}
+  oscillateScale: {x: 5, y: 7, z: 5}
+  oscillateOffset: {x: 0.3, y: 0.45, z: 0.3}
   flame: {fileID: 0}
 --- !u!4 &1292338914 stripped
 Transform:
@@ -13721,8 +13781,8 @@ MonoBehaviour:
   rate: 5
   targetIntensity: 3
   offset: 0
-  oscillateScale: {x: 0.1, y: 1, z: 1}
-  oscillateOffset: {x: 0.1, y: 1, z: 1}
+  oscillateScale: {x: 5, y: 7, z: 5}
+  oscillateOffset: {x: 0.3, y: 0.45, z: 0.3}
   flame: {fileID: 0}
 --- !u!1001 &1572292923
 Prefab:

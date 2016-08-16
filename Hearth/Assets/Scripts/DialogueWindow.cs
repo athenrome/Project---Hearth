@@ -51,7 +51,7 @@ public class DialogueWindow : MonoBehaviour
         dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear text
         TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear panel
 
-        StartWriting();
+        //StartWriting();
         //FinishWriting();
 
 
