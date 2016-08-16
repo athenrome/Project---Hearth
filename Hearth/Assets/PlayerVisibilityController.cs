@@ -19,15 +19,26 @@ public class PlayerVisibilityController : MonoBehaviour
     public GameObject enableWhenTrasitionComplete;
     public bool isTransitioning = false;
 
+    public GameObject[] toggleActiveOnDisappear;
+
     // Use this for initialization
     void Start()
     {
         myRenderers = gameObject.GetComponentsInChildren<Renderer>();
         SetAllAlpha(desiredVisibility, true);
         curVis = desiredVisibility;
-
-        //Director.inst.OrderCharacter(Director.inst.activeCharacters[0], CharacterOrders.SpeakDialogue);
     }
+
+    void OnEnable()
+    {
+        SetAllAlpha(desiredVisibility, true);
+        curVis = desiredVisibility;
+        isTransitioning = false;
+        transitionCounter = 0;
+        counter = 0;
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -36,11 +47,21 @@ public class PlayerVisibilityController : MonoBehaviour
         SetAllAlpha(curVis, true);
 
         //what state am i in, be here or not or transition
-        if(!isTransitioning)
+        if (!isTransitioning)
+        {
             HandleUpdatingVisState();
+
+            if(curVis <= 0 && desiredVisibility <= 0)
+            {
+                for (int i = 0; i < toggleActiveOnDisappear.Length; i++)
+                {
+                    toggleActiveOnDisappear[i].SetActive(!toggleActiveOnDisappear[i].activeSelf);
+                }
+            }
+        }
         else
         {
-            if(curVis <= 0)
+            if (curVis <= 0)
             {
                 gameObject.SetActive(false);
                 enableWhenTrasitionComplete.SetActive(true);
@@ -60,6 +81,11 @@ public class PlayerVisibilityController : MonoBehaviour
         {
             transitionCounter = 0;
         }
+
+        if(curVis == 0)
+        {
+
+        }
     }
 
     void TriggerTransition()
@@ -70,6 +96,9 @@ public class PlayerVisibilityController : MonoBehaviour
 
     void SetAllAlpha(float target, bool overrideLerp = false)
     {
+        if (myRenderers == null)
+            return;
+
         for (int i = 0; i < myRenderers.Length; i++)
         {
             var matArray = myRenderers[i].materials;
