@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Wood : MonoBehaviour {
 
+    
 
     Vector3 camPos;
     float posX;
@@ -65,7 +66,9 @@ public class Wood : MonoBehaviour {
             GameObject.Destroy(this.gameObject);
 
             currBurnTime = burnTime;
+
             
+
         }
     }
 

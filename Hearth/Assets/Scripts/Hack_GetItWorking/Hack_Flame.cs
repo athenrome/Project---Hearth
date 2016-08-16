@@ -31,6 +31,10 @@ public class Hack_Flame : MonoBehaviour {
     FMOD.Studio.ParameterInstance fire4;
     FMOD.Studio.ParameterInstance embers;
 
+    [FMODUnity.EventRef]
+    public string woodDropSound = "event:/Fire/Log_Drop";
+    FMOD.Studio.EventInstance woodDropStartEvent;
+
     Director director;
 
     //bool actionInProgress;
@@ -128,6 +132,7 @@ public class Hack_Flame : MonoBehaviour {
     {
             logActive = true;
             logBurnTime = maxBurnTime;
+        FMODUnity.RuntimeManager.PlayOneShot(woodDropSound);
 
     }
 
