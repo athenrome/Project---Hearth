@@ -20,6 +20,8 @@ public class Hack_Flame : MonoBehaviour {
 
     public float logBurnTime = 0;
     public float maxBurnTime = 5;
+    public float fireIdleTimer = 5;
+    private float counter;
     bool logActive = false;
 
 
@@ -85,13 +87,18 @@ public class Hack_Flame : MonoBehaviour {
 
     void IntensityModifier()
     {
-        if (logActive == false)
+        if (!logActive)
         {
-            intensity -= (Time.deltaTime / 10);
+            counter -= Time.deltaTime;
+            if (counter <= 0)
+            { 
+                intensity -= (Time.deltaTime / 10);
+            }
         }
 
-        if (logActive == true)
+        if (logActive)
         {
+            counter = fireIdleTimer;
             logBurnTime -= Time.deltaTime;
             intensity += (Time.deltaTime / 5);
 
