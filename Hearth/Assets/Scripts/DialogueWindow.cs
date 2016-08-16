@@ -21,7 +21,7 @@ public class DialogueWindow : MonoBehaviour
     public float lifeTime;//how long the text will stay active after it has finished writing
     float currLifetime = 0;
 
-    public float letterInterval = 5; //time it takes between letter writes
+    public static  float letterInterval = 0.025f; //time it takes between letter writes
     float currInterval;
 
     int currLine;//piece of dialogue that is currently being written
@@ -165,7 +165,7 @@ public class DialogueWindow : MonoBehaviour
         dialogueText.text = "";//clear the text
         floatingText.text = "";
 
-        currLine = 0;
+        currLine = -1;
         currLetter = 0;
         stopped = true;
         finished = true;
@@ -181,7 +181,7 @@ public class DialogueWindow : MonoBehaviour
         toWrite = _toWrite.storyText;
         dialogueText.text = "";
         currText = "";
-        currLine = 0;
+        currLine = -1;
         currLetter = 0;
         finishedLine = true;
         finished = false;
@@ -199,7 +199,7 @@ public class DialogueWindow : MonoBehaviour
         toWrite.Add(_toWrite);
         dialogueText.text = "";
         currText = "";
-        currLine = 0;
+        currLine = -1;
         currLetter = 0;
         finishedLine = false;
         finished = false;

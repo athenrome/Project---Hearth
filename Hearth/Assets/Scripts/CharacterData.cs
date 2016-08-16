@@ -11,6 +11,7 @@ public class CharacterData : ScriptableObject
 
     //STRINGS TO BE USED CREATE DIALOGUE
 
+        [TextArea]
     public List<string> HopefulStorys1Text;
     public List<string> HopefulStorys2Text;
     public List<string> HopefulStorys3Text;

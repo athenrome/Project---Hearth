@@ -26,7 +26,7 @@ public class PlayerVisibilityController : MonoBehaviour
         SetAllAlpha(desiredVisibility, true);
         curVis = desiredVisibility;
 
-        Director.inst.OrderCharacter(Director.inst.activeCharacters[0], CharacterOrders.SpeakDialogue);
+        //Director.inst.OrderCharacter(Director.inst.activeCharacters[0], CharacterOrders.SpeakDialogue);
     }
 
     // Update is called once per frame

@@ -67,7 +67,8 @@ public class Director : MonoBehaviour {
 
         if(fireBurning == true)
         {
-            CheckFire();
+            //CheckFire();
+
             CheckWood();
 
 
@@ -104,7 +105,7 @@ public class Director : MonoBehaviour {
                 woodPile.AddWood(woodPile.maxWood);//fill the woood pile
 
 
-                OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
+                //OrderCharacter(GetActiveCharacter(), CharacterOrders.RequestWood);
 
                 UpdateWorldState(WorldState.Idle, true);
                 break;

@@ -14,9 +14,7 @@ MonoBehaviour:
   characterName: Charles
   efficiency: 5
   HopefulStorys1Text:
-  - All I want to do
-  - Is give my wife a hug
-  - And tell her how much I love her
+  - All I want to do... Is give my wife a hug... And tell her how much I love her.
   HopefulStorys2Text:
   - "You should see my kids, they\u2019re so funny"
   - When they were little they hated each other

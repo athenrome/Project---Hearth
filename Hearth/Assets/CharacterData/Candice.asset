@@ -14,9 +14,9 @@ MonoBehaviour:
   characterName: Candice
   efficiency: 4
   HopefulStorys1Text:
-  - My first job was flipping burgers at a rundown diner
-  - The pay was rubbish, but the company was great
-  - "People have a lot of stories, if you\u2019ll just listen sometimes"
+  - "My first job was flipping burgers at a rundown diner. The pay was rubbish, but
+    the company was great. People have a lot of stories, if you\u2019ll just listen
+    sometimes"
   HopefulStorys2Text:
   - My parents tried their best with me
   - We were poor and always out of food, but they really tried
