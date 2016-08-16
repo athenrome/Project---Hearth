@@ -81,7 +81,7 @@ public class CharacterController : MonoBehaviour {
 
     public void Speak(DialogueType toSpeak, bool forceSpeak)
     {
-        if (!isActiveAndEnabled || !diagWin.finished)
+        if (!isActiveAndEnabled )//|| !diagWin.finished)
             return;
 
         if (director.canSpeak == true || forceSpeak == true)//if none else is speaking
