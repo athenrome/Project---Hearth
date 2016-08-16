@@ -35,6 +35,13 @@ public class Director : MonoBehaviour {
     public WorldState currState;
     WorldState lastState;
 
+    public static Director inst;
+
+    void Awake()
+    {
+        inst = this;
+    }
+
 	// Use this for initialization
 	void Start () {
         unlockedCharacterIndex = 0;
@@ -184,7 +191,7 @@ public class Director : MonoBehaviour {
 
 
 
-    void OrderCharacter(CharacterController character, CharacterOrders order)
+    public void OrderCharacter(CharacterController character, CharacterOrders order)
     {
         character.ReceiveOrder(order);
 

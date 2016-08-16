@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerVisibilityController : MonoBehaviour {
+public class PlayerVisibilityController : MonoBehaviour
+{
 
     private Renderer[] myRenderers;
     public float desiredVisibility = 1;
+    private float curVis;
     static float distanceFromLightScale = 0.5f, percentFromLightToAppear = 1, percentFromLightToDis = 0.8f;
 
     public float timeTillAppear, timeTillDisappear;
@@ -12,26 +14,83 @@ public class PlayerVisibilityController : MonoBehaviour {
 
     public float fadeSpeed = 1;
 
+    public float timeTillTransition = 1;
+    private float transitionCounter = 0;
+    public GameObject enableWhenTrasitionComplete;
+    public bool isTransitioning = false;
+
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         myRenderers = gameObject.GetComponentsInChildren<Renderer>();
+        SetAllAlpha(desiredVisibility, true);
+        curVis = desiredVisibility;
+
+        Director.inst.OrderCharacter(Director.inst.activeCharacters[0], CharacterOrders.SpeakDialogue);
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < myRenderers.Length; i++)
+        curVis = Mathf.MoveTowards(curVis, desiredVisibility, Time.deltaTime * fadeSpeed); 
+        SetAllAlpha(curVis, true);
+
+        //what state am i in, be here or not or transition
+        if(!isTransitioning)
+            HandleUpdatingVisState();
+        else
         {
-            var currcol = myRenderers[i].material.color;
-            currcol.a = Mathf.Lerp(currcol.a, desiredVisibility, Time.deltaTime * fadeSpeed);
-            myRenderers[i].material.color = currcol;    
+            if(curVis <= 0)
+            {
+                gameObject.SetActive(false);
+                enableWhenTrasitionComplete.SetActive(true);
+            }
         }
 
-        //what state am i in
-        HandleUpdatingVisState();
+        //if we are here then it's time to see if we should transition to destination
+        if (desiredVisibility >= 1 && enableWhenTrasitionComplete != null)
+        {
+            transitionCounter += Time.deltaTime;
+            if(transitionCounter > timeTillTransition)
+            {
+                TriggerTransition();
+            }
+        }
+        else
+        {
+            transitionCounter = 0;
+        }
+    }
 
-       
+    void TriggerTransition()
+    {
+        isTransitioning = true;
+        desiredVisibility = 0;
+    }
+
+    void SetAllAlpha(float target, bool overrideLerp = false)
+    {
+        for (int i = 0; i < myRenderers.Length; i++)
+        {
+            var matArray = myRenderers[i].materials;
+
+            for (int j = 0; j < matArray.Length; j++)
+            {
+                var currcol = matArray[j].color;
+                if (!overrideLerp)
+                {
+                    currcol.a = Mathf.MoveTowards(currcol.a, target, Time.deltaTime * fadeSpeed);
+                }
+                else
+                {
+                    currcol.a = target;
+                }
+
+                matArray[j].color = currcol;
+            }
+
+            myRenderers[i].materials = matArray;
+        }
     }
 
     void HandleUpdatingVisState()
@@ -51,7 +110,10 @@ public class PlayerVisibilityController : MonoBehaviour {
                 counter += Time.deltaTime;
                 //if counter above time limit then go vis
                 if (counter >= timeTillAppear)
+                {
                     desiredVisibility = 1;
+                    counter = 0;
+                }
             }
             else
             {
@@ -65,7 +127,10 @@ public class PlayerVisibilityController : MonoBehaviour {
                 counter += Time.deltaTime;
 
                 if (counter >= timeTillDisappear)
+                {
                     desiredVisibility = 0;
+                    counter = 0;
+                }
             }
             else
             {

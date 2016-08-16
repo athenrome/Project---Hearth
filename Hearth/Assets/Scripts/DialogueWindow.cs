@@ -73,7 +73,7 @@ public class DialogueWindow : MonoBehaviour {
                     if (currLine < toWrite.Count)//is there another line
                     {//reset for next line
 
-                        dialogueText.text = "";//clear text
+                        SetDiaText("");//clear text
                         currText = "";
                         currLetter = 0;
 
@@ -131,11 +131,17 @@ public class DialogueWindow : MonoBehaviour {
         finished = false;
         finishedLine = false;
         stopped = false;
-        dialogueText.text = "";//clear the text
+        SetDiaText("");//clear the text
         floatingText.text = "";
 
         
 
+    }
+
+    void SetDiaText(string txt)
+    {
+        if(dialogueText != null)
+            dialogueText.text = txt;
     }
 
     public void FinishWriting()
@@ -143,7 +149,7 @@ public class DialogueWindow : MonoBehaviour {
 
         currText = "";
 
-        dialogueText.text = "";//clear the text
+        SetDiaText("");//clear the text
         floatingText.text = "";
 
         currLine = 0;
@@ -158,7 +164,7 @@ public class DialogueWindow : MonoBehaviour {
     public void WriteStory(DialogueStory _toWrite)
     {
         toWrite = _toWrite.storyText;
-        dialogueText.text = "";
+        SetDiaText("");
         currText = "";
         currLine = 0;
         currLetter = 0;
@@ -174,7 +180,7 @@ public class DialogueWindow : MonoBehaviour {
         
 
         toWrite.Add(_toWrite);
-        dialogueText.text = "";
+        SetDiaText("");
         currText = "";
         currLine = 0;
         currLetter = 0;
@@ -195,7 +201,7 @@ public class DialogueWindow : MonoBehaviour {
 
         currText = currText + nextchar;
 
-        dialogueText.text = currText;
+        SetDiaText( currText);
 
         currLetter++;
 
