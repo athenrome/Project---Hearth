@@ -85,14 +85,14 @@ public class Director : MonoBehaviour {
                 }
 
 
-                if (currStoryCool <= 0 && actionInProgress == false)
-                {
-                    UpdateWorldState(WorldState.SpeakStory, true);
-                }
-                else
-                {
-                    currStoryCool -= Time.deltaTime;
-                }
+                //if (currStoryCool <= 0 && actionInProgress == false)
+                //{
+                //    UpdateWorldState(WorldState.SpeakStory, true);
+                //}
+                //else
+                //{
+                //    currStoryCool -= Time.deltaTime;
+                //}
             }
         }
         
@@ -156,8 +156,11 @@ public class Director : MonoBehaviour {
                 break;
 
             default:
+                Debug.Log("invalid state idling " + currState);
+
                 UpdateWorldState(WorldState.Idle, true);
-                Debug.Log("invalid state idling");
+                
+
                 break;
 
 
@@ -236,7 +239,7 @@ public class Director : MonoBehaviour {
         {
             UpdateWorldState(WorldState.NeedWood, true);
             stateChanged = false;
-            actionInProgress = false;
+            //actionInProgress = false;
             Debug.Log("wood ordered");
         }
     }

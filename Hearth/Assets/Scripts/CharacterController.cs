@@ -88,6 +88,7 @@ public class CharacterController : MonoBehaviour {
         {
             Debug.Log("Start Speaking");
             director.canSpeak = false;
+            director.actionInProgress = true;
 
            
 
