@@ -777,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -3432,7 +3432,7 @@ GameObject:
   - 4: {fileID: 193812759}
   - 114: {fileID: 711823833}
   - 65: {fileID: 193812758}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WoodPile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3798,7 +3798,7 @@ GameObject:
   - 33: {fileID: 260877046}
   - 65: {fileID: 260877045}
   - 23: {fileID: 260877044}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3887,7 +3887,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 311243087}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WoodSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4025,7 +4025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -4323,7 +4323,7 @@ GameObject:
   - 33: {fileID: 366236737}
   - 65: {fileID: 366236736}
   - 23: {fileID: 366236735}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8361,7 +8361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -9713,7 +9713,7 @@ GameObject:
   - 33: {fileID: 1043011984}
   - 65: {fileID: 1043011983}
   - 23: {fileID: 1043011982}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13951,7 +13951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -14136,7 +14136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -14960,7 +14960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -15426,7 +15426,7 @@ GameObject:
   - 33: {fileID: 1795693460}
   - 65: {fileID: 1795693459}
   - 23: {fileID: 1795693458}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15712,8 +15712,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visCon: {fileID: 1833186553}
   charCon: {fileID: 1977234801}
-  timer: 2
+  Hopetimer: 10
   hasFiredHope: 0
+  enableGenericDialog: 0
+  genericMin: 1
+  genericMax: 2
+  curGenericTimer: 0
+  genCounter: 0
 --- !u!114 &1833186553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15725,7 +15730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -15820,7 +15825,7 @@ GameObject:
   - 33: {fileID: 1856511979}
   - 65: {fileID: 1856511978}
   - 23: {fileID: 1856511977}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16089,7 +16094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1
@@ -16818,7 +16823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa899ebc5d1ad540b894cec011bd7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredVisibility: 1
+  desiredVisibility: 0
   timeTillAppear: 0
   timeTillDisappear: 0
   fadeSpeed: 1

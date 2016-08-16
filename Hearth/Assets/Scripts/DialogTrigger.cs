@@ -5,27 +5,52 @@ public class DialogTrigger : MonoBehaviour {
 
     public PlayerVisibilityController visCon;
     public CharacterController charCon;
-    public float timer = 0;
-    private float counter = 0;
+    public float Hopetimer = 0;
+    private float hopeCounter = 0;
     public bool hasFiredHope = false;
+
+    public bool enableGenericDialog = false;
+    public float genericMin, genericMax, curGenericTimer, genCounter;
 
 	void OnEnable()
     {
         hasFiredHope = false;
+        RollGenericTimer();
+    }
+
+    void RollGenericTimer()
+    {
+        curGenericTimer = Random.Range(genericMin, genericMax);
+        genCounter = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
-        if(visCon.desiredVisibility > 0 && !hasFiredHope)
+
+        if (visCon.desiredVisibility > 0)
         {
-            counter += Time.deltaTime;
-            if (counter > timer)
+            if (!hasFiredHope)
             {
-                charCon.Speak(DialogueType.HopefulStory,false);
-                hasFiredHope = true;
+                hopeCounter += Time.deltaTime;
+                if (hopeCounter > Hopetimer)
+                {
+                    charCon.Speak(DialogueType.HopefulStory, false);
+                    hasFiredHope = true;
+                    RollGenericTimer();
+                }
+            }
+            else { hopeCounter = 0; }
+
+            if (enableGenericDialog)
+            {
+                genCounter += Time.deltaTime;
+
+                if (genCounter > curGenericTimer)
+                {
+                    charCon.Speak(DialogueType.LightDropPrompt, false);
+                    RollGenericTimer();
+                }
             }
         }
-        else { counter = 0; }
 	}
 }

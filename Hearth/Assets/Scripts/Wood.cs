@@ -23,6 +23,8 @@ public class Wood : MonoBehaviour {
     public float burnTime; //time it takes for a single piece of fuel to be consumed
     float currBurnTime;
 
+    public float z;
+
 
     // Use this for initialization
     void Start()
@@ -82,6 +84,7 @@ public class Wood : MonoBehaviour {
         posY = Input.mousePosition.y - camPos.y;//1 - camPos.y;
         Debug.Log("Picked up wood");
         selected = true;
+        z = transform.position.z;
 
 
 
@@ -99,7 +102,7 @@ public class Wood : MonoBehaviour {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(currPos);
 
 
-        transform.position = new Vector3(worldPos.x, worldPos.y, 5.9f);
+        transform.position = new Vector3(worldPos.x, worldPos.y, z);
 
     }
     //END WOOD DRAGGING
