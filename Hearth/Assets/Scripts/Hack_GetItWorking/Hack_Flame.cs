@@ -73,10 +73,17 @@ public class Hack_Flame : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        
+
         if(director.fireBurning == true)
         {
             //Debug.Log(intensity);
-            IntensityModifier();
+            if (director.actionInProgress == false)
+            {
+                IntensityModifier();
+            }
+
+            
             fireSoundControl();
         }
 
