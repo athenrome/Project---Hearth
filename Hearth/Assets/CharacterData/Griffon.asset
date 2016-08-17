@@ -14,29 +14,24 @@ MonoBehaviour:
   characterName: Griffon
   efficiency: 7
   HopefulStorys1Text:
-  - My friends at school used to play this game
-  - You go around to people who look sad and say something nice about them
-  - We made a lot of new friends playing that game
+  - My friends at school used to play this game. You go around to people who look
+    sad and say something nice about them. We made a lot of new friends playing that
+    game
   HopefulStorys2Text:
-  - "When I was younger, life wasn\u2019t always so good"
-  - As I got older, my life became better. I became happier
-  - Life is more than a series of bad days and pain
+  - "When I was younger, life wasn\u2019t always so good. As I got older, my life
+    became better. I became happier. Life is more than a series of bad days and pain."
   HopefulStorys3Text:
-  - I used to have a lot of friends when I was younger
-  - We drifted apart a bit, but we tried to stay in touch
-  - They will always mean the world to me
+  - I used to have a lot of friends when I was younger. We drifted apart a bit, but
+    we tried to stay in touch. They will always mean the world to me
   GhostStory1Text:
-  - "When I was younger, my parents didn\u2019t have a lot of money"
-  - They fought. They argued and they threw things
-  - My sister and I lived a long time in fear
+  - "When I was younger, my parents didn\u2019t have a lot of money. They fought.
+    They argued and they threw things. My sister and I lived a long time in fear. "
   GhostStory2Text:
-  - The forest out there is something else
-  - "It\u2019s cold, it\u2019s quiet and it feels like something is watching me"
-  - We have to keep this fire going
+  - "The forest out there is something else. It\u2019s cold, it\u2019s quiet and it
+    feels like something is watching me. We have to keep this fire going"
   GhostStory3Text:
-  - The house I grew up in was always falling apart
-  - Holes in the walls, the roof and the floor
-  - "My sister ran away young. I didn\u2019t"
+  - "The house I grew up in was always falling apart. Holes in the walls, the roof
+    and the floor. My sister ran away young. I didn\u2019t."
   needWoodPromptsText:
   - "Let\u2019s go get some wood"
   - Anyone want to go get wood?

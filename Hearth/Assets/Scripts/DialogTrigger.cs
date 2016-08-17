@@ -12,6 +12,13 @@ public class DialogTrigger : MonoBehaviour {
     public bool enableGenericDialog = false;
     public float genericMin, genericMax, curGenericTimer, genCounter;
 
+    public Director dir;
+
+    void Awake()
+    {
+        dir = FindObjectOfType<Director>();
+    }
+
 	void OnEnable()
     {
         hasFiredHope = false;
@@ -27,30 +34,33 @@ public class DialogTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (visCon.desiredVisibility > 0)
-        {
-            if (!hasFiredHope)
-            {
-                hopeCounter += Time.deltaTime;
-                if (hopeCounter > Hopetimer)
-                {
-                    charCon.Speak(DialogueType.HopefulStory, false);
-                    hasFiredHope = true;
-                    RollGenericTimer();
-                }
-            }
-            else { hopeCounter = 0; }
+        if(!dir.actionInProgress)
+        { 
+         if (visCon.desiredVisibility > 0)
+         {
+             if (!hasFiredHope)
+             {
+                 hopeCounter += Time.deltaTime;
+                 if (hopeCounter > Hopetimer)
+                 {
+                     charCon.Speak(DialogueType.HopefulStory, false);
+                     hasFiredHope = true;
+                     RollGenericTimer();
+                 }
+             }
+             else { hopeCounter = 0; }
 
-            if (enableGenericDialog)
-            {
-                genCounter += Time.deltaTime;
+             if (enableGenericDialog)
+             {
+                 genCounter += Time.deltaTime;
 
-                if (genCounter > curGenericTimer)
-                {
-                    charCon.Speak(DialogueType.LightDropPrompt, false);
-                    RollGenericTimer();
-                }
-            }
+                 if (genCounter > curGenericTimer)
+                 {
+                     charCon.Speak(DialogueType.LightDropPrompt, false);
+                     RollGenericTimer();
+                 }
+             }
+         }
         }
 	}
 }

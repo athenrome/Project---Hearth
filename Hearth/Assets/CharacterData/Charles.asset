@@ -16,26 +16,20 @@ MonoBehaviour:
   HopefulStorys1Text:
   - All I want to do... Is give my wife a hug... And tell her how much I love her.
   HopefulStorys2Text:
-  - "You should see my kids, they\u2019re so funny"
-  - When they were little they hated each other
-  - "Nowadays, they\u2019re inseparable. It just warms my heart to see"
+  - "You should see my kids, they\u2019re so funny. When they were little they hated
+    each other. Nowadays, they\u2019re inseparable. It just warms my heart to see"
   HopefulStorys3Text:
-  - My neighbourhood had a lot of problems
-  - Like anywhere else, I suppose
-  - "Things have been better since I arrived. I really feel like I\u2019m making a
-    difference"
+  - "My neighbourhood had a lot of problems. Like anywhere else, I suppose. Things
+    have been better since I arrived. I really feel like I\u2019m making a difference"
   GhostStory1Text:
-  - Some days are easier than others, you know?
-  - I mean, some days, I just can't help but wonder...
-  - What's the point of it all?
+  - Some days are easier than others, you know? I mean, some days, I just can't help
+    but wonder... What's the point of it all?
   GhostStory2Text:
-  - "Things are just falling apart, aren\u2019t they?"
-  - "There\u2019s no way back. No way to live like we used to"
-  - "Now it\u2019s all just darkness"
+  - "Things are just falling apart, aren\u2019t they? There\u2019s no way back. No
+    way to live like we used to. Now it\u2019s all just darkness"
   GhostStory3Text:
-  - When the darkness came, I was at home
-  - My wife screamed, and I came running
-  - I was too late to do anything. She was gone
+  - 'When the darkness came, I was at home. My wife screamed, and I came running.
+    I was too late to do anything. She was gone. '
   needWoodPromptsText:
   - Looks like we're running low...
   - Someone's gonna have to go get wood soon...

@@ -14,29 +14,25 @@ MonoBehaviour:
   characterName: John
   efficiency: 2
   HopefulStorys1Text:
-  - I lived in a high-rise in the city. Penthouse apartment with a doorman
-  - I worked so hard for it, for so long
-  - Hard work pays off. It was a really nice home
+  - I lived in a high-rise in the city. Penthouse apartment with a doorman. I worked
+    so hard for it, for so long. Hard work pays off. It was a really nice home
   HopefulStorys2Text:
-  - I met my wife on holiday in Greece
-  - She looked so beautiful looking over the bay
-  - I fell in love the moment I looked in her eyes
+  - I met my wife on holiday in Greece. She looked so beautiful looking over the bay.
+    I fell in love the moment I looked in her eyes.
   HopefulStorys3Text:
-  - I spent a lot of time in the park by my apartment
-  - Lots of people were always there, playing with their dogs
-  - I ended up with a lot of canine friends every time I went there
+  - I spent a lot of time in the park by my apartment. Lots of people were always
+    there, playing with their dogs. I ended up with a lot of canine friends every
+    time I went there
   GhostStory1Text:
-  - "I don\u2019t have any kids. My wife and I were trying, for years"
-  - "We went to the doctors to find out why we couldn\u2019t"
-  - "I\u2019d never seen her so depressed after that"
+  - "I don\u2019t have any kids. My wife and I were trying, for years. We went to
+    the doctors to find out why we couldn\u2019t. I\u2019d never seen her so depressed
+    after that. "
   GhostStory2Text:
-  - I felt something out there
-  - "It wasn\u2019t a nice feeling. It felt heavy"
-  - Heavy and cold
+  - "I felt something out there. It wasn\u2019t a nice feeling. It felt heavy. Heavy
+    and cold. "
   GhostStory3Text:
-  - I used to hate the noise of the city
-  - Cars honking, people shouting, sirens blaring
-  - "Strange to think I\u2019ll never hear it again"
+  - "I used to hate the noise of the city. Cars honking, people shouting, sirens blaring.
+    Strange to think I\u2019ll never hear it again"
   needWoodPromptsText:
   - "Someone\u2019s gonna have to get wood"
   - We should get wood before the fire dies

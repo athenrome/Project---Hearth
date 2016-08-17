@@ -14,30 +14,28 @@ MonoBehaviour:
   characterName: Frank
   efficiency: 1
   HopefulStorys1Text:
-  - When you get to my age, most of your friends and family are gone.
-  - "It isn\u2019t the end of the world, even if you\u2019re an old coot like me."
-  - The Home is nice, though. Nice and friendly.
+  - "When you get to my age, most of your friends and family are gone. It isn\u2019t
+    the end of the world, even if you\u2019re an old coot like me. The fire is nice,
+    though. Nice and friendly."
   HopefulStorys2Text:
-  - Back in my day, a night like this would be spent with your mates and a cold beer.
-  - "After a day of failed fishing\u2026 or was it hunting?"
-  - This reminds me of those times.
+  - "Back in my day, a night like this would be spent with your mates and a cold beer.
+    After a day of failed fishing\u2026 or was it hunting? This reminds me of those
+    times."
   HopefulStorys3Text:
   - "I\u2019m no spring chicken, but as a young man I could carry three trees worth
-    of wood  back to camp!"
-  - "Men these days don\u2019t have that kind of strength!"
-  - "But with hard work maybe they\u2019ll get there."
+    of wood  back to camp! Men these days don\u2019t have that kind of strength! But
+    with hard work maybe they\u2019ll get there."
   GhostStory1Text:
-  - "A Home is nice, but you\u2019re always reminded of how long you have left."
-  - You never know who or when another friend is gone.
-  - "It\u2019s a lonely life, but we\u2019re all there together."
+  - "A Home is nice, but you\u2019re always reminded of how long you have left. You
+    never know who or when another friend is gone. It\u2019s a lonely life, but we\u2019re
+    all there together. "
   GhostStory2Text:
-  - When you get old, parts of you start fading away.
-  - "It happened to the wife, and it\u2019s not what you want your family to see."
-  - "At least out here they won\u2019t have to see me."
+  - "When you get old, parts of you start fading away. It happened to the wife, and
+    it\u2019s not what you want your family to see. At least out here they won\u2019t
+    have to see me. "
   GhostStory3Text:
-  - Sometimes the darkness is comforting.
-  - But I know I still have some life left in me.
-  - "I won\u2019t bow out just yet."
+  - "Sometimes the darkness is comforting. But I know I still have some life left
+    in me. I won\u2019t bow out just yet."
   needWoodPromptsText:
   - I think we need some wood.
   - Who wants so get some wood?

@@ -14,31 +14,27 @@ MonoBehaviour:
   characterName: Marianne
   efficiency: 8
   HopefulStorys1Text:
-  - I met this guy once. We were on a hill looking out on some cliffs
-  - "He\u2019d picked me a bunch of flowers. I didn\u2019t have the heart to tell
-    him I hated flowers"
-  - Then I saw the stupid look on his face. Grinning ear to ear. Now I smile at the
-    sight of flowers
+  - "I met this guy once. We were on a hill looking out on some cliffs. He\u2019d
+    picked me a bunch of flowers. I didn\u2019t have the heart to tell him I hated
+    flowers. Then I saw the stupid look on his face. Grinning ear to ear. Now I smile
+    at the sight of flowers. "
   HopefulStorys2Text:
-  - I never really had a home. I sailed around a lot, so there was always the boat
-  - I used to drop anchor somewhere out from port and look at the city lights
-  - The world has so much beauty in places no one thinks to look
+  - I never really had a home. I sailed around a lot, so there was always the boat.
+    I used to drop anchor somewhere out from port and look at the city lights. The
+    world has so much beauty in places no one thinks to look.
   HopefulStorys3Text:
-  - I was alone a lot of the time. I never really had people hang around long enough
-  - I used to wish there was. All I wanted was a friend
-  - "I\u2019m so happy you\u2019re all here"
+  - "I was alone a lot of the time. I never really had people hang around long enough.
+    I used to wish there was. All I wanted was a friend. I\u2019m so happy you\u2019re
+    all here"
   GhostStory1Text:
-  - "When my mother died, my father didn\u2019t take it too well"
-  - He was in hospital for a few days before he died
-  - Then I was back on my own
+  - "When my mother died, my father didn\u2019t take it too well. He was in hospital
+    for a few days before he died. Then I was back on my own. "
   GhostStory2Text:
-  - "I think there\u2019s something in the darkness"
-  - "I couldn\u2019t see it, but I could feel it"
-  - It was cold
+  - "I think there\u2019s something in the darkness. I couldn\u2019t see it, but I
+    could feel it. It was cold."
   GhostStory3Text:
-  - Without this fire
-  - Without this warmth, this light, these people
-  - It would just be more darkness
+  - Without this fire. Without this warmth, this light, these people. It would just
+    be more darkness...
   needWoodPromptsText:
   - We need wood
   - Someone get out there

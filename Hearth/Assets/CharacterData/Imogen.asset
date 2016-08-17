@@ -14,29 +14,26 @@ MonoBehaviour:
   characterName: Imogen
   efficiency: 8
   HopefulStorys1Text:
-  - "I\u2019ve had a lot of jobs, even though I\u2019m young."
-  - "Something always went wrong, and I\u2019d have to leave."
-  - "So I followed my dream of carpentry, and it\u2019s looking up."
+  - "I\u2019ve had a lot of jobs, even though I\u2019m young. Something always went
+    wrong, and I\u2019d have to leave. So I followed my dream of carpentry, and it\u2019s
+    looking up."
   HopefulStorys2Text:
-  - "Have you ever seen something or someone and go \u201CI want to be that.\u201D?"
-  - "I did. It\u2019s driven me time and time again to stay in the fight."
-  - "I\u2019m not gunna let setbacks knock me down!"
+  - "Have you ever seen something or someone and go \u201CI want to be that.\u201D?
+    I did. It\u2019s driven me time and time again to stay in the fight. I\u2019m
+    not gunna let setbacks knock me down!"
   HopefulStorys3Text:
-  - This fire is a lot like a person.
-  - Bright, ambitious, always reaching for the sky.
-  - Just needs a little help to get going.
+  - This fire is a lot like a person. Bright, ambitious, always reaching for the sky.
+    Just needs a little help to get going.
   GhostStory1Text:
-  - "I guess you can say I\u2019m unlucky."
-  - Wrong place, wrong time, and always stuck in the middle.
-  - Nothing always works the way I want it.
+  - "I guess you can say I\u2019m unlucky. Wrong place, wrong time, and always stuck
+    in the middle. Nothing always works the way I want it."
   GhostStory2Text:
-  - "Being a carpenter, surrounded by all these trees, in the dark\u2026"
-  - "Maybe it\u2019s all the ghosts of the tree\u2019s I\u2019ve carved in the past."
-  - "It\u2019s silly, but still scary."
+  - "Being a carpenter, surrounded by all these trees, in the dark\u2026 Maybe it\u2019s
+    all the ghosts of the tree\u2019s I\u2019ve carved in the past. It\u2019s silly,
+    but still scary. "
   GhostStory3Text:
-  - "When it gets dark, I see the things that I\u2019ve always messed up."
-  - It shakes me up inside.
-  - "Can\u2019t let this fire die with that waiting for me in the dark."
+  - "When it gets dark, I see the things that I\u2019ve always messed up. It shakes
+    me up inside. Can\u2019t let this fire die with that waiting for me in the dark."
   needWoodPromptsText:
   - Do you think we need some wood?
   - "Looks like we\u2019ll need wood soon."

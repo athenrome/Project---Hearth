@@ -18,26 +18,20 @@ MonoBehaviour:
     the company was great. People have a lot of stories, if you\u2019ll just listen
     sometimes"
   HopefulStorys2Text:
-  - My parents tried their best with me
-  - We were poor and always out of food, but they really tried
-  - It taught me a lot about the value of hard work
+  - My parents tried their best with me. We were poor and always out of food, but
+    they really tried. It taught me a lot about the value of hard work
   HopefulStorys3Text:
-  - My job comes with a lot of pressure
-  - Pressure to create, pressure to make great things...
-  - "But I wouldn\u2019t have it any other way"
+  - "My job comes with a lot of pressure. Pressure to create, pressure to make great
+    things... But I wouldn\u2019t have it any other way"
   GhostStory1Text:
-  - I grew up in a poor neighbourhood
-  - Lots of drunks walking around, lots of homeless people
-  - People trapped on the fringe of society. Makes me sick
+  - I grew up in a poor neighbourhood. Lots of drunks walking around, lots of homeless
+    people. People trapped on the fringe of society. Makes me sick
   GhostStory2Text:
-  - "This forest isn\u2019t like any other"
-  - I usually enjoy getting outdoors
-  - But not here. Not in this forest. It's just not safe
+  - "This forest isn\u2019t like any other. I usually enjoy getting outdoors. But
+    not here. Not in this forest. It's just not safe. "
   GhostStory3Text:
-  - Following your dreams can be tiring
-  - "Some days you just have to remind yourself that you love it and it\u2019s what
-    you want to do"
-  - And some days you forget
+  - "Following your dreams can be tiring. Some days you just have to remind yourself
+    that you love it and it\u2019s what you want to do. And some days you forget."
   needWoodPromptsText:
   - "The fire\u2019s gonna die unless we get wood"
   - We gotta get some wood

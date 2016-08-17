@@ -271,6 +271,7 @@ public class DialogueWindow : MonoBehaviour
 
         dialogueText.text = currText;
 
+        Debug.Log(currText);
         currLetter++;
 
         if (currLetter >= toWrite[currLine].length)

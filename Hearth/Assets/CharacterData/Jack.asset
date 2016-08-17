@@ -14,30 +14,26 @@ MonoBehaviour:
   characterName: Jack
   efficiency: 10
   HopefulStorys1Text:
-  - "Where I grew up, we didn\u2019t have much. We had our family and we had our home."
-  - We used to light fires like this to keep warm, and then huddle together and eat.
-  - It was simpler back then. Everyone was safe. Everyone was happy. No one ran away.
+  - "Where I grew up, we didn\u2019t have much. We had our family and we had our home.
+    We used to light fires like this to keep warm, and then huddle together and eat.
+    It was simpler back then. Everyone was safe. Everyone was happy. No one ran away."
   HopefulStorys2Text:
-  - My father used to tell us about a place where the lights never go out.
-  - Where the fires burn forever and they never ever go out.
-  - "People are okay there. They don\u2019t want to leave, and everyone helps each
-    other."
+  - "My father used to tell us about a place where the lights never go out. Where
+    the fires burn forever and they never ever go out. People are okay there. They
+    don\u2019t want to leave, and everyone helps each other."
   HopefulStorys3Text:
-  - I used to camp out in forests like this one. Not now obviously.
-  - There used to be lights in the sky at night.
-  - "They\u2019ll be back again though. One day."
+  - "I used to camp out in forests like this one. Not now obviously. There used to
+    be lights in the sky at night. They\u2019ll be back again though. One day."
   GhostStory1Text:
-  - When I was younger, I used to watch the lights in the night sky
-  - Then they went away, and I stopped looking up.
-  - "I miss the night lights. I wish they\u2019d come back."
+  - "When I was younger, I used to watch the lights in the night sky. Then they went
+    away, and I stopped looking up. I miss the night lights. I wish they\u2019d come
+    back."
   GhostStory2Text:
-  - I saw something out in the dark.
-  - It was moving too quick to catch what it was
-  - 'But I know it was there. '
+  - 'I saw something out in the dark. It was moving too quick to catch what it was.
+    But I know it was there. '
   GhostStory3Text:
-  - I wish things would go back to how they were
-  - There was light, it was safe. Everyone was together
-  - It was fine. We were happy.
+  - I wish things would go back to how they were. There was light, it was safe. Everyone
+    was together. It was fine. We were happy.
   needWoodPromptsText:
   - 'I feel like this light can''t last. '
   - "The fires getting low\u2026"
