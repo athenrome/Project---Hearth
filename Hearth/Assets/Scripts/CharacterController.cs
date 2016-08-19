@@ -33,43 +33,45 @@ public class CharacterController : MonoBehaviour {
 
         timeSinceLastAction += Time.deltaTime;//increase character idle time
 
-        if(diagWin.finished == true)
+        if(diagWin.finished == false)
         {
-            director.actionInProgress = false;
+            // director.actionInProgress |= true;
+            director.canSpeak = false;
         }
 
     }
     
-    public void ReceiveOrder(CharacterOrders _order)
+    public bool ReceiveOrder(CharacterOrders _order)
     {
         switch(_order)
         {
             case CharacterOrders.RequestWood:
                 
-                Speak(DialogueType.NeedWoodPrompt, true);
+                return Speak(DialogueType.NeedWoodPrompt, false);
                 //Debug.Log("wood order recieved");
                 break;
 
             case CharacterOrders.SpeakHope:
-                Speak(DialogueType.HopefulStory, true);
+                return Speak(DialogueType.HopefulStory, false);
                 break;
 
             case CharacterOrders.SpeakGhost:
-                Speak(DialogueType.GhostStory, true);
+                return Speak(DialogueType.GhostStory, false);
                 break;
 
             case CharacterOrders.SpeakLightUp:
-                Speak(DialogueType.LightBoostPrompt, true);
+                return Speak(DialogueType.LightBoostPrompt, false);
                 break;
 
             case CharacterOrders.SpeakLightDrop:
-                Speak(DialogueType.LightDropPrompt, true);
+                return Speak(DialogueType.LightDropPrompt, false);
                 break;
 
 
 
             default:
                 Debug.Log("Invalid order");
+                return true;
                 break;
 
                 
@@ -79,10 +81,10 @@ public class CharacterController : MonoBehaviour {
 
     
 
-    public void Speak(DialogueType toSpeak, bool forceSpeak)
+    public bool Speak(DialogueType toSpeak, bool forceSpeak)
     {
         if (!isActiveAndEnabled )//|| !diagWin.finished)
-            return;
+            return false;
 
         if (director.canSpeak == true || forceSpeak == true)//if none else is speaking
         {
@@ -106,10 +108,12 @@ public class CharacterController : MonoBehaviour {
                 currOrder = CharacterOrders.SpeakDialogue;
                 
             }
+            return true;
         }
         else
         {
             Debug.Log("Speaking blocked");
+            return false;
         }
 
     }

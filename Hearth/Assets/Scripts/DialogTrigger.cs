@@ -34,21 +34,30 @@ public class DialogTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(!dir.actionInProgress)
-        { 
-         if (visCon.desiredVisibility > 0)
+       // if(!dir.actionInProgress)
+   //    if(dir.canSpeak)
+        {
+
+            if (visCon.desiredVisibility > 0)
          {
              if (!hasFiredHope)
              {
                  hopeCounter += Time.deltaTime;
                  if (hopeCounter > Hopetimer)
                  {
-                     charCon.Speak(DialogueType.HopefulStory, false);
-                     hasFiredHope = true;
-                     RollGenericTimer();
+                        if(charCon.ReceiveOrder(CharacterOrders.SpeakHope))
+                        {
+                            hasFiredHope = true;
+                            RollGenericTimer();
+                        }
+                    // charCon.Speak(DialogueType.HopefulStory, false);
+                     
                  }
              }
-             else { hopeCounter = 0; }
+             else
+                {
+                    hopeCounter = 0;
+                }
 
              if (enableGenericDialog)
              {
@@ -61,6 +70,7 @@ public class DialogTrigger : MonoBehaviour {
                  }
              }
          }
-        }
+         //   dir.canSpeak = false;
+       }
 	}
 }

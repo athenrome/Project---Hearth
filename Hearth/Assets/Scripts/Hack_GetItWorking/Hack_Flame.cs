@@ -96,7 +96,7 @@ public class Hack_Flame : MonoBehaviour {
             counter -= Time.deltaTime;
             if (counter <= 0)
             { 
-                intensity -= (Time.deltaTime / 10);
+                intensity -= (Time.deltaTime / 5);
             }
         }
 

@@ -53,7 +53,7 @@ public class Director : MonoBehaviour {
 
         actionInProgress = false;
         stateChanged = false;
-        canSpeak = false;
+        canSpeak = true;
 
         currStoryCool = storyCooldown;
 
@@ -76,11 +76,12 @@ public class Director : MonoBehaviour {
 
             CheckWood();
 
-
+            Debug.Log("about to check state");
             if (actionInProgress == false)
             {
                 if (stateChanged == false)
                 {
+                    Debug.Log("checkstate");
                     CheckWorldState();
                 }
 
@@ -97,10 +98,12 @@ public class Director : MonoBehaviour {
                 else
                 {
                     currStoryCool = storyCooldown;
+                    UpdateWorldState(WorldState.SpeakHopeStory,false);
                 }
             }
         }
-        
+       actionInProgress = false;
+        canSpeak = true;
     }
 
     void CheckWorldState()
@@ -122,7 +125,7 @@ public class Director : MonoBehaviour {
 
             case WorldState.SpeakDialogue:
                 UpdateWorldState(WorldState.Idle, true);
-                canSpeak = true;
+            //    canSpeak = true;
                 break;
 
             case WorldState.EndSpeaking:
@@ -156,8 +159,9 @@ public class Director : MonoBehaviour {
                 break;
 
             case WorldState.Idle:
-                canSpeak = true;
+               // canSpeak = true;
                 canChangeState = true;
+                Debug.Log("Idle");
                 break;
 
             default:
@@ -258,24 +262,47 @@ public class Director : MonoBehaviour {
 
     }
 
+    //CharacterController GetActiveCharacter()
+    //{
+    //    CharacterController foundCharacter = activeCharacters[0];
+    //    float score = 0;
+
+    //    foreach(int i = 0; i < unlockedCharacterIndex; i++)// (CharacterController character in activeCharacters)
+    //    {
+    //        CharacterController character = activeCharacters[i];
+    //        if (character.timeSinceLastAction > score)
+    //        {
+    //            foundCharacter = character;
+    //            score = character.timeSinceLastAction;
+
+    //        }
+    //    }
+
+    //    foundCharacter.timeSinceLastAction = 0;
+
+
+
+
+    //    return foundCharacter;
+    //}
+
     CharacterController GetActiveCharacter()
     {
         CharacterController foundCharacter = activeCharacters[0];
         float score = 0;
 
-        for(int i = 0; i < unlockedCharacterIndex; i++)// (CharacterController character in activeCharacters)
+        foreach (CharacterController character in activeCharacters)
         {
-            CharacterController character = activeCharacters[i];
             if (character.timeSinceLastAction > score)
             {
                 foundCharacter = character;
                 score = character.timeSinceLastAction;
-                
+
             }
         }
 
         foundCharacter.timeSinceLastAction = 0;
-        
+
 
 
 

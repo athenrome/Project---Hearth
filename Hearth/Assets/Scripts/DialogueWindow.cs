@@ -47,7 +47,7 @@ public class DialogueWindow : MonoBehaviour
     void Start()
     {
         finished = true;
-        fadeLevel = 0;
+        fadeLevel = 1;
         dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear text
         TextboxPanel.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear panel
 
@@ -176,7 +176,7 @@ public class DialogueWindow : MonoBehaviour
         Debug.Log("Finish Writing");
 
 
-        StartFadingOut();
+        //StartFadingOut();
     }
 
     public void WriteStory(DialogueStory _toWrite)
@@ -271,7 +271,7 @@ public class DialogueWindow : MonoBehaviour
 
         dialogueText.text = currText;
 
-        Debug.Log(currText);
+       // Debug.Log(currText);
         currLetter++;
 
         if (currLetter >= toWrite[currLine].length)

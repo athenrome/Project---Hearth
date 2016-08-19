@@ -22,6 +22,9 @@ public class PlayerVisibilityController : MonoBehaviour
 
     public GameObject[] toggleActiveOnDisappear;
 
+    public Material transMat;
+    public Material transCutMat;
+
     // Use this for initialization
     void Start()
     {
@@ -45,8 +48,34 @@ public class PlayerVisibilityController : MonoBehaviour
     void Update()
     {
         curVis = Mathf.MoveTowards(curVis, desiredVisibility, Time.deltaTime * fadeSpeed); 
-        SetAllAlpha(curVis, true);
+      
+        if(curVis>=0.99f)
+        {
+            if(transCutMat)
+                if (GetComponentInChildren<MeshRenderer>())
+                {
+                    GetComponentInChildren<MeshRenderer>().material = transCutMat;
+                }
+                else
+                {
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = transCutMat;
+                }//GetComponentInChildren<MeshRenderer>().material = transCutMat;
+        }
+        else
+        {
+            if(transMat)
 
+            if (GetComponentInChildren<MeshRenderer>())
+            {
+                GetComponentInChildren<MeshRenderer>().material = transMat;
+            }
+            else
+                {
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = transMat;
+                }
+           // GetComponentInChildren<MeshRenderer>().material = transMat;
+        }
+        SetAllAlpha(curVis, true);
         //what state am i in, be here or not or transition
         if (!isTransitioning)
         {
