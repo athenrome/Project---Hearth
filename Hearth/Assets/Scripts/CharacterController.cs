@@ -33,58 +33,62 @@ public class CharacterController : MonoBehaviour {
 
         timeSinceLastAction += Time.deltaTime;//increase character idle time
 
-        if(diagWin.finished == false)
+        if(diagWin.finished == true && director.actionInProgress == true)
         {
-            // director.actionInProgress |= true;
-            director.canSpeak = false;
+            director.actionInProgress = false;
         }
 
     }
     
-    public bool ReceiveOrder(CharacterOrders _order)
+    public void ReceiveOrder(CharacterOrders _order)
     {
-        switch(_order)
+
+        if(director.actionInProgress == false)
         {
-            case CharacterOrders.RequestWood:
-                
-                return Speak(DialogueType.NeedWoodPrompt, false);
-                //Debug.Log("wood order recieved");
-                break;
+            switch (_order)
+            {
+                case CharacterOrders.RequestWood:
 
-            case CharacterOrders.SpeakHope:
-                return Speak(DialogueType.HopefulStory, false);
-                break;
+                    Speak(DialogueType.NeedWoodPrompt, true);
+                    //Debug.Log("wood order recieved");
+                    break;
 
-            case CharacterOrders.SpeakGhost:
-                return Speak(DialogueType.GhostStory, false);
-                break;
+                case CharacterOrders.SpeakHope:
+                    Speak(DialogueType.HopefulStory, true);
+                    break;
 
-            case CharacterOrders.SpeakLightUp:
-                return Speak(DialogueType.LightBoostPrompt, false);
-                break;
+                case CharacterOrders.SpeakGhost:
+                    Speak(DialogueType.GhostStory, true);
+                    break;
 
-            case CharacterOrders.SpeakLightDrop:
-                return Speak(DialogueType.LightDropPrompt, false);
-                break;
+                case CharacterOrders.SpeakLightUp:
+                    Speak(DialogueType.LightBoostPrompt, true);
+                    break;
+
+                case CharacterOrders.SpeakLightDrop:
+                    Speak(DialogueType.LightDropPrompt, true);
+                    break;
 
 
 
-            default:
-                Debug.Log("Invalid order");
-                return true;
-                break;
+                default:
+                    Debug.Log("Invalid order");
+                    break;
 
-                
+
+            }
         }
+
+        
         
     }
 
     
 
-    public bool Speak(DialogueType toSpeak, bool forceSpeak)
+    public void Speak(DialogueType toSpeak, bool forceSpeak)
     {
-        if (!isActiveAndEnabled )//|| !diagWin.finished)
-            return false;
+        if (!isActiveAndEnabled || director.actionInProgress == true)//!diagWin.finished)
+            return;
 
         if (director.canSpeak == true || forceSpeak == true)//if none else is speaking
         {
@@ -108,12 +112,10 @@ public class CharacterController : MonoBehaviour {
                 currOrder = CharacterOrders.SpeakDialogue;
                 
             }
-            return true;
         }
         else
         {
             Debug.Log("Speaking blocked");
-            return false;
         }
 
     }

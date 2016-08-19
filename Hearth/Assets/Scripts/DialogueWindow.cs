@@ -42,10 +42,13 @@ public class DialogueWindow : MonoBehaviour
     bool fading;
     float fadeLevel;
 
+    Director director;
 
     // Use this for initialization
     void Start()
     {
+        director = FindObjectOfType<Director>();
+
         finished = true;
         fadeLevel = 1;
         dialogueText.color = new Color(dialogueText.color.r, dialogueText.color.g, dialogueText.color.b, fadeLevel);//clear text
@@ -60,13 +63,16 @@ public class DialogueWindow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        WriteText();
-
-        if(fading == true)
+        if(director.actionInProgress == false)
         {
-            Fading();
+            WriteText();
+
+            if (fading == true)
+            {
+                Fading();
+            }
         }
+        
 
         
 
@@ -186,7 +192,7 @@ public class DialogueWindow : MonoBehaviour
         currText = "";
         currLine = -1;
         currLetter = 0;
-        finishedLine = true;
+        finishedLine = false;
         finished = false;
         stopped = false;
 

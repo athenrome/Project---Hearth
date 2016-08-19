@@ -246,7 +246,9 @@ public class Director : MonoBehaviour {
     {
         if(woodPile.woodCount <= getWoodThreshold && woodPile.woodToAdd == 0)
         {
-            UpdateWorldState(WorldState.NeedWood, true);
+            //UpdateWorldState(WorldState.NeedWood, true);
+            woodPile.AddWood(woodPile.maxWood);
+
             stateChanged = false;
             //actionInProgress = false;
             Debug.Log("wood ordered");
